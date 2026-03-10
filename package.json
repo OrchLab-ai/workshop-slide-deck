@@ -1,0 +1,17 @@
+{
+  "name": "orchlab-workshop-slides",
+  "version": "1.0.0",
+  "description": "OrchLab Workshop slide deck generator",
+  "main": "build.js",
+  "scripts": {
+    "build": "node build.js",
+    "qa": "python3 -m markitdown OrchLab_Workshop.pptx"
+  },
+  "dependencies": {
+    "pptxgenjs": "^3.12.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0",
+    "sharp": "^0.33.0"
+  }
+}
