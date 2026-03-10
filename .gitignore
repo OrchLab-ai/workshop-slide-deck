@@ -5,3 +5,4 @@ slide-*.jpg
 *.png
 .env
 .DS_Store
+*.local.json
