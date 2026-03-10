@@ -1,0 +1,7 @@
+node_modules/
+OrchLab_Workshop.pptx
+OrchLab_Workshop.pdf
+slide-*.jpg
+*.png
+.env
+.DS_Store
