@@ -1,4 +1,5 @@
 const pptxgen = require("pptxgenjs");
+const QRCode = require("qrcode");
 const { preRenderIcons } = require("./src/icons");
 const branding = require("./src/branding");
 const helpers = require("./src/helpers");
@@ -19,7 +20,19 @@ async function build() {
   pres.title = "OrchLab Workshop - Evolving from AI Assistance to AI Orchestration";
 
   const icons = await preRenderIcons();
-  const ctx = { branding, helpers, icons };
+
+  // Pre-render QR codes
+  const qrCodes = {};
+  qrCodes.hdrHistogramPR = await QRCode.toDataURL(
+    "https://github.com/HdrHistogram/HdrHistogram.NET/pull/130/",
+    { width: 200, margin: 1, color: { dark: "#FFFFFFFF", light: "#00000000" } }
+  );
+  qrCodes.marsMissionFund = await QRCode.toDataURL(
+    "https://github.com/LeeCampbell/mars-mission-fund",
+    { width: 200, margin: 1, color: { dark: "#333333FF", light: "#00000000" } }
+  );
+
+  const ctx = { branding, helpers, icons, qrCodes };
 
   for (const slide of allSlides) {
     renderers[slide.type](pres, slide, ctx);

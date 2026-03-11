@@ -131,6 +131,12 @@ module.exports = [
         margin: 0, valign: "top", lineSpacingMultiple: 0.95
       });
 
+      // QR code linking to the PR (bottom-right of code block)
+      s.addImage({
+        data: ctx.qrCodes.hdrHistogramPR,
+        x: 8.4, y: 3.3, w: 0.95, h: 0.95
+      });
+
       // Legend strip below code block
       s.addText([
         { text: "\u25cf ", options: { fontSize: 11, fontFace: FONT.body, color: hi } },
@@ -311,9 +317,10 @@ module.exports = [
         { num: "02", title: "Dependency Upgrade", desc: "Make the breaking change from ESLint v8 to v9. Handle all configuration and API changes.", color: C.accentDim },
         { num: "03", title: "Cross-Cutting Concern", desc: "Add structured logging with correlation-IDs across the MMF codebase.", color: C.midBg },
       ];
+      const cardW = 6.7;
       challenges.forEach((ch, i) => {
         const y = 1.8 + i * 1.1;
-        addLightCard(s, 0.8, y, 8.4, 0.9, ch.color, pres);
+        addLightCard(s, 0.8, y, cardW, 0.9, ch.color, pres);
         s.addText(ch.num, {
           x: 1.1, y: y + 0.1, w: 0.6, h: 0.7,
           fontSize: 28, fontFace: FONT.head, color: ch.color, bold: true, valign: "middle", margin: 0
@@ -323,10 +330,28 @@ module.exports = [
           fontSize: 16, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
         });
         s.addText(ch.desc, {
-          x: 1.8, y: y + 0.45, w: 7, h: 0.35,
+          x: 1.8, y: y + 0.45, w: cardW - 0.7, h: 0.35,
           fontSize: 12, fontFace: FONT.body, color: "555555", margin: 0
         });
       });
+
+      // Right column — QR code + repo link
+      const qrSize = 1.4;
+      const qrX = 7.7 + (1.5 - qrSize) / 2;
+      const qrY = 2.0;
+      s.addImage({
+        data: ctx.qrCodes.marsMissionFund,
+        x: qrX, y: qrY, w: qrSize, h: qrSize
+      });
+      s.addText("Scan to open the\nMMF repository", {
+        x: 7.7, y: qrY + qrSize + 0.15, w: 1.5, h: 0.45,
+        fontSize: 10, fontFace: FONT.head, color: C.darkText, bold: true, align: "center", margin: 0
+      });
+      s.addText("github.com/LeeCampbell/\nmars-mission-fund", {
+        x: 7.7, y: qrY + qrSize + 0.6, w: 1.5, h: 0.4,
+        fontSize: 8, fontFace: FONT.body, color: "888888", align: "center", margin: 0
+      });
+
       s.addNotes("Alright, hands-on time! Pick whichever challenge interests you most. The refactor-rename is the most approachable if you want a quick win. The dependency upgrade is great if you've ever dealt with a painful major version bump. And the cross-cutting concern is the most architecturally interesting. All three are problems that are painful with copy-paste but very manageable with contextual AI tools. [pause] You've got 15 to 20 minutes. Use Cursor, Claude Code, Copilot — whatever you've got set up. We'll debrief as a group after.");
     }
   },
