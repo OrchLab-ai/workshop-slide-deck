@@ -2,8 +2,12 @@
 
 ## Workflow Preferences
 
-- **Never chain shell commands with `&&`** — use separate Bash tool calls so each goes through the permission model independently. Chaining forces manual approval for commands that are already auto-approved.
-- **Never wrap commands with `cat` or heredocs unnecessarily** — keep commands simple to avoid triggering manual approval.
+- **Minimize manual approval interruptions.** Each Bash command should match an auto-approved pattern in `.claude/settings.json`. Things that break this:
+  - Chaining commands with `&&` (the combined string won't match individual patterns)
+  - Using `cat <<'EOF'` or heredocs (triggers quoted-newline detection)
+  - Embedding newlines followed by `#`-prefixed lines in arguments (hides args from permission checks)
+  - Any command structure that obscures what's actually being run
+  Use separate Bash tool calls for each command instead.
 - **Visual QA after slide changes** — build, convert to PDF, and extract slide images as separate steps:
   1. `node build.js`
   2. `libreoffice --headless --convert-to pdf OrchLab_Workshop.pptx`
