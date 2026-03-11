@@ -261,6 +261,27 @@ module.exports = [
     }
   },
 
+  // SLIDE 8b — From Action to Task (nesting diagram, 2 visible)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, nestingDiagram } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      s.addText("From Action to Task", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Combining atomic actions into purposeful tasks", {
+        x: 0.8, y: 0.7, w: 6, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+      nestingDiagram(s, pres, 2);
+      s.addNotes("Pause after the coding challenges to frame what participants just did. Each challenge involved multiple atomic actions — completions, edits, test runs — combined into a purposeful task. The dashed outer rings hint that there are higher levels of orchestration to come. We'll fill those in as the workshop progresses.");
+    },
+  },
+
   // SLIDE 9 — Activity: Design Your Own Claude Code
   {
     type: "custom",

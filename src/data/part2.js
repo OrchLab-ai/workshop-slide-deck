@@ -817,6 +817,27 @@ module.exports = [
     }
   },
 
+  // SLIDE 31b — From Task to Flow (nesting diagram, 3 visible)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, nestingDiagram } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      s.addText("From Task to Flow", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Chaining tasks into an autonomous Plan \u2192 Do \u2192 Review flow", {
+        x: 0.8, y: 0.7, w: 7, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+      nestingDiagram(s, pres, 3);
+      s.addNotes("After the Socratic spec activity, participants have experienced the full Plan-Do-Review flow: they interviewed for requirements (plan), generated output (do), and refined it (review). This is the third layer of the nesting model. The dashed outer ring hints at the final level — loops — which we'll cover in Part 3 when we discuss self-correcting autonomous systems.");
+    },
+  },
+
   // SLIDE 32 — Part 2 Takeaways
   {
     type: "custom",

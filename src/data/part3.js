@@ -701,6 +701,125 @@ module.exports = [
     },
   },
 
+  // SLIDE 46b — From Actions to Loops (nested concentric)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, nestingDiagram } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      s.addText("From Actions to Loops", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Building up the units of AI-assisted development", {
+        x: 0.8, y: 0.7, w: 6, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+      nestingDiagram(s, pres, 4);
+      s.addNotes("Walk through from the inside out. Actions are the atomic unit — what we covered in Part 1. Tasks combine multiple actions towards a goal — Part 2 territory. Flows chain planning, execution, and review into an autonomous pipeline — this is what we've been building in Part 3. Loops wrap flows in self-correcting feedback: the output of a review feeds back into the next plan until the outcome is met. Each layer multiplies the previous one.");
+    },
+  },
+
+  // SLIDE 46c — Scaling the Loop (macro level)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      s.addText("Scaling the Loop", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("From individual loops to organisational feedback cycles", {
+        x: 0.8, y: 0.7, w: 7, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      // Three tiers stacked vertically, each wider than the last
+      // Tier 1: Loop (narrow, top)
+      addCard(s, 3.0, 1.2, 4.0, 0.8, C.accent, pres);
+      s.addText("LOOP", {
+        x: 3.2, y: 1.25, w: 2.0, h: 0.3,
+        fontSize: 14, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("A single Plan \u2192 Do \u2192 Review cycle on one task", {
+        x: 3.2, y: 1.55, w: 3.6, h: 0.35,
+        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+
+      // Tier 2: Macro Flow (medium, middle) — taller to fit steps
+      addCard(s, 2.0, 2.3, 6.0, 1.5, C.warnAmber, pres);
+      s.addText("MACRO FLOW", {
+        x: 2.2, y: 2.35, w: 3.0, h: 0.3,
+        fontSize: 14, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
+      });
+      s.addText("Chaining loops into a sprint-level pipeline", {
+        x: 2.2, y: 2.65, w: 5.6, h: 0.3,
+        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+      // Plan → Do → Review step boxes
+      const steps = ["Plan", "Do", "Review"];
+      const stepW = 1.4;
+      const stepGap = 0.4;
+      const totalStepsW = 3 * stepW + 2 * stepGap;
+      const stepStartX = 2.0 + (6.0 - totalStepsW) / 2;
+      steps.forEach((step, i) => {
+        const sx = stepStartX + i * (stepW + stepGap);
+        s.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+          x: sx, y: 3.05, w: stepW, h: 0.55,
+          fill: { color: C.lightBg }, rectRadius: 0.08
+        });
+        s.addText(step, {
+          x: sx, y: 3.05, w: stepW, h: 0.55,
+          fontSize: 13, fontFace: FONT.head, color: C.warnAmber, bold: true,
+          align: "center", valign: "middle", margin: 0
+        });
+        if (i < 2) {
+          s.addText("\u2192", {
+            x: sx + stepW, y: 3.05, w: stepGap, h: 0.55,
+            fontSize: 18, fontFace: FONT.body, color: C.muted,
+            align: "center", valign: "middle", margin: 0
+          });
+        }
+      });
+
+      // Tier 3: Macro Loop (wide, bottom)
+      addCard(s, 1.0, 4.1, 8.0, 0.8, C.highlightYellow, pres);
+      s.addText("MACRO LOOP", {
+        x: 1.2, y: 4.15, w: 3.0, h: 0.3,
+        fontSize: 14, fontFace: FONT.head, color: C.highlightYellow, bold: true, margin: 0
+      });
+      s.addText("Continuous feedback: outcomes inform the next macro flow, adapting strategy over time", {
+        x: 1.2, y: 4.45, w: 7.6, h: 0.35,
+        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+
+      // Feedback arrows (vertical dashed lines connecting tiers)
+      s.addShape(pres.shapes.LINE, {
+        x: 9.2, y: 1.6, w: 0, h: 3.3,
+        line: { color: C.muted, width: 1.5, dashType: "dash" }
+      });
+      s.addText("\u2191 feedback", {
+        x: 9.0, y: 2.9, w: 0.9, h: 0.4,
+        fontSize: 9, fontFace: FONT.body, color: C.muted, margin: 0
+      });
+      s.addShape(pres.shapes.LINE, {
+        x: 0.7, y: 1.6, w: 0, h: 3.3,
+        line: { color: C.muted, width: 1.5, dashType: "dash" }
+      });
+      s.addText("\u2193 scale", {
+        x: 0.15, y: 2.9, w: 0.6, h: 0.4,
+        fontSize: 9, fontFace: FONT.body, color: C.muted, margin: 0
+      });
+
+      s.addNotes("This slide zooms out from the individual loop to the macro level. A Loop is a single Plan-Do-Review cycle on one task — what participants experienced in the activities. A Macro Flow chains multiple loops together: plan the sprint, execute tasks in parallel loops, review outcomes as a batch. A Macro Loop is the organisational feedback cycle: the outcomes of one macro flow inform the strategy for the next. This is how AI-assisted development scales from individual productivity to team and organisational transformation. The feedback arrow on the right shows learning flowing back up; the scale arrow on the left shows strategy flowing down.");
+    },
+  },
+
   // SLIDE 47 — Tools & Ecosystem
   {
     type: "custom",
