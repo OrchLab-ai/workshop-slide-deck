@@ -675,6 +675,168 @@ module.exports = [
     }
   },
 
+  // SLIDE 28b — Brief + Specs = Tasks
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, FT);
+      s.addText("From Brief to Backlog", {
+        x: 0.8, y: 0.3, w: 8, h: 0.6,
+        fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+
+      // ── Layout constants ──
+      const colW = 2.6;
+      const colH = 3.2;
+      const colY = 1.2;
+      const col1X = 0.5;
+      const col2X = 3.7;
+      const col3X = 6.9;
+      const plusY = colY + colH / 2 - 0.2;
+      const opFontSize = 26;
+
+      // ═══════════════ COLUMN 1 — Brief (document) ═══════════════
+      // Document shape
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col1X, y: colY, w: colW, h: colH,
+        fill: { color: C.cardBg }, shadow: makeShadow()
+      });
+      // Title bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col1X, y: colY, w: colW, h: 0.45,
+        fill: { color: C.accent }
+      });
+      s.addText("Brief", {
+        x: col1X, y: colY, w: colW, h: 0.45,
+        fontSize: 15, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", margin: 0
+      });
+      // Brief body text
+      const briefLines = [
+        { t: "Goal", bold: true, color: C.accent },
+        { t: "Build a campaign management", bold: false, color: C.offWhite },
+        { t: "platform with multi-tenant auth", bold: false, color: C.offWhite },
+        { t: "", bold: false, color: C.offWhite },
+        { t: "Key Requirements", bold: true, color: C.accent },
+        { t: "Role-based access control", bold: false, color: C.muted },
+        { t: "Real-time analytics dashboard", bold: false, color: C.muted },
+        { t: "REST API with versioning", bold: false, color: C.muted },
+        { t: "PostgreSQL + Redis stack", bold: false, color: C.muted },
+      ];
+      briefLines.forEach((bl, i) => {
+        s.addText(bl.t, {
+          x: col1X + 0.2, y: colY + 0.58 + i * 0.27,
+          w: colW - 0.4, h: 0.24,
+          fontSize: 9.5, fontFace: FONT.body, color: bl.color,
+          bold: bl.bold, margin: 0
+        });
+      });
+
+      // ── "+" operator ──
+      s.addText("+", {
+        x: col1X + colW + 0.05, y: plusY, w: 0.5, h: 0.5,
+        fontSize: opFontSize, fontFace: FONT.head, color: C.warnAmber, bold: true, align: "center", margin: 0
+      });
+
+      // ═══════════════ COLUMN 2 — Specs (directory tree) ═══════════════
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col2X, y: colY, w: colW, h: colH,
+        fill: { color: C.cardBg }, shadow: makeShadow()
+      });
+      // Title bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col2X, y: colY, w: colW, h: 0.45,
+        fill: { color: C.accentDim }
+      });
+      s.addText("Specs", {
+        x: col2X, y: colY, w: colW, h: 0.45,
+        fontSize: 15, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", margin: 0
+      });
+      // Folder tree with connectors
+      const treeLines = [
+        { t: "specs/",              depth: 0, color: C.offWhite, bold: true },
+        { t: "readme.md",          depth: 1, color: C.offWhite, connector: "\u251C\u2500" },
+        { t: "domain/",            depth: 1, color: C.warnAmber, bold: true, connector: "\u251C\u2500" },
+        { t: "account.md",         depth: 2, color: C.muted, connector: "\u251C\u2500" },
+        { t: "campaign.md",        depth: 2, color: C.muted, connector: "\u251C\u2500" },
+        { t: "...",                 depth: 2, color: C.muted, connector: "\u2514\u2500" },
+        { t: "tech/",              depth: 1, color: C.warnAmber, bold: true, connector: "\u2514\u2500" },
+        { t: "arch.md",            depth: 2, color: C.muted, connector: "\u251C\u2500" },
+        { t: "data.md",            depth: 2, color: C.muted, connector: "\u251C\u2500" },
+        { t: "sec.md",             depth: 2, color: C.muted, connector: "\u251C\u2500" },
+        { t: "...",                 depth: 2, color: C.muted, connector: "\u2514\u2500" },
+      ];
+      treeLines.forEach((tl, i) => {
+        const prefix = tl.connector ? tl.connector + " " : "";
+        const indent = tl.depth * 0.3;
+        s.addText(prefix + tl.t, {
+          x: col2X + 0.15 + indent, y: colY + 0.55 + i * 0.24,
+          w: colW - 0.3 - indent, h: 0.22,
+          fontSize: 9, fontFace: "Consolas", color: tl.color,
+          bold: tl.bold || false, margin: 0
+        });
+      });
+
+      // ── "=" operator ──
+      s.addText("=", {
+        x: col2X + colW + 0.05, y: plusY, w: 0.5, h: 0.5,
+        fontSize: opFontSize, fontFace: FONT.head, color: C.warnAmber, bold: true, align: "center", margin: 0
+      });
+
+      // ═══════════════ COLUMN 3 — Tasks (checklist) ═══════════════
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col3X, y: colY, w: colW, h: colH,
+        fill: { color: C.cardBg }, shadow: makeShadow()
+      });
+      // Title bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: col3X, y: colY, w: colW, h: 0.45,
+        fill: { color: C.highlightYellow }
+      });
+      s.addText("Tasks", {
+        x: col3X, y: colY, w: colW, h: 0.45,
+        fontSize: 15, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", margin: 0
+      });
+      // Checklist items
+      const tasks = [
+        "Set up data models",
+        "Create API endpoints",
+        "Build auth flow",
+        "Add validation layer",
+        "Write unit tests",
+        "Configure CI pipeline",
+        "Set up monitoring",
+        "Deploy staging env",
+      ];
+      tasks.forEach((task, i) => {
+        const ty = colY + 0.6 + i * 0.3;
+        // Checkbox
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: col3X + 0.2, y: ty + 0.02, w: 0.18, h: 0.18,
+          fill: { type: "none" }, line: { color: C.accent, width: 1.2 }
+        });
+        // Task text
+        s.addText(task, {
+          x: col3X + 0.5, y: ty, w: colW - 0.7, h: 0.22,
+          fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+      });
+
+      // ── Bottom insight card ──
+      addCard(s, 0.5, 4.6, 9, 0.7, C.accent, pres);
+      iconCircle(s, "lightbulbGreen", 0.75, 4.7, 0.45, C.darkBg, icons, pres);
+      s.addText("A high-level brief combined with structured specifications produces clear, actionable tasks.", {
+        x: 1.4, y: 4.65, w: 7.6, h: 0.55,
+        fontSize: 14, fontFace: FONT.body, color: C.white, italic: true, valign: "middle", margin: 0
+      });
+
+      s.addNotes("This is the equation that makes the Recursive Builder work. On the left, a brief — a high-level document describing what you want to build. In the middle, your specs — structured standards files organised by domain and technical area, with a readme index at the top. Combine the two, and on the right you get a clear, scoped task list that any coding agent can execute reliably. The key insight: neither the brief nor the specs alone are enough. The brief provides intent and scope, the specs provide constraints and conventions, and together they produce tasks that are specific enough to implement correctly.");
+    }
+  },
+
   // SLIDE 29 — Meta-Prompting
   {
     type: "custom",
