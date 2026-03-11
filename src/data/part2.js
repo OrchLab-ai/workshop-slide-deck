@@ -114,7 +114,7 @@ module.exports = [
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
       });
       addCard(s, 0.8, 1.4, 3.8, 1.5, C.warnRed, pres);
-      s.addText("This ISN'T hype", {
+      s.addText("This ISN'T hype, like:", {
         x: 1.1, y: 1.5, w: 3.2, h: 0.35,
         fontSize: 16, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
       });
@@ -123,7 +123,7 @@ module.exports = [
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
       addCard(s, 5.2, 1.4, 4.0, 1.5, C.accent, pres);
-      s.addText("This IS evolutionary", {
+      s.addText("This IS evolutionary, like:", {
         x: 5.5, y: 1.5, w: 3.4, h: 0.35,
         fontSize: 16, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
       });
@@ -634,7 +634,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 26, FT);
+      const s = darkSlide(pres, 25, FT);
       s.addText("Meta-Prompting", {
         x: 0.8, y: 0.3, w: 5, h: 0.6,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -719,7 +719,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 27, FT);
+      const s = lightSlide(pres, 26, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -772,7 +772,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 28, FT);
+      const s = lightSlide(pres, 27, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -846,7 +846,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 29, FT);
+      const s = darkSlide(pres, 28, FT);
       s.background = { color: C.darkBg };
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.06, fill: { color: C.accent }
