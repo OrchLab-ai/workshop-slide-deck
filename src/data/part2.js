@@ -569,6 +569,55 @@ module.exports = [
           fontSize: 15, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
         });
       });
+      // --- Mini Context Usage bar (callback to Slide 15) ---
+      const miniX = 7.8;
+      const miniW = 1.4;
+      const miniTop = 2.2;
+      const miniH = 2.6;
+
+      s.addText("Context Usage", {
+        x: miniX - 0.1, y: miniTop - 0.35, w: miniW + 0.2, h: 0.3,
+        fontSize: 9, fontFace: FONT.head, color: C.muted, align: "center", margin: 0
+      });
+
+      // Outer border
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: miniX, y: miniTop, w: miniW, h: miniH,
+        fill: { color: C.darkBg },
+        line: { color: C.muted, width: 0.75 }
+      });
+
+      // Segments (top to bottom)
+      const miniSegs = [
+        { label: "System",   h: 0.30, color: "5A7A4A" },
+        { label: "Tools",    h: 0.33, color: "4A6A3A" },
+        { label: "Memory",   h: 0.23, color: "3F5E33" },
+        { label: "Messages", h: 1.00, color: C.accentDim },
+        { label: "Free",     h: 0.74, color: C.darkBg },
+      ];
+
+      let mY = miniTop;
+      miniSegs.forEach((seg) => {
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: miniX, y: mY, w: miniW, h: seg.h,
+          fill: { color: seg.color },
+          line: { color: C.muted, width: 0.4 }
+        });
+        s.addText(seg.label, {
+          x: miniX, y: mY, w: miniW, h: seg.h,
+          fontSize: 7, fontFace: FONT.body, color: C.offWhite,
+          align: "center", valign: "middle", margin: 0
+        });
+        mY += seg.h;
+      });
+
+      // Zone of Stupid dashed line
+      const miniStupidY = miniTop + 0.30 + 0.33 + 0.23 + 0.63;
+      s.addShape(pres.shapes.LINE, {
+        x: miniX - 0.15, y: miniStupidY, w: miniW + 0.3, h: 0,
+        line: { color: C.warnRed, width: 1, dashType: "dash" }
+      });
+
       s.addNotes("Now here's a critical nuance. You can't just dump all your standards into the prompt — that recreates the mega-prompt problem we just talked about. The solution is index files. [pause] You create a single README that lists all your standards files with brief descriptions. The AI reads the index, determines which standards are relevant to the current task, and loads only those. Define once, reuse many. Geoffrey Huntley's specs/README.md pattern is the canonical example of this. Your activity: restructure your standards into indexed files, then try building the blog engine again and see how the output changes.");
     }
   },
