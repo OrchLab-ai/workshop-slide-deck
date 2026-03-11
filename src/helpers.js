@@ -7,21 +7,14 @@ function addFooter(slide, text) {
   });
 }
 
-function addSlideNumber(slide, num) {
-  slide.addText(String(num), {
-    x: 9.2, y: 5.15, w: 0.5, h: 0.35,
-    fontSize: 9, fontFace: FONT.body, color: C.muted, align: "right", valign: "bottom"
-  });
-}
-
-function darkSlide(pres, num, footerText) {
+function darkSlide(pres, footerText) {
   const slide = pres.addSlide();
   slide.background = { color: C.midBg };
   if (footerText) addFooter(slide, footerText);
   return slide;
 }
 
-function lightSlide(pres, num, footerText) {
+function lightSlide(pres, footerText) {
   const slide = pres.addSlide();
   slide.background = { color: C.offWhite };
   if (footerText) addFooter(slide, footerText);
@@ -113,4 +106,4 @@ function nestingDiagram(s, pres, visibleCount) {
   });
 }
 
-module.exports = { addFooter, addSlideNumber, darkSlide, lightSlide, addCard, addLightCard, iconCircle, nestingDiagram };
+module.exports = { addFooter, darkSlide, lightSlide, addCard, addLightCard, iconCircle, nestingDiagram };
