@@ -282,6 +282,317 @@ module.exports = [
     },
   },
 
+  // SLIDE B1 — "Understanding the Robots" (mini-divider)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, null, FT);
+      // Accent left bar (thinner than part dividers to signal "mini-section")
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
+      });
+      iconCircle(s, "robot", 4.1, 1.3, 1.4, C.darkBg, icons, pres);
+      s.addText("Understanding the Robots", {
+        x: 1.5, y: 3.0, w: 7, h: 0.8,
+        fontSize: 34, fontFace: FONT.head, color: C.white, bold: true, align: "center", margin: 0
+      });
+      s.addText("Before we design a tool, let's peek under the hood", {
+        x: 1.5, y: 3.8, w: 7, h: 0.5,
+        fontSize: 16, fontFace: FONT.body, color: C.muted, italic: true, align: "center", margin: 0
+      });
+      s.addNotes("Quick detour — we're going to spend a few minutes making sure everyone has the same mental model of what these AI systems actually are. This isn't a deep ML lecture; it's the minimum understanding needed to make good decisions about tooling.");
+    }
+  },
+
+  // SLIDE B2 — "What Is a GPT?" (3-card comparison)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, null, FT);
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
+      });
+      s.addText("What Is a GPT?", {
+        x: 0.8, y: 0.3, w: 8, h: 0.6,
+        fontSize: 32, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Generative  ·  Pre-trained  ·  Transformer", {
+        x: 0.8, y: 0.9, w: 8, h: 0.35,
+        fontSize: 14, fontFace: FONT.body, color: C.accent, italic: true, margin: 0
+      });
+
+      const cards = [
+        { icon: "chart", title: "Classification Models", desc: "Given an input, pick a label.\nSpam filter, sentiment analysis.\nTrained for one job.", color: C.muted },
+        { icon: "code", title: "Generative Models", desc: "Given a prompt, produce new content.\nText, code, images.\nThe 'G' in GPT.", color: C.accentDim },
+        { icon: "brain", title: "The Transformer", desc: "Attention mechanism lets it weigh every word against every other word.\nThe 'T' that made scale possible.", color: C.accent },
+      ];
+      cards.forEach((c, i) => {
+        const x = 0.8 + i * 3.05;
+        addCard(s, x, 1.5, 2.75, 2.6, c.color, pres);
+        iconCircle(s, c.icon, x + 0.9, 1.7, 0.55, C.darkBg, icons, pres);
+        s.addText(c.title, {
+          x: x + 0.15, y: 2.4, w: 2.45, h: 0.35,
+          fontSize: 14, fontFace: FONT.head, color: c.color, bold: true, align: "center", margin: 0
+        });
+        s.addText(c.desc, {
+          x: x + 0.15, y: 2.85, w: 2.45, h: 1.1,
+          fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+      });
+
+      // Bottom callout bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 4.4, w: 8.4, h: 0.7, fill: { color: C.darkBg }
+      });
+      s.addText("Pre-trained on internet-scale text, then fine-tuned with human feedback. It doesn't 'think' — it predicts the next token.", {
+        x: 1.0, y: 4.4, w: 8, h: 0.7,
+        fontSize: 13, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
+      });
+      s.addNotes("Keep this high-level. Classification models are what most people think of as 'AI/ML' — spam filters, recommendation engines. Generative models are the paradigm shift: instead of choosing from options, they create. The Transformer architecture (2017) is what made GPTs possible — the attention mechanism lets the model consider relationships between all tokens simultaneously, which is why it scales so well. The key takeaway: it's a next-token predictor, not a reasoning engine. Everything it does emerges from predicting what text should come next.");
+    }
+  },
+
+  // SLIDE B3 — "How It Remembers" (memory analogy)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, null, FT);
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
+      });
+      s.addText("The Context Window & Memory", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("It remembers like you do — sort of", {
+        x: 0.8, y: 0.7, w: 6, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      const rows = [
+        {
+          icon: "eye", color: C.accent,
+          human: "Short-term / Working memory",
+          humanDesc: "What's in front of you right now",
+          ai: "Context Window",
+          aiDesc: "The conversation, files, and errors the AI can 'see' right now. Fixed size. Expensive."
+        },
+        {
+          icon: "brain", color: C.accentDim,
+          human: "Long-term memory",
+          humanDesc: "Things you've learned and can recall",
+          ai: "Fine-tuning & RLHF",
+          aiDesc: "Patterns baked in during training. The AI 'knows' Python syntax the way you know your native language."
+        },
+        {
+          icon: "book", color: C.muted,
+          human: "Deep storage / Library",
+          humanDesc: "Books on your shelf you can look up",
+          ai: "RAG & Tool Use",
+          aiDesc: "Documentation, databases, web search. Not in memory — retrieved on demand."
+        },
+      ];
+
+      rows.forEach((r, i) => {
+        const y = 1.2 + i * 1.0;
+        // Row background
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: 0.8, y, w: 8.4, h: 0.85, fill: { color: C.darkBg }
+        });
+        // Left accent bar per row
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: 0.8, y, w: 0.06, h: 0.85, fill: { color: r.color }
+        });
+        iconCircle(s, r.icon, 1.1, y + 0.15, 0.5, C.midBg, icons, pres);
+        // Human side
+        s.addText(r.human, {
+          x: 1.75, y: y + 0.05, w: 2.8, h: 0.3,
+          fontSize: 12, fontFace: FONT.head, color: r.color, bold: true, margin: 0
+        });
+        s.addText(r.humanDesc, {
+          x: 1.75, y: y + 0.4, w: 2.8, h: 0.35,
+          fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+        // Arrow separator
+        s.addText("→", {
+          x: 4.55, y: y + 0.05, w: 0.4, h: 0.7,
+          fontSize: 20, fontFace: FONT.head, color: C.muted, valign: "middle", align: "center", margin: 0
+        });
+        // AI side
+        s.addText(r.ai, {
+          x: 5.1, y: y + 0.05, w: 3.8, h: 0.3,
+          fontSize: 12, fontFace: FONT.head, color: r.color, bold: true, margin: 0
+        });
+        s.addText(r.aiDesc, {
+          x: 5.1, y: y + 0.4, w: 3.8, h: 0.35,
+          fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+      });
+
+      // Danger zone callout
+      const dzY = 4.3;
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: dzY, w: 8.4, h: 0.9, fill: { color: C.darkBg }
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: dzY, w: 0.06, h: 0.9, fill: { color: C.warnRed }
+      });
+      iconCircle(s, "warn", 1.1, dzY + 0.15, 0.5, "5A2020", icons, pres);
+      s.addText("Zone of Stupid", {
+        x: 1.75, y: dzY + 0.08, w: 3, h: 0.3,
+        fontSize: 14, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
+      });
+      s.addText("Overload the context window and quality collapses. Like trying to hold a phone conversation while reading a novel and doing taxes. More context ≠ better answers.", {
+        x: 1.75, y: dzY + 0.42, w: 7.2, h: 0.4,
+        fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+
+      s.addNotes("The memory analogy is the key mental model for the whole workshop. Short-term = context window: it's everything the model can attend to right now, and it's finite. When people talk about '200k tokens' that's this. Long-term = training: the model 'knows' things like syntax, common patterns, and general knowledge because it was trained on them. Deep storage = retrieval: RAG, MCP servers, web search — things the model doesn't inherently know but can look up. The 'Zone of Stupid' is critical for practitioners: stuffing the context window with everything you can find actually *degrades* quality. The model loses focus. This directly connects to Station 2 of the next activity ('The Context Problem') — the audience will now understand *why* context selection matters.");
+    }
+  },
+
+  // SLIDE B4 — Context Usage visualisation ("Zone of Stupid")
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      // Breakout left bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
+      });
+
+      s.addText("Context Usage", {
+        x: 0.8, y: 0.2, w: 8, h: 0.5,
+        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("What's actually inside the context window?", {
+        x: 0.8, y: 0.7, w: 6, h: 0.3,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      // The stacked bar
+      const barX = 1.2;
+      const barW = 2.4;
+      const barTop = 1.15;
+      const barH = 3.9;
+
+      // Outer border for entire bar
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: barX, y: barTop, w: barW, h: barH,
+        fill: { color: C.darkBg },
+        line: { color: C.muted, width: 1 }
+      });
+
+      // Segments (top to bottom)
+      const segments = [
+        { label: "System Prompt",  h: 0.45, color: "5A7A4A", labelColor: C.offWhite },
+        { label: "System Tools",   h: 0.50, color: "4A6A3A", labelColor: C.offWhite },
+        { label: "Memory Files",   h: 0.35, color: "3F5E33", labelColor: C.offWhite },
+        { label: "Messages",       h: 1.50, color: C.accentDim, labelColor: C.white },
+        { label: "Free Space",     h: 1.10, color: C.darkBg, labelColor: C.muted },
+      ];
+
+      let curY = barTop;
+      const segPositions = [];
+      segments.forEach((seg) => {
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: barX, y: curY, w: barW, h: seg.h,
+          fill: { color: seg.color },
+          line: { color: C.muted, width: 0.5 }
+        });
+        s.addText(seg.label, {
+          x: barX, y: curY, w: barW, h: seg.h,
+          fontSize: 10, fontFace: FONT.body, color: seg.labelColor,
+          align: "center", valign: "middle", margin: 0
+        });
+        segPositions.push({ y: curY, h: seg.h });
+        curY += seg.h;
+      });
+
+      // "Zone of Stupid" dashed line — cuts through Messages at ~65%
+      const stupidY = barTop + 0.45 + 0.50 + 0.35 + 0.95;
+      s.addShape(pres.shapes.LINE, {
+        x: barX - 0.3, y: stupidY, w: barW + 0.6, h: 0,
+        line: { color: C.warnRed, width: 1.5, dashType: "dash" }
+      });
+
+      // Right side — annotations aligned to segment midpoints
+      const annoX = 4.3;
+      const annoW = 5.2;
+      const annos = [
+        { label: "System Prompt", desc: "Role, personality, rules, safety guardrails. Set by the tool vendor.", color: "5A7A4A", segIdx: 0 },
+        { label: "System Tools", desc: "Tool definitions (Read, Edit, Bash, Grep…). Each schema costs tokens.", color: "4A6A3A", segIdx: 1 },
+        { label: "Memory Files", desc: "CLAUDE.md, project docs. Loaded at start — grows with your config.", color: "3F5E33", segIdx: 2 },
+        { label: "Messages", desc: "Conversation history, tool calls, results, file contents. Grows fastest.", color: C.accentDim, segIdx: 3, yOffset: -0.25 },
+      ];
+
+      annos.forEach((a) => {
+        const sp = segPositions[a.segIdx];
+        const midY = sp.y + sp.h / 2 - 0.2 + (a.yOffset || 0);
+        s.addShape(pres.shapes.OVAL, {
+          x: annoX - 0.22, y: midY + 0.07, w: 0.14, h: 0.14,
+          fill: { color: a.color }
+        });
+        s.addText(a.label, {
+          x: annoX, y: midY, w: annoW, h: 0.22,
+          fontSize: 11, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+        });
+        s.addText(a.desc, {
+          x: annoX, y: midY + 0.22, w: annoW, h: 0.22,
+          fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+      });
+
+      // Zone of Stupid callout — positioned clearly below Messages anno
+      const zosY = stupidY + 0.15;
+      s.addShape(pres.shapes.OVAL, {
+        x: annoX - 0.22, y: zosY + 0.04, w: 0.14, h: 0.14,
+        fill: { color: C.warnRed }
+      });
+      s.addText("Zone of Stupid", {
+        x: annoX, y: zosY, w: 2, h: 0.22,
+        fontSize: 11, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
+      });
+      s.addText("Past here, quality degrades. The model can't attend to everything well.", {
+        x: annoX, y: zosY + 0.22, w: annoW, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+
+      // Free Space annotation — aligned to Free Space segment midpoint
+      const freeSeg = segPositions[4];
+      const freeAnnoY = freeSeg.y + freeSeg.h / 2 - 0.1;
+      s.addShape(pres.shapes.OVAL, {
+        x: annoX - 0.22, y: freeAnnoY + 0.04, w: 0.14, h: 0.14,
+        fill: { color: C.muted }
+      });
+      s.addText("Free Space", {
+        x: annoX, y: freeAnnoY, w: annoW, h: 0.22,
+        fontSize: 11, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Room for the model to reason and respond. When this shrinks, quality collapses.", {
+        x: annoX, y: freeAnnoY + 0.22, w: annoW, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
+      });
+
+      s.addNotes("This visualises the context window as a finite resource. Walk through each segment: the system prompt and tools are 'tax' — they're always there, consuming space before you even type. Memory files grow as you configure more. Messages are the biggest consumer and grow with every exchange. Free space is what the model needs to actually think and produce quality output. The dashed red line is the 'Zone of Stupid' — once messages push past roughly 70% of the window, the model starts losing coherence. It can't attend to everything well. This is why context management matters: every file you dump in, every long error trace, every 'just in case' inclusion competes with the model's ability to reason. This directly sets up the next activity where participants will grapple with 'what do you send and when?'");
+    }
+  },
+
   // SLIDE 9 — Activity: Design Your Own Claude Code
   {
     type: "custom",
