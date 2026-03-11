@@ -30,7 +30,7 @@ module.exports = [
         fontSize: 22, fontFace: FONT.head, color: C.accent, bold: true, align: "center", margin: 0
       });
       s.addImage({ data: icons.heart, x: 4.5, y: 4.2, w: 0.8, h: 0.8 });
-      s.addNotes("Close with warmth. The three traits — curious, humble, gritty — are the human qualities that matter most in this AI-augmented future. Curious: keep exploring new tools and approaches. Humble: acknowledge what you don't know and let AI help you learn. Gritty: this transition isn't easy, and persistence matters. Thank the audience, invite questions, and remind them that everyone in the room is ahead of the curve simply by engaging with these ideas today.");
+      s.addNotes("This is a journey, not a destination. And the three qualities that will carry you through it are right here on the screen. [point to each] Stay curious — keep exploring new tools and approaches. The landscape is changing fast and the people who thrive are the ones who stay open. Stay humble — acknowledge what you don't know, and let AI help you learn. Some of the best engineers I know are the ones who say 'I don't know, let's find out.' Stay gritty — because this transition isn't easy. There will be frustrating days. Persistence matters. [pause] Thank you for spending the day with me. Everyone in this room is ahead of the curve simply by engaging with these ideas. I'd love to take questions.");
     }
   },
 ];

@@ -60,7 +60,7 @@ module.exports = [
         x: 1.0, y: 4.45, w: 8, h: 0.6,
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
       });
-      s.addNotes("This is the deliberate trough between Part 2's high and Part 3's climb. You've just shown the audience the recursive builder — AI writing specs, AI executing specs, everything is wonderful. Now ground them. The four dimensions explain why the hype feels disconnected from their daily experience. Most tweets showing '10x productivity' are someone building a todo app from scratch, alone, with no consequences if it breaks. Most real software engineering is maintaining a large brownfield codebase, in a team, where a mistake means a production incident. Name this tension explicitly — the audience will feel seen. Then use the discussion to let them articulate which dimensions define THEIR reality. This sets Part 3 up perfectly: orchestration is the answer to 'how do we get AI benefits in the brownfield, large, team, low-risk-appetite world?'");
+      s.addNotes("Okay, time for a reality check. Everything we built today was greenfield, small, and solo. And it felt amazing. [pause] But most of your real work isn't like that. [walk through the four dimensions] Greenfield versus brownfield — new code from scratch versus a living codebase with years of decisions baked in. Small versus large — fits in one context window versus too big for any AI to see at once. Solo versus team — you directing agents versus five people with shared standards and merge conflicts. And risk appetite — a blog engine with zero consequences versus payment systems and production infrastructure. [pause] Most of those '10x productivity' tweets? Someone building a todo app from scratch, alone, with no consequences. Most real engineering looks like the right side of this chart. Part 3 is about how we get AI benefits in *that* world.");
     },
   },
 
@@ -96,7 +96,7 @@ module.exports = [
         x: 1.0, y: 4.3, w: 8, h: 0.65,
         fontSize: 12, fontFace: FONT.body, color: C.accent, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("Open discussion. Let people talk. The four dimensions will resonate differently with each person. Some will immediately say 'brownfield and team — that's us' and you can ask what specific challenges that creates. Others might say they're in a greenfield startup but worried about risk as they scale. The bottleneck question is the key bridge: when people name code review, testing, compliance, or deployment as their bottleneck, you can say 'that's exactly what Part 3 is about.' The multi-agent pipeline (Agent A plans, Agent B codes, Agent C tests, Human approves, Agent D deploys) directly maps to these bottlenecks. Each stage of the pipeline is a specialist agent addressing a specific bottleneck.");
+      s.addNotes("Let's talk about this. [ask audience] Which dimensions define your reality? Who's dealing with brownfield and team? [take responses] What specific challenges does that create? [take a few more] Who's greenfield but worried about risk as you scale? [pause] Now here's the key question: what's your biggest bottleneck? Is it code review? Testing? Compliance? Deployment? [take answers] Hold onto those answers — because that's exactly what Part 3 is about. Imagine a pipeline: Agent A plans, Agent B codes, Agent C tests, a human approves, Agent D deploys. Each stage is a specialist agent addressing one of those bottlenecks you just named.");
     },
   },
 
@@ -126,7 +126,7 @@ module.exports = [
         fontSize: 16, fontFace: FONT.body, color: C.muted, margin: 0
       });
       s.addImage({ data: icons.sitemap, x: 8.0, y: 3.8, w: 1.2, h: 1.2 });
-      s.addNotes("Part 3 is where we go from managing one AI agent to orchestrating many. This is L4 territory — the bleeding edge. We'll look at what happens when you try naive autonomy, how orchestration frameworks solve that, and ultimately what this means for the role of a software engineer. Buckle up.");
+      s.addNotes("Part 3 is where we go from managing one AI agent to orchestrating many. This is Level 4 territory — the bleeding edge. We'll look at what happens when you try naive autonomy, how orchestration frameworks solve the chaos that follows, and ultimately what all of this means for the role of a software engineer. [pause] Buckle up.");
     },
   },
 
@@ -172,7 +172,7 @@ module.exports = [
         x: 1.0, y: 4.5, w: 8, h: 0.55,
         fontSize: 16, fontFace: FONT.body, color: C.white, bold: true, valign: "middle", align: "center", margin: 0
       });
-      s.addNotes("The cautionary tale. Everyone who's experimented with AutoGPT or simple agent loops has experienced this: the agent confidently starts coding, hits an error, 'fixes' it by introducing a new error, and spirals. Meanwhile, your API bill is climbing. The early AutoGPT experiments were exciting demos but terrible in practice. The key lesson: autonomy without orchestration is chaos. You need structure, specialisation, and guardrails. This sets up the orchestration frameworks.");
+      s.addNotes("First, the cautionary tale. Anyone here experimented with AutoGPT or simple agent loops? [show of hands] Then you know this feeling: the agent confidently starts coding, hits an error, 'fixes' it by introducing a new error, and spirals into chaos. Meanwhile, your API bill is climbing. [pause] The early AutoGPT experiments were exciting demos but terrible in practice. The lesson is clear: autonomy without orchestration is chaos. You need structure, specialisation, and guardrails. That's what we're going to build.");
     },
   },
 
@@ -225,7 +225,7 @@ module.exports = [
         x: 1.0, y: 4.6, w: 8, h: 0.45,
         fontSize: 11, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This is the most ambitious activity in the workshop. Participants build an autonomous agent that performs the ESLint dependency upgrade from Part 1 — but inside Docker, with tests and Playwright verification as guardrails. Some participants WILL experience the loop of death: their agent will get stuck in a fix-break-fix cycle. That's a feature, not a bug — it makes the next concept (Handoffs & Routines) concrete. Others will get it working, which demonstrates that constrained autonomy IS viable. The Docker boundary is critical: emphasise that you'd never let an autonomous agent run directly on your production codebase. The guardrails step (iteration cap, cost limit, rollback) is the most important — this is what separates a useful autonomous agent from an expensive disaster. Give 15-20 minutes, then debrief.");
+      s.addNotes("This is the most ambitious activity in the workshop. You're going to build an autonomous agent that performs the ESLint dependency upgrade from Part 1 — but inside Docker, with tests and Playwright verification as guardrails. [pause] Here's what I expect to happen: some of you will experience the loop of death firsthand. Your agent will get stuck in a fix-break-fix cycle. That's not a failure — it's the lesson. Others will get it working, which proves that constrained autonomy IS viable. [pause] Critical point: Docker is the boundary. You would never let an autonomous agent run directly on your production codebase. And the guardrails step — iteration cap, cost limit, rollback — is the most important part. That's what separates a useful agent from an expensive disaster. You've got 15 to 20 minutes. Go.");
     },
   },
 
@@ -286,7 +286,7 @@ module.exports = [
         x: 0.8, y: 4.2, w: 8.4, h: 0.5,
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
-      s.addNotes("Orchestration frameworks like Swarm, Agora, or custom setups solve the chaos problem through specialisation. A Triage Agent reads the request and decides: is this a database task or a UI task? Then it hands off to the appropriate specialist. The specialist agent has focused context and tools. The handoff includes relevant context so the specialist doesn't start from scratch. Think of it like a well-run engineering team: the tech lead triages tickets, the backend dev handles APIs, the frontend dev handles UI. Same principle, AI agents.");
+      s.addNotes("So how do we solve the chaos problem? Specialisation. Orchestration frameworks like Swarm, Agora, or custom setups work the same way a well-run engineering team does. [walk through the flow] A Triage Agent reads the request and decides: is this a database task or a UI task? Then it hands off to the appropriate specialist. That specialist has focused context and focused tools. The handoff includes relevant context so the specialist doesn't start from scratch. [pause] Think about your own team: the tech lead triages tickets, the backend dev handles APIs, the frontend dev handles UI. Same principle — but with AI agents.");
     },
   },
 
@@ -343,7 +343,7 @@ module.exports = [
         x: 1.0, y: 4.6, w: 8, h: 0.45,
         fontSize: 12, fontFace: FONT.body, color: C.accent, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("This is the 'second peak' answer to the Loop of Death. Same task (dependency upgrade), same Docker environment, but now with a structured handoff. The Planning Agent uses meta-prompting (Context Extractor + Constraint Builder work well here) to produce a detailed upgrade plan: which files are affected, what breaking changes exist, what the migration steps are, and what tests must pass. This plan is then fed to the Coding Agent as its instruction set. The Coding Agent doesn't need to figure out 'what to do' — it just needs to execute the plan. Compare the output to Activity 1: the quality difference demonstrates why specialisation and handoffs matter. The planner has broad context; the coder has focused execution.");
+      s.addNotes("Same task as before — the dependency upgrade. Same Docker environment. But now with a structured handoff. [walk through the steps] First, a Planning Agent uses meta-prompting — Context Extractor plus Constraint Builder work well here — to produce a detailed upgrade plan: which files are affected, what breaking changes exist, what the migration steps are, and what tests must pass. Then that plan gets fed to the Coding Agent as its instruction set. The Coding Agent doesn't need to figure out 'what to do' — it just executes. [after activity] Compare this output to your first attempt. The quality difference shows why specialisation matters. The planner has broad context; the coder has focused execution.");
     },
   },
 
@@ -398,7 +398,7 @@ module.exports = [
         { text: "After approval, deployment proceeds automatically", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
       ];
       s.addText(visionPts, { x: 0.8, y: 3.5, w: 8.4, h: 1.2, margin: 0 });
-      s.addNotes("This is the future vision made concrete. The 'software factory' is an asynchronous pipeline of specialist agents. You commit a spec file, and the system activates: Agent A creates a plan, Agent B writes code, Agent C runs tests. At defined checkpoints, the system pauses and asks a human for approval — 'human-on-the-loop' rather than 'human-in-the-loop'. After approval, Agent D deploys. The key insight: humans shift from writing code to reviewing and approving. Tools like Loom make this real today.");
+      s.addNotes("Here's where it all comes together — the software factory. An asynchronous pipeline of specialist agents. [walk through the flow] You commit a spec file, and the system activates: Agent A creates a plan, Agent B writes code, Agent C runs tests. At defined checkpoints, the system pauses and asks a human for approval. That's 'human-on-the-loop' rather than 'human-in-the-loop.' After approval, Agent D deploys. [pause] Notice the shift: humans go from writing code to reviewing and approving. Tools like Loom are making this real today.");
     },
   },
 
@@ -450,7 +450,7 @@ module.exports = [
         x: 1.0, y: 4.55, w: 8, h: 0.55,
         fontSize: 12, fontFace: FONT.body, color: C.accent, bold: true, valign: "middle", margin: 0
       });
-      s.addNotes("This completes the software factory pipeline. The Review Agent is a different specialist with a different prompt: it's looking for risks, regressions, and style issues — not writing code. The executive summary step is particularly powerful: participants generate a 3-sentence summary that a non-technical stakeholder could understand. This demonstrates that AI agents can communicate up the chain, not just down. The bottom callout is the emotional hook: they've just experienced the entire plan → do → review cycle without writing code. Let that sink in before moving to the 'You are no longer a coder' slide. This is the concrete evidence that makes the philosophical shift feel real.");
+      s.addNotes("This completes the pipeline. The Review Agent is a different specialist with a different prompt — it's looking for risks, regressions, and style issues, not writing code. And here's the powerful part: generate a 3-sentence executive summary that a non-technical stakeholder could understand. AI agents can communicate up the chain, not just down. [pause] Now look at what just happened. You planned, you delegated, you reviewed. The entire plan-do-review cycle, and you didn't write a single line of code. [let it land] Hold that thought.");
     },
   },
 
@@ -494,7 +494,7 @@ module.exports = [
         { text: "If coding just became a commodity skill, where do we add value now?", options: { bullet: true, fontSize: 15, fontFace: FONT.body, color: C.warnAmber } },
       ];
       s.addText(questions, { x: 0.8, y: 4.0, w: 8.4, h: 1.0, margin: 0 });
-      s.addNotes("This is the emotional peak of the workshop. The callback to their concrete experience — planning, delegating, reviewing — transforms an abstract philosophical point into something they just lived. They didn't write code, but software was delivered. That's the identity shift. Let it land. Some people find it exciting, others find it threatening. Both reactions are valid. The two questions on screen are deliberately provocative — don't rush to answer them. Let the audience sit with the discomfort. The next slide provides the framework for navigating this shift constructively.");
+      s.addNotes("You are no longer a coder. [long pause] Think about what you just did. You planned. You delegated. You reviewed. Software was delivered, and you didn't write any of it. [pause] That might feel exciting to some of you. It might feel threatening to others. Both reactions are completely valid. [read the questions on screen] What does 'senior engineer' mean when AI writes most of the code? What's your value when the AI can build faster than you can type? [pause] Don't rush to answer. Sit with it for a moment. The next slide gives us a framework for navigating this.");
     },
   },
 
@@ -551,7 +551,7 @@ module.exports = [
         }));
         s.addText(bullets, { x: 1.8, y: y + 0.42, w: 7, h: 0.75, margin: 0 });
       });
-      s.addNotes("This is the framework for navigating the identity shift. Step Back: acknowledge that the landscape has changed. Your coding skills aren't worthless but they're less differentiated. Step Up: the opportunity is to own more of the SDLC — not just 'I write backend code' but 'I own the entire delivery pipeline from spec to production.' Step In: use AI itself to upskill into adjacent disciplines. You can use AI to learn security, reliability engineering, data governance — areas where human judgment is still critical but expertise was previously hard to acquire. The message is optimistic: this is an expansion of your role, not a contraction.");
+      s.addNotes("Here's the framework. Three steps. [point to each] Step Back — acknowledge that the landscape has changed. Your coding skills aren't worthless, but they're less differentiated than they used to be. Step Up — the opportunity is to own more of the SDLC. Not just 'I write backend code' but 'I own the entire delivery pipeline from spec to production.' Step In — and this is my favourite — use AI itself to upskill into adjacent disciplines. Security, reliability engineering, data governance — areas where human judgment is still critical but expertise was previously hard to acquire. [pause] This is an expansion of your role, not a contraction. You're becoming more valuable, not less.");
     },
   },
 
@@ -609,7 +609,7 @@ module.exports = [
         { text: "Part 3 — Genesis stage: Autonomous agents, orchestration, plan→do→review pipelines", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: C.warnAmber } },
       ];
       s.addText(journeyItems, { x: 0.8, y: 3.4, w: 8.4, h: 1.2, margin: 0 });
-      s.addNotes("Bring it full circle. The evolution stages from early in Part 2 now have concrete meaning. Participants have personally experienced each stage today: Part 1 was firmly in Product territory — stable tools, increasing adoption. Part 2 moved into Custom — spec-driven approaches are experimental and require expertise. Part 3 was Genesis — orchestrators, autonomous loops, and multi-agent pipelines are novel and uncertain. This framing helps people calibrate their expectations: the Part 1 tools are ready to use tomorrow morning. Part 2 techniques need practice. Part 3 patterns are frontier territory. All three are worth pursuing, but at different investment levels.");
+      s.addNotes("Let's bring it full circle. Remember the evolution stages from Part 2? They have concrete meaning now because you've lived them today. [walk through each] Part 1 was Product territory — stable tools, increasing adoption. You can use those tomorrow morning. Part 2 moved into Custom — spec-driven approaches work, but they require expertise and practice. Part 3 was Genesis — orchestrators, autonomous loops, multi-agent pipelines. Novel, uncertain, and exciting. [pause] All three are worth pursuing, but at different investment levels. Calibrate your expectations accordingly.");
     },
   },
 
@@ -697,7 +697,7 @@ module.exports = [
         x: 0.8, y: 4.55, w: 8.4, h: 0.4,
         fontSize: 14, fontFace: FONT.body, color: C.warnAmber, bold: true, margin: 0
       });
-      s.addNotes("This is the 'show don't tell' moment. The timeline visualisation makes the multiplier effect visceral. Walk through it: you spend 10 minutes writing Plan A. You hand it to an agent. While the agent spends 20 minutes building Feature A, you write Plan B. When Feature A comes back for review and Feature B goes to the agent, you write Plan C. You're never idle, the agents are never idle, and features are being delivered in parallel. The key insight: the bottleneck shifts from coding speed to planning quality. This is why Part 2 (spec-driven development, meta-prompting) is so important — your planning speed and quality determine the throughput of the entire system. An Engineering Manager doesn't write code; they write plans, review output, and unblock their team. That's exactly what you're doing here.");
+      s.addNotes("Look at this timeline. [walk through it] You spend 10 minutes writing Plan A. You hand it to an agent. While the agent spends 20 minutes building Feature A, you're writing Plan B. When Feature A comes back for review and Feature B goes to the agent, you're already on Plan C. You're never idle. The agents are never idle. Features are being delivered in parallel. [pause] Notice where the bottleneck shifted — it's no longer coding speed, it's planning quality. That's why Part 2 matters so much. Your specs, your standards, your meta-prompting skills — they determine the throughput of the entire system. An engineering manager doesn't write code; they write plans, review output, and unblock their team. That's exactly what you're doing here.");
     },
   },
 
@@ -718,7 +718,7 @@ module.exports = [
         fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
       });
       nestingDiagram(s, pres, 4);
-      s.addNotes("Walk through from the inside out. Actions are the atomic unit — what we covered in Part 1. Tasks combine multiple actions towards a goal — Part 2 territory. Flows chain planning, execution, and review into an autonomous pipeline — this is what we've been building in Part 3. Loops wrap flows in self-correcting feedback: the output of a review feeds back into the next plan until the outcome is met. Each layer multiplies the previous one.");
+      s.addNotes("[walk through from the inside out] Actions — the atomic unit, what we covered in Part 1. Completions, edits, tool calls. Tasks — combining multiple actions towards a goal, that's Part 2 territory. Flows — chaining planning, execution, and review into an autonomous pipeline, which is what we've been building in Part 3. And finally, loops — wrapping flows in self-correcting feedback. The output of a review feeds back into the next plan until the outcome is met. Each layer multiplies the previous one.");
     },
   },
 
@@ -816,7 +816,7 @@ module.exports = [
         fontSize: 9, fontFace: FONT.body, color: C.muted, margin: 0
       });
 
-      s.addNotes("This slide zooms out from the individual loop to the macro level. A Loop is a single Plan-Do-Review cycle on one task — what participants experienced in the activities. A Macro Flow chains multiple loops together: plan the sprint, execute tasks in parallel loops, review outcomes as a batch. A Macro Loop is the organisational feedback cycle: the outcomes of one macro flow inform the strategy for the next. This is how AI-assisted development scales from individual productivity to team and organisational transformation. The feedback arrow on the right shows learning flowing back up; the scale arrow on the left shows strategy flowing down.");
+      s.addNotes("Now let's zoom out from the individual loop to the macro level. [point to each layer] A Loop is a single plan-do-review cycle on one task — that's what you experienced in the activities. A Macro Flow chains multiple loops together: plan the sprint, execute tasks in parallel loops, review outcomes as a batch. And a Macro Loop is the organisational feedback cycle: the outcomes of one macro flow inform the strategy for the next. [point to arrows] Feedback flows back up on the right. Strategy flows down on the left. This is how AI-assisted development scales from individual productivity to team and organisational transformation.");
     },
   },
 
@@ -882,7 +882,7 @@ module.exports = [
         x: 1.0, y: 4.75, w: 8, h: 0.4,
         fontSize: 12, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("Concrete next steps. Walk through each tool briefly. Agor is the most production-ready — it's an orchestration platform with approval checkpoints built in. Loom is the philosophical foundation — Geoffrey Huntley's spec-first approach where the 'Ralph loop' (study specs, pick task, implement, verify, repeat) runs continuously. Swarm CLI makes the Ralph loop practical — it's like docker-compose for AI agents, with containerisation for safety. Token Bonfire is the observability layer — when you're running autonomous agents, you MUST track costs. Without it, the Loop of Death becomes a financial disaster. Remind participants: these are all Genesis-stage tools. They're rough around the edges. They'll change rapidly. But they represent the direction the industry is heading. Getting familiar with them now is an investment in future capability.");
+      s.addNotes("Concrete next steps — tools you can try this week. [walk through each] Agor is the most production-ready: an orchestration platform with approval checkpoints built in. Loom is the philosophical foundation — Geoffrey Huntley's spec-first approach where the 'Ralph loop' runs continuously: study specs, pick task, implement, verify, repeat. Swarm CLI makes the Ralph loop practical — think docker-compose for AI agents, with containerisation for safety. And Token Bonfire is the observability layer. When you're running autonomous agents, you must track costs. Without it, the Loop of Death becomes a financial disaster. [pause] Fair warning: these are all Genesis-stage tools. Rough around the edges. They'll change rapidly. But they represent the direction the industry is heading, and getting familiar now is an investment in your future capability.");
     },
   },
 
@@ -943,7 +943,7 @@ module.exports = [
         x: 1.0, y: 4.5, w: 8, h: 0.55,
         fontSize: 12, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("Light-hearted slide with a serious point. 2027 sounds like the distant future but it's barely a year away. The core disciplines of software engineering — observability, governance, cost management — are still essential. Call back to the Great Divide here: the four dimensions (greenfield/brownfield, small/large, solo/team, risk appetite) don't disappear — they're the permanent constraints that determine how fast any team can move along the AI engineering levels. A solo developer on a greenfield project might reach L4 next month. A team maintaining a large brownfield system with low risk appetite might take two years to reach L3 — and that's perfectly fine. The levels are a map, not a race. Meet people where they are.");
+      s.addNotes("2027 sounds like the distant future, but it's barely a year away. And here's the serious point behind the fun: the core disciplines of software engineering — observability, governance, cost management — are still essential. [pause] Remember the Great Divide? Those four dimensions — greenfield versus brownfield, small versus large, solo versus team, risk appetite — they don't disappear. They're the permanent constraints that determine how fast any team can move along the AI engineering levels. A solo developer on a greenfield project might reach Level 4 next month. A team maintaining a large brownfield system with low risk appetite might take two years to reach Level 3. And that's perfectly fine. The levels are a map, not a race. Meet yourself where you are.");
     },
   },
 ];
