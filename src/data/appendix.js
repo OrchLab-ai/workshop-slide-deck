@@ -337,4 +337,118 @@ module.exports = [
       s.addNotes("This slide is all about the visual contrast — let it sink in. On the left, eleven lines of JSON-RPC just to read a file. On the right, one shell command. That's the trade-off in a nutshell.\n\nBut here's why MCP exists despite the verbosity:\n\n- Protocol: JSON-RPC 2.0 over stdio/SSE vs. shell commands + stdout\n- Type Safety: Typed schemas with validated params vs. strings in, strings out\n- Discovery: tools/list is self-describing vs. man pages, --help, trial and error\n- Composability: Server chains and tool aggregation vs. pipes, scripts, aliases\n- Setup Cost: Server + config + transport vs. already installed everywhere\n- Best For: Structured integrations and agents vs. quick tasks and existing workflows\n\nMy take: use CLI for quick, well-understood tasks. Use MCP when you're building structured integrations that agents will use repeatedly, or when you need the AI to discover and compose tools dynamically. They're complementary, not competing. The verbosity of MCP buys you type safety, discoverability, and composability — the AI knows exactly what tools are available and what parameters they accept.");
     }
   },
+
+  // APPENDIX A5 — Agentic Coding - Locally
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, null, FT);
+
+      s.addText("Agentic Coding \u2014 Locally", {
+        x: 0.8, y: 0.3, w: 8, h: 0.7,
+        fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 1.0, w: 3, h: 0.04, fill: { color: C.accent }
+      });
+
+      s.addText("Run the same agentic tools with local models \u2014 no API keys, no cloud, no cost.", {
+        x: 0.8, y: 1.15, w: 8.4, h: 0.4,
+        fontSize: 14, fontFace: FONT.body, color: C.offWhite, italic: true, margin: 0
+      });
+
+      // Ollama hub — left side
+      addCard(s, 0.6, 1.7, 3.5, 2.85, C.accent, pres);
+      iconCircle(s, "cog", 1.95, 1.82, 0.45, C.darkBg, icons, pres);
+      s.addText("Ollama", {
+        x: 0.75, y: 2.35, w: 3.2, h: 0.3,
+        fontSize: 18, fontFace: FONT.head, color: C.accent, bold: true, align: "center", margin: 0
+      });
+      s.addText("Local model runtime", {
+        x: 0.75, y: 2.65, w: 3.2, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.muted, italic: true, align: "center", margin: 0
+      });
+
+      // Ollama install command
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.85, y: 2.95, w: 3.0, h: 0.35, fill: { color: C.darkBg }
+      });
+      s.addText("$ ollama run qwen2.5-coder", {
+        x: 0.95, y: 2.95, w: 2.8, h: 0.35,
+        fontSize: 9.5, fontFace: "Consolas", color: C.accent, valign: "middle", margin: 0
+      });
+
+      const ollamaItems = [
+        "One-command install, runs anywhere",
+        "Llama, Qwen, DeepSeek, Gemma, etc.",
+        "OpenAI-compatible API on localhost",
+        "GPU optional \u2014 works on CPU too",
+      ];
+      ollamaItems.forEach((item, i) => {
+        s.addText("\u2022  " + item, {
+          x: 0.85, y: 3.4 + i * 0.28, w: 3.1, h: 0.26,
+          fontSize: 9, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+      });
+
+      // Arrow from Ollama to tools
+      s.addText("\u25B6", {
+        x: 4.15, y: 2.75, w: 0.4, h: 0.4,
+        fontSize: 20, fontFace: FONT.body, color: C.accent, align: "center", valign: "middle", margin: 0
+      });
+
+      // Tools grid — right side (3 rows x 2 cols, compact)
+      const tools = [
+        { name: "Claude Code",  desc: "Anthropic\u2019s agentic CLI",     icon: "robot" },
+        { name: "Codex",        desc: "OpenAI\u2019s coding agent",       icon: "code" },
+        { name: "Goose",        desc: "Block\u2019s open-source agent",   icon: "rocket" },
+        { name: "Continue",     desc: "IDE autocomplete & chat",     icon: "puzzle" },
+        { name: "Aider",        desc: "Git-aware pair programmer",   icon: "tools" },
+        { name: "OpenCode",     desc: "Terminal coding agent",       icon: "cog" },
+      ];
+
+      tools.forEach((t, i) => {
+        const col = i % 2;
+        const row = Math.floor(i / 2);
+        const x = 4.65 + col * 2.55;
+        const y = 1.7 + row * 0.95;
+
+        addCard(s, x, y, 2.35, 0.8, C.accent, pres);
+        iconCircle(s, t.icon, x + 0.15, y + 0.1, 0.3, C.darkBg, icons, pres);
+        s.addText(t.name, {
+          x: x + 0.55, y: y + 0.05, w: 1.65, h: 0.28,
+          fontSize: 11, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+        });
+        s.addText(t.desc, {
+          x: x + 0.55, y: y + 0.33, w: 1.2, h: 0.22,
+          fontSize: 8.5, fontFace: FONT.body, color: C.offWhite, margin: 0
+        });
+        // "LOCAL" badge
+        s.addShape(pres.shapes.ROUNDED_RECTANGLE, {
+          x: x + 1.75, y: y + 0.33, w: 0.5, h: 0.18,
+          fill: { color: C.darkBg }, rectRadius: 0.05
+        });
+        s.addText("LOCAL", {
+          x: x + 1.75, y: y + 0.33, w: 0.5, h: 0.18,
+          fontSize: 6.5, fontFace: FONT.head, color: C.accent, bold: true, align: "center", valign: "middle", margin: 0
+        });
+      });
+
+      // Link bar at bottom
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.6, y: 4.6, w: 8.8, h: 0.4, fill: { color: C.darkBg }
+      });
+      iconCircle(s, "book", 0.7, 4.63, 0.3, C.cardBg, icons, pres);
+      s.addText("docs.ollama.com/integrations  \u2014  full list of supported tools & setup guides", {
+        x: 1.15, y: 4.6, w: 8, h: 0.4,
+        fontSize: 10, fontFace: FONT.body, color: C.muted, valign: "middle", margin: 0
+      });
+
+      s.addNotes("Here's something a lot of people don't realise — you can run the same agentic coding tools you've been using all day with completely local models. No API keys, no cloud, no cost per token. Ollama is the key piece. It's a local model runtime — one command install, runs on Mac, Linux, Windows. You pull a model like Qwen 2.5 Coder or DeepSeek, and it exposes an OpenAI-compatible API on localhost. That's the magic — because most agentic tools already speak the OpenAI API format, they just work. Claude Code supports Ollama as a provider. Codex from OpenAI supports it. Goose from Block, Continue for IDE integration, Aider for git-aware pair programming, OpenCode for terminal work — they all connect to Ollama. Why does this matter? Three reasons. First, privacy — your code never leaves your machine. That matters a lot in regulated industries. Second, cost — you can experiment all day without burning tokens. Third, offline — you can code on a plane, on a train, wherever. The models aren't as capable as Claude or GPT-4, but for many tasks — autocomplete, small refactors, test generation — they're surprisingly good. Check docs.ollama.com/integrations for the full list and setup guides for each tool.");
+    }
+  },
 ];
