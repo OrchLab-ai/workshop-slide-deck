@@ -18,7 +18,6 @@ function darkSlide(pres, num, footerText) {
   const slide = pres.addSlide();
   slide.background = { color: C.midBg };
   if (footerText) addFooter(slide, footerText);
-  if (num) addSlideNumber(slide, num);
   return slide;
 }
 
@@ -26,7 +25,6 @@ function lightSlide(pres, num, footerText) {
   const slide = pres.addSlide();
   slide.background = { color: C.offWhite };
   if (footerText) addFooter(slide, footerText);
-  if (num) addSlideNumber(slide, num);
   return slide;
 }
 

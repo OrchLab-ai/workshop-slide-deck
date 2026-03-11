@@ -748,7 +748,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 9, FT);
+      const s = darkSlide(pres, 8, FT);
       s.addText("The Agentic Tool User", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -841,7 +841,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { lightSlide, addLightCard } = ctx.helpers;
 
-      const s = lightSlide(pres, 11, FT);
+      const s = lightSlide(pres, 10, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -881,7 +881,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 12, FT);
+      const s = darkSlide(pres, 11, FT);
       s.background = { color: C.darkBg };
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.06, fill: { color: C.accent }
