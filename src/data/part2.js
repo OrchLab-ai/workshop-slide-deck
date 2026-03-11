@@ -9,7 +9,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 12, FT);
+      const s = darkSlide(pres, FT);
       s.addText("General Conversation", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -74,7 +74,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 13, FT);
+      const s = darkSlide(pres, FT);
       s.addText("A Vision of the Future (Revisited)", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -108,7 +108,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 14, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Where Are We in the Hype Cycle?", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -150,7 +150,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 15, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Evolution Stages", {
         x: 0.8, y: 0.4, w: 8, h: 0.6,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -211,7 +211,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 16, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The (Wishful) \"Micro-Prompt\"", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 28, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
@@ -263,7 +263,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 17, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -291,7 +291,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 18, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -343,7 +343,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 19, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The \"Mega-Prompt\"", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
@@ -385,7 +385,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 20, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Spec-Driven Architecture", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -431,7 +431,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 21, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -485,7 +485,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 22, FT);
+      const s = darkSlide(pres, FT);
       s.addText("What Standards?", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -533,7 +533,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 23, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Context Window Problem", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
@@ -581,7 +581,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 24, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Recursive Builder", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -634,7 +634,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 25, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Meta-Prompting", {
         x: 0.8, y: 0.3, w: 5, h: 0.6,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -719,7 +719,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 26, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -772,7 +772,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 27, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -824,7 +824,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { darkSlide, nestingDiagram } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addText("From Task to Flow", {
         x: 0.8, y: 0.2, w: 8, h: 0.5,
         fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -846,7 +846,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 28, FT);
+      const s = darkSlide(pres, FT);
       s.background = { color: C.darkBg };
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.06, fill: { color: C.accent }

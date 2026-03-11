@@ -33,7 +33,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
 
       s.addText("Whisperflow: Just Talk", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,
@@ -97,7 +97,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
 
       s.addText("Remote Access & Monitoring", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,
@@ -174,7 +174,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
 
       s.addText("Team Dynamics: Scout vs. Strike", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,
@@ -256,7 +256,7 @@ module.exports = [
       const { darkSlide, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
 
       s.addText("MCP vs. CLI", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,
@@ -346,7 +346,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
 
       s.addText("Agentic Coding \u2014 Locally", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,

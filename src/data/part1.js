@@ -9,7 +9,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 1, FT);
+      const s = darkSlide(pres, FT);
       s.addText("A Vision of the Future", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -44,7 +44,7 @@ module.exports = [
       const { darkSlide, addCard } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 2, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Copy-Paste Win", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -88,7 +88,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { darkSlide } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       const mono = "Courier New";
       const hi = C.highlightYellow;
       const dm = C.muted;
@@ -165,7 +165,7 @@ module.exports = [
       const { darkSlide, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 3, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Copy-Paste Trap", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
@@ -217,7 +217,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 4, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Phone Call vs. Pair Programming", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -259,7 +259,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 5, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Contextual Integration", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -300,7 +300,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { lightSlide, addLightCard } = ctx.helpers;
 
-      const s = lightSlide(pres, 6, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -363,7 +363,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { darkSlide, nestingDiagram } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addText("From Action to Task", {
         x: 0.8, y: 0.2, w: 8, h: 0.5,
         fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -385,7 +385,7 @@ module.exports = [
       const { darkSlide, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       // Accent left bar (thinner than part dividers to signal "mini-section")
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
@@ -411,7 +411,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
       });
@@ -463,7 +463,7 @@ module.exports = [
       const { darkSlide, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
       });
@@ -565,7 +565,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { darkSlide } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       // Breakout left bar
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 0.06, h: 5.63, fill: { color: C.accentDim }
@@ -695,7 +695,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { lightSlide, addLightCard } = ctx.helpers;
 
-      const s = lightSlide(pres, 7, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -748,7 +748,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 8, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Agentic Tool User", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -797,7 +797,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 9, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Tool Selection Strategy", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -841,7 +841,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { lightSlide, addLightCard } = ctx.helpers;
 
-      const s = lightSlide(pres, 10, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -881,7 +881,7 @@ module.exports = [
       const { darkSlide, addCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 11, FT);
+      const s = darkSlide(pres, FT);
       s.background = { color: C.darkBg };
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.06, fill: { color: C.accent }

@@ -9,7 +9,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 29, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Great Divide", {
         x: 0.8, y: 0.3, w: 8, h: 0.7,
         fontSize: 32, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
@@ -72,7 +72,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 30, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Where Do You Sit?", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -138,7 +138,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 31, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Loop of Death", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.warnRed, bold: true, margin: 0
@@ -184,7 +184,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 32, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -237,7 +237,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 33, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Handoffs & Routines", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -298,7 +298,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 34, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -355,7 +355,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 35, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Human-on-the-Loop & Self-Healing", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
         fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -410,7 +410,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = lightSlide(pres, 36, FT);
+      const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
@@ -462,7 +462,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 37, FT);
+      const s = darkSlide(pres, FT);
       s.background = { color: C.darkBg };
       s.addText("You Are No Longer a Coder", {
         x: 0.8, y: 0.4, w: 8, h: 0.7,
@@ -506,7 +506,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 38, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Step Back, Step Up, Step In", {
         x: 0.8, y: 0.3, w: 8, h: 0.6,
         fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -563,7 +563,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 39, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Where Are We Now?", {
         x: 0.8, y: 0.3, w: 8, h: 0.6,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -621,7 +621,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 40, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Multiplier Effect", {
         x: 0.8, y: 0.3, w: 8, h: 0.6,
         fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -708,7 +708,7 @@ module.exports = [
       const { C, FONT } = ctx.branding;
       const { darkSlide, nestingDiagram } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addText("From Actions to Loops", {
         x: 0.8, y: 0.2, w: 8, h: 0.5,
         fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -729,7 +729,7 @@ module.exports = [
       const { C, FONT, makeShadow } = ctx.branding;
       const { darkSlide, addCard } = ctx.helpers;
 
-      const s = darkSlide(pres, null, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Scaling the Loop", {
         x: 0.8, y: 0.2, w: 8, h: 0.5,
         fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
@@ -828,7 +828,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 41, FT);
+      const s = darkSlide(pres, FT);
       s.addText("Tools & Ecosystem", {
         x: 0.8, y: 0.3, w: 8, h: 0.6,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
@@ -894,7 +894,7 @@ module.exports = [
       const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
       const { icons } = ctx;
 
-      const s = darkSlide(pres, 42, FT);
+      const s = darkSlide(pres, FT);
       s.addText("The Year 2027", {
         x: 0.8, y: 0.3, w: 5, h: 0.6,
         fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
