@@ -81,7 +81,77 @@ module.exports = [
     }
   },
 
-  // SLIDE 5 — The Copy-Paste Trap
+  // SLIDE 5 — The Bug AI Found in Seconds
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide } = ctx.helpers;
+
+      const s = darkSlide(pres, null, FT);
+      const mono = "Courier New";
+      const hi = C.highlightYellow;
+      const dm = C.muted;
+
+      // Title
+      s.addText("The Bug AI Found in Seconds", {
+        x: 0.6, y: 0.2, w: 8.8, h: 0.55,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+
+      // Code block background
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 0.85, w: 9.0, h: 3.55,
+        fill: { color: C.darkBg }, rectRadius: 0.08
+      });
+
+      // Code with highlighted key variables
+      // Using text-run arrays for inline color highlighting
+      const fs = 10.5;
+      const codeRuns = [
+        { text: "var histogram = new LongHistogram(TimeSpan.FromMinutes(40).Ticks, ", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "4", options: { fontSize: fs, fontFace: mono, color: hi, bold: true } },
+        { text: ");\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "var maxValue = TimeSpan.FromMinutes(20).Ticks;\n\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "var count = ", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "10000", options: { fontSize: fs, fontFace: mono, color: hi, bold: true } },
+        { text: ";\nfor (var i = 0; i < count; i++)\n{\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "    histogram.RecordValue(Random.Shared.NextInt64(maxValue));\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "}\n\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "await using var ms = new MemoryStream();\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "HistogramLogWriter.Write(ms,\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "    DateTimeOffset.FromUnixTimeMilliseconds(\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "        histogram.StartTimeStamp).UtcDateTime, histogram);\n\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "ms.Position = 0;\n\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "var readBackHistograms = new HistogramLogReader(ms)\n", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+        { text: "    .ReadHistograms().ToList();", options: { fontSize: fs, fontFace: mono, color: C.offWhite } },
+      ];
+      s.addText(codeRuns, {
+        x: 0.7, y: 0.95, w: 8.6, h: 3.35,
+        margin: 0, valign: "top", lineSpacingMultiple: 0.95
+      });
+
+      // Legend strip below code block
+      s.addText([
+        { text: "\u25cf ", options: { fontSize: 11, fontFace: FONT.body, color: hi } },
+        { text: "Highlighted values are the trigger conditions  ", options: { fontSize: 11, fontFace: FONT.body, color: dm } },
+        { text: "  |  significantDigits > 3  +  count \u2265 10,000  +  .NET 5+", options: { fontSize: 11, fontFace: mono, color: dm } },
+      ], {
+        x: 0.5, y: 4.5, w: 9.0, h: 0.35,
+        margin: 0, valign: "middle"
+      });
+
+      // Issue reference
+      s.addText("HdrHistogram.NET issue #99", {
+        x: 0.5, y: 4.85, w: 9.0, h: 0.25,
+        fontSize: 9, fontFace: FONT.body, color: dm, italic: true, margin: 0
+      });
+
+      s.addNotes("This slide drills into the HdrHistogram bug to make it concrete. The bug required three specific conditions to trigger simultaneously: significantValueDigits > 3 (most people use 2\u20133), count >= 10,000, AND running on .NET 5.0+. The human (Lee Campbell) spent hours spread over weeks. He could reproduce it, he could see wrong outputs, but he couldn\u2019t trace the root cause. He pasted the GitHub issue URL into ChatGPT and the AI identified a known integer-overflow problem in the Java port\u2019s sub-bucket calculation that surfaced differently on .NET\u2019s newer runtime. This is the ideal copy-paste scenario: a well-documented issue, a bounded codebase, and the human already did the hard work of isolating the repro.");
+    }
+  },
+
+  // SLIDE 6 — The Copy-Paste Trap
   {
     type: "custom",
     render(pres, ctx) {
@@ -133,7 +203,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 6 — Phone Call vs. Pair Programming
+  // SLIDE 7 — Phone Call vs. Pair Programming
   {
     type: "custom",
     render(pres, ctx) {
@@ -175,7 +245,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 7 — Contextual Integration
+  // SLIDE 8 — Contextual Integration
   {
     type: "custom",
     render(pres, ctx) {
@@ -217,7 +287,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 8 — Activity: Coding Challenges
+  // SLIDE 9 — Activity: Coding Challenges
   {
     type: "custom",
     render(pres, ctx) {
@@ -261,7 +331,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 8b — From Action to Task (nesting diagram, 2 visible)
+  // SLIDE 9b — From Action to Task (nesting diagram, 2 visible)
   {
     type: "custom",
     render(pres, ctx) {
@@ -593,7 +663,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 9 — Activity: Design Your Own Claude Code
+  // SLIDE 10 — Activity: Design Your Own Claude Code
   {
     type: "custom",
     render(pres, ctx) {
@@ -645,7 +715,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 10 — The Agentic Tool User
+  // SLIDE 11 — The Agentic Tool User
   {
     type: "custom",
     render(pres, ctx) {
@@ -694,7 +764,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 11 — Tool Selection
+  // SLIDE 12 — Tool Selection
   {
     type: "custom",
     render(pres, ctx) {
@@ -739,7 +809,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 12 — Activity: Playwright
+  // SLIDE 13 — Activity: Playwright
   {
     type: "custom",
     render(pres, ctx) {
@@ -778,7 +848,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 13 — Part 1 Takeaways
+  // SLIDE 14 — Part 1 Takeaways
   {
     type: "custom",
     render(pres, ctx) {
@@ -815,7 +885,7 @@ module.exports = [
     }
   },
 
-  // SLIDE 14 — Break
+  // SLIDE 15 — Break
   {
     type: "custom",
     render(pres, ctx) {
