@@ -11,6 +11,7 @@ const allSlides = [
   ...require("./src/data/part2"),
   ...require("./src/data/part3"),
   ...require("./src/data/closing"),
+  ...require("./src/data/appendix"),
 ];
 
 async function build() {
