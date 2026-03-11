@@ -2,9 +2,10 @@
   "name": "OrchLab Workshop Slides",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
   "features": {
-    "ghcr.io/devcontainers/features/github-cli:1": {}
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/devcontainers/features/python:1": {}
   },
-  "postCreateCommand": "npm install && sudo npm install -g @anthropic-ai/claude-code",
+  "postCreateCommand": "npm install && sudo npm install -g @anthropic-ai/claude-code && sudo apt-get update && sudo apt-get install -y libreoffice-impress poppler-utils && pip install 'markitdown[pptx]'",
   "customizations": {
     "vscode": {
       "settings": {
