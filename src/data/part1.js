@@ -853,7 +853,7 @@ module.exports = [
         x: 0.8, y: 1.0, w: 8, h: 0.5,
         fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
       });
-      s.addText("Playwright is a headless way to render and take screenshots of web pages. Use this prompt (or similar) to create a simple web server with screenshot capability:", {
+      s.addText("Start a brand-new repo. Playwright is a headless way to render and screenshot web pages. Use this prompt to create a simple web server with screenshot capability:", {
         x: 0.8, y: 1.6, w: 8.4, h: 0.6,
         fontSize: 13, fontFace: FONT.body, color: "444444", margin: 0
       });
@@ -869,7 +869,7 @@ module.exports = [
         x: 1.0, y: 4.2, w: 8, h: 0.6,
         fontSize: 12, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("Time to give your AI agent the ability to see. You're going to set up Playwright in Docker — it's a clean, reproducible environment. The prompt is deliberately simple because we want you to see how an agentic tool can scaffold an entire Docker, web server, and testing setup from a single natural-language request. [pause] If you get stuck, there's a cheat code repo on GitHub — ask me for the link. The takeaway here: when your AI agent can browse, take screenshots, and verify UIs, your testing capabilities explode.");
+      s.addNotes("Time to give your AI agent the ability to see. Start a brand-new repo for this — don't do it inside your existing project. You're going to set up Playwright in Docker — it's a clean, reproducible environment. The prompt is deliberately simple because we want you to see how an agentic tool can scaffold an entire Docker, web server, and testing setup from a single natural-language request. [pause] If you get stuck, there's a cheat code repo on GitHub — ask me for the link. The takeaway here: when your AI agent can browse, take screenshots, and verify UIs, your testing capabilities explode.");
     }
   },
 
