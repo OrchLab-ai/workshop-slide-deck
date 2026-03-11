@@ -77,7 +77,7 @@ module.exports = [
         x: 5.8, y: 4.2, w: 3.8, h: 0.6,
         fontSize: 12, fontFace: FONT.body, color: C.warnAmber, italic: true, align: "center", valign: "middle", margin: 0
       });
-      s.addNotes("Start with the win. Show the audience that AI *does* deliver real value even in its simplest form. The HdrHistogram demo is powerful because it's a real bug that stumped a human — the AI reasoned through it, found the issue, explained the repro steps, and gave a clean fix. The key insight is that for small, well-scoped problems, copy-paste from a browser chat genuinely works. But this is the high point of the copy-paste approach. The next slide shows where it falls apart.");
+      s.addNotes("Let's start with the good news — copy-paste AI genuinely works, and this story proves it. A colleague of mine hit a nasty bug in HdrHistogram. He'd been stuck for weeks. He pasted the GitHub issue into ChatGPT, and the AI nailed it — found the root cause, explained the repro steps, suggested a clean fix. For small, well-scoped problems like this, the browser chat approach is a legitimate win. [pause] But here's what I want you to hold onto: this is the *best* case for copy-paste. The next slide shows where it falls apart.");
     }
   },
 
@@ -147,7 +147,7 @@ module.exports = [
         fontSize: 9, fontFace: FONT.body, color: dm, italic: true, margin: 0
       });
 
-      s.addNotes("This slide drills into the HdrHistogram bug to make it concrete. The bug required three specific conditions to trigger simultaneously: significantValueDigits > 3 (most people use 2\u20133), count >= 10,000, AND running on .NET 5.0+. The human (Lee Campbell) spent hours spread over weeks. He could reproduce it, he could see wrong outputs, but he couldn\u2019t trace the root cause. He pasted the GitHub issue URL into ChatGPT and the AI identified a known integer-overflow problem in the Java port\u2019s sub-bucket calculation that surfaced differently on .NET\u2019s newer runtime. This is the ideal copy-paste scenario: a well-documented issue, a bounded codebase, and the human already did the hard work of isolating the repro.");
+      s.addNotes("So here's the actual bug. Three conditions had to line up at once: significantValueDigits greater than 3 — most people use 2 or 3, so this was rare — plus a count over 10,000, AND it had to be running on .NET 5.0 or later. Lee Campbell, the maintainer, spent hours over multiple weeks. He could reproduce it, he could see wrong outputs, but he couldn't trace the root cause. He pasted the GitHub issue URL into ChatGPT and the AI immediately identified it — a known integer-overflow problem in the Java port's sub-bucket calculation that surfaced differently on .NET's newer runtime. [pause] This is the ideal copy-paste scenario: a well-documented issue, a bounded codebase, and the human already did the hard work of isolating the repro.");
     }
   },
 
@@ -199,7 +199,7 @@ module.exports = [
         x: 1.8, y: 4.2, w: 7, h: 0.55,
         fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
-      s.addNotes("This is the crucial 'aha' moment. Walk through each scenario and show how copy-paste breaks down at scale. The refactor-rename example is great: find-and-replace can handle code, but what about REST endpoints, documentation, database migration scripts? The AI in a browser has zero awareness of your project. It gives you confident-sounding answers based on incomplete information. The 'fall' is when the audience feels the frustration they've probably already experienced.");
+      s.addNotes("Now here's where it breaks down. [walk through each card] Take the refactor-rename example — find-and-replace handles the code, sure, but what about your REST endpoints? Your documentation? Your database migration scripts? The AI in a browser has zero awareness of your project. It gives you confident-sounding answers based on incomplete information. [pause] I'm guessing some of you have felt this frustration already — you paste in a question, get a beautiful answer, try to apply it, and it just... doesn't fit. That's because the AI is working blind.");
     }
   },
 
@@ -241,7 +241,7 @@ module.exports = [
       ];
       s.addText(pairItems, { x: 5.5, y: 2.3, w: 3.4, h: 1.8, margin: 0 });
       s.addImage({ data: icons.arrow, x: 4.55, y: 2.7, w: 0.5, h: 0.5 });
-      s.addNotes("This analogy really lands with engineering audiences. Everyone has had the experience of calling a friend for advice — the advice makes sense in theory but falls apart when you try to apply it to your specific situation. Compare that with pair programming, where your partner can see your screen, understands the codebase, and collaborates in real-time. That's the difference between browser-based AI chat and contextually integrated AI tools. We want to move from 'phone call' to 'pairing'.");
+      s.addNotes("Think about the last time you phoned a friend for coding advice. They say 'oh yeah, just refactor the service layer' — and it sounds great in theory. But they can't see your screen. They don't know your dependencies, your test setup, your deployment pipeline. Now compare that with pair programming — your partner sees your screen, knows the codebase, and you collaborate in real time. [pause] That's exactly the difference between browser-based AI chat and contextually integrated AI tools. We want to move from the phone call on the left to the pairing session on the right.");
     }
   },
 
@@ -283,7 +283,7 @@ module.exports = [
           fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
         });
       });
-      s.addNotes("This is the big shift of Part 1. AI-native IDEs like Cursor, Cline, or Claude Code don't just chat — they see your codebase. Codebase indexing means the AI knows every file, every import, every function signature. Inline generation (Command-K) lets you generate code exactly where you need it, not in a chat window. And real-time diff review means you're always in control. This is the difference between L1 (AI Coding) and L2 (AI Development) from the levels framework.");
+      s.addNotes("This is the big shift. AI-native IDEs like Cursor, Cline, or Claude Code don't just chat with you — they see your codebase. [point to each feature] Codebase indexing means the AI knows every file, every import, every function signature. Inline generation — Command-K in Cursor — lets you generate code exactly where you need it, not in a separate chat window. And real-time diff review means you're always in control of what gets applied. This is what takes you from Level 1, AI Coding, up to Level 2, AI Development.");
     }
   },
 
@@ -327,7 +327,7 @@ module.exports = [
           fontSize: 12, fontFace: FONT.body, color: "555555", margin: 0
         });
       });
-      s.addNotes("Hands-on time. Let participants choose whichever challenge interests them most. The refactor-rename is the most approachable. The dependency upgrade is the most relatable for people who've dealt with major version bumps. The cross-cutting concern is the most architecturally interesting. All three demonstrate problems that are painful with copy-paste but manageable with contextual AI tools. Give people 15-20 minutes, then debrief as a group.");
+      s.addNotes("Alright, hands-on time! Pick whichever challenge interests you most. The refactor-rename is the most approachable if you want a quick win. The dependency upgrade is great if you've ever dealt with a painful major version bump. And the cross-cutting concern is the most architecturally interesting. All three are problems that are painful with copy-paste but very manageable with contextual AI tools. [pause] You've got 15 to 20 minutes. Use Cursor, Claude Code, Copilot — whatever you've got set up. We'll debrief as a group after.");
     }
   },
 
@@ -348,7 +348,7 @@ module.exports = [
         fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
       });
       nestingDiagram(s, pres, 2);
-      s.addNotes("Pause after the coding challenges to frame what participants just did. Each challenge involved multiple atomic actions — completions, edits, test runs — combined into a purposeful task. The dashed outer rings hint that there are higher levels of orchestration to come. We'll fill those in as the workshop progresses.");
+      s.addNotes("Before we move on, let's frame what you just did. Each of those challenges involved multiple atomic actions — completions, edits, running tests — and you combined them into a purposeful task. [point to the two inner rings] That's these two layers: actions inside tasks. [gesture to the dashed outer rings] See the outer rings? Those are levels of orchestration we haven't reached yet. We'll fill those in as the workshop progresses.");
     },
   },
 
@@ -374,7 +374,7 @@ module.exports = [
         x: 1.5, y: 3.8, w: 7, h: 0.5,
         fontSize: 16, fontFace: FONT.body, color: C.muted, italic: true, align: "center", margin: 0
       });
-      s.addNotes("Quick detour — we're going to spend a few minutes making sure everyone has the same mental model of what these AI systems actually are. This isn't a deep ML lecture; it's the minimum understanding needed to make good decisions about tooling.");
+      s.addNotes("Quick detour. We're going to spend a few minutes making sure we all have the same mental model of what these AI systems actually are under the hood. Don't worry — this isn't a deep ML lecture. It's the minimum understanding you need to make good decisions about your tooling.");
     }
   },
 
@@ -426,7 +426,7 @@ module.exports = [
         x: 1.0, y: 4.4, w: 8, h: 0.7,
         fontSize: 13, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("Keep this high-level. Classification models are what most people think of as 'AI/ML' — spam filters, recommendation engines. Generative models are the paradigm shift: instead of choosing from options, they create. The Transformer architecture (2017) is what made GPTs possible — the attention mechanism lets the model consider relationships between all tokens simultaneously, which is why it scales so well. The key takeaway: it's a next-token predictor, not a reasoning engine. Everything it does emerges from predicting what text should come next.");
+      s.addNotes("Three letters: G-P-T. Generative, Pre-trained, Transformer. [point to each card] Classification models are what most people think of as 'AI' — spam filters, recommendation engines, sorting things into buckets. Generative models are the paradigm shift: instead of choosing from options, they create new content. And the Transformer architecture from 2017 is what made all of this possible — its attention mechanism lets the model consider relationships between all tokens at once, which is why it scales so well. [pause] Here's the key takeaway: it's a next-token predictor, not a reasoning engine. Everything it does — the code, the explanations, the surprising insights — all emerges from predicting what text should come next.");
     }
   },
 
@@ -529,7 +529,7 @@ module.exports = [
         fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
 
-      s.addNotes("The memory analogy is the key mental model for the whole workshop. Short-term = context window: it's everything the model can attend to right now, and it's finite. When people talk about '200k tokens' that's this. Long-term = training: the model 'knows' things like syntax, common patterns, and general knowledge because it was trained on them. Deep storage = retrieval: RAG, MCP servers, web search — things the model doesn't inherently know but can look up. The 'Zone of Stupid' is critical for practitioners: stuffing the context window with everything you can find actually *degrades* quality. The model loses focus. This directly connects to Station 2 of the next activity ('The Context Problem') — the audience will now understand *why* context selection matters.");
+      s.addNotes("Let's talk about how these models remember — or don't. [point to each layer] Short-term memory is the context window. It's everything the model can attend to right now, and it's finite. When you hear '200k tokens,' that's this. Long-term memory is training — the model 'knows' syntax, common patterns, and general knowledge because it was trained on billions of examples. Deep storage is retrieval — RAG, MCP servers, web search — things the model doesn't inherently know but can look up on demand. [pause] Now here's the critical part: the 'Zone of Stupid.' If you stuff the context window with everything you can find, quality actually *degrades*. The model loses focus. More context is not always better. We'll come back to this idea throughout the workshop.");
     }
   },
 
@@ -659,7 +659,7 @@ module.exports = [
         fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
 
-      s.addNotes("This visualises the context window as a finite resource. Walk through each segment: the system prompt and tools are 'tax' — they're always there, consuming space before you even type. Memory files grow as you configure more. Messages are the biggest consumer and grow with every exchange. Free space is what the model needs to actually think and produce quality output. The dashed red line is the 'Zone of Stupid' — once messages push past roughly 70% of the window, the model starts losing coherence. It can't attend to everything well. This is why context management matters: every file you dump in, every long error trace, every 'just in case' inclusion competes with the model's ability to reason. This directly sets up the next activity where participants will grapple with 'what do you send and when?'");
+      s.addNotes("Here's what the context window actually looks like as a resource. [walk through each segment] Down here, the system prompt and tools — that's 'tax.' It's always there, consuming space before you even type a message. Memory files grow as you configure more. Messages are the biggest consumer and they grow with every exchange. And free space up top is what the model needs to actually think and produce quality output. [point to dashed line] See that red dashed line? That's the Zone of Stupid. Once messages push past roughly 70 percent of the window, the model starts losing coherence. It can't attend to everything well. [pause] So every file you dump in, every long error trace, every 'just in case' inclusion is competing with the model's ability to reason. Context management is a skill, and it's one we'll keep building on.");
     }
   },
 
@@ -711,7 +711,7 @@ module.exports = [
         x: 1.0, y: 4.55, w: 8, h: 0.5,
         fontSize: 11, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This is a physical, collaborative exercise. Put four large sheets on the wall, one per station. Give everyone sticky notes and markers. Spend 10-15 minutes total.\n\nStation 1 (The HTTP Call): Have people draw what a request to an LLM API actually looks like — system prompt, messages array, temperature, model name. Then draw the response — content blocks, finish reasons. The point: it's just JSON over HTTPS. No magic.\n\nStation 2 (The Context Problem): This is the hardest. 500 files, 200k token window. What do you include? File tree? Open files? Git diff? Error output? Have people propose strategies — they'll naturally converge on the same solutions that real tools use (file tree summary, open files, relevant errors).\n\nStation 3 (Parsing the Response): Show a real LLM response that contains a code block, a shell command, a question, and explanatory text all mixed together. Have people draw boxes around each type. How would a tool know which is which? This surfaces the need for structured output — XML tags, tool use, JSON mode.\n\nStation 4 (Trust & Execution): The most provocative. The AI says 'run rm -rf /tmp/cache'. Do you run it? What about 'git push --force'? What about 'npm install lodash'? Have people create a trust spectrum from 'always auto-run' to 'always ask'. This directly sets up the agentic tool user concept on the next slide.\n\nDebrief by connecting their sticky notes to real tools: 'Everything you just designed is exactly how Cursor, Claude Code, and Copilot work. The differences between tools are just different answers to these four questions.'");
+      s.addNotes("This is a collaborative, hands-on exercise. You'll find four stations around the room, each with a large sheet of paper. Grab sticky notes and markers and spend about 10 to 15 minutes rotating through them.\n\n[describe each station] Station 1, The HTTP Call — draw what a request to an LLM API actually looks like. System prompt, messages array, temperature, model name. Then draw the response. The point is: it's just JSON over HTTPS. No magic.\n\nStation 2, The Context Problem — this is the hardest one. You have 500 files and a 200k token window. What do you include? File tree? Open files? Git diff? Error output? Propose your strategies on sticky notes.\n\nStation 3, Parsing the Response — you'll see a real LLM response that mixes a code block, a shell command, a question, and explanatory text. Draw boxes around each type. How would a tool know which is which?\n\nStation 4, Trust and Execution — the AI says 'run rm -rf /tmp/cache.' Do you run it? What about 'git push --force'? Create a trust spectrum from 'always auto-run' to 'always ask.'\n\n[after activity] Here's the punchline: everything you just designed is exactly how Cursor, Claude Code, and Copilot work. The differences between those tools are just different answers to these four questions.");
     }
   },
 
@@ -760,7 +760,7 @@ module.exports = [
         { text: "DEMO: ", options: { bold: true, color: C.accent, fontSize: 13, fontFace: FONT.head } },
         { text: "Claude Code / Cursor terminal integration — let the AI run tests, see failures, and fix code. Use Playwright for automated UI testing without human interaction.", options: { color: C.offWhite, fontSize: 12, fontFace: FONT.body } },
       ], { x: 1.0, y: 3.9, w: 8, h: 0.75, valign: "middle", margin: 0 });
-      s.addNotes("This is where minds start to blow. The key question is: why are WE running the tests? Why are WE copying error messages back into the chat? Let the AI do it. MCP (Model Context Protocol) enables AI to use tools — file system, terminal, browser, databases. The Playwright demo is particularly powerful: the AI can literally navigate a web application, take screenshots, verify UI behavior, and fix issues — all without you touching anything. This is the leap from L2 to L3.");
+      s.addNotes("Here's a question I want you to sit with: why are *we* still running the tests? Why are *we* copying error messages back into the chat? [pause] Let the AI do it. MCP — Model Context Protocol — enables AI to use tools directly: the file system, the terminal, the browser, databases. And here's where it gets wild — with Playwright, the AI can literally navigate a web application, take screenshots, verify UI behaviour, and fix issues, all without you touching a thing. [pause] This is the leap from Level 2 to Level 3. The AI isn't just writing code — it's operating your development environment.");
     }
   },
 
@@ -805,7 +805,7 @@ module.exports = [
         }));
         s.addText(bullets, { x: x + 0.2, y: 2.65, w: 2.35, h: 1.8, margin: 0 });
       });
-      s.addNotes("Not all tools are created equal, and choosing the right interface for AI matters. Static prompts are your documentation and coding standards — they change slowly and are loaded once. MCP servers are powerful but token-hungry; use them for dynamic content like account info or live knowledge bases. CLI tools are the sweet spot for most engineering tasks: they have standard input/output patterns, are lightweight, and the AI already knows how to use them. Help the audience think about which category their tools fall into.");
+      s.addNotes("Not all tools are created equal, so let's talk about choosing the right interface for your AI. [point to each column] Static prompts — these are your documentation and coding standards. They change slowly, get loaded once. MCP servers are powerful but token-hungry; use them for dynamic content like account information or live knowledge bases. And CLI tools are the sweet spot for most engineering tasks: standard input/output patterns, lightweight, and the AI already knows how to use them. [pause] As you're setting up your own tooling, think about which category each of your tools falls into. That'll guide how you expose them to the AI.");
     }
   },
 
@@ -844,7 +844,7 @@ module.exports = [
         x: 1.0, y: 4.2, w: 8, h: 0.6,
         fontSize: 12, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This activity is about giving the AI the ability to 'see' web applications. Playwright in Docker is a clean, reproducible setup. The prompt is deliberately simple — we want participants to see how an agentic tool can scaffold an entire Docker + web server + testing setup from a single natural-language request. If anyone gets stuck, point them to the GitHub cheat code repo. The takeaway: when your AI agent can browse, screenshot, and verify UIs, your testing capabilities explode.");
+      s.addNotes("Time to give your AI agent the ability to see. You're going to set up Playwright in Docker — it's a clean, reproducible environment. The prompt is deliberately simple because we want you to see how an agentic tool can scaffold an entire Docker, web server, and testing setup from a single natural-language request. [pause] If you get stuck, there's a cheat code repo on GitHub — ask me for the link. The takeaway here: when your AI agent can browse, take screenshots, and verify UIs, your testing capabilities explode.");
     }
   },
 
@@ -881,7 +881,7 @@ module.exports = [
         { text: "Agent CLIs: Claude Code, Codex CLI", options: { bullet: true, fontSize: 14, fontFace: FONT.body, color: C.offWhite } },
       ];
       s.addText(toolItems, { x: 0.8, y: 3.2, w: 8, h: 1.5, margin: 0 });
-      s.addNotes("Recap Part 1 before the break. The single most important idea is that AI is no longer just a text generator — it's an agent that can interact with your development environment. Make sure everyone has at least one integrated tool set up (Cursor, Copilot, or Claude Code) before moving into Part 2, which will focus on how to communicate effectively with these tools.");
+      s.addNotes("Let's recap Part 1 before we take a break. [point to each takeaway] The single most important idea: AI is no longer just a text generator — it's an agent that can interact with your development environment. It can read your files, run your tests, browse your app, and iterate on its own work. [pause] Before we move into Part 2, make sure you have at least one integrated tool set up — Cursor, Copilot, or Claude Code. Part 2 is all about how to communicate effectively with these tools, and you'll need one running to follow along.");
     }
   },
 
