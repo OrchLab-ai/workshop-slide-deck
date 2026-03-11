@@ -41,7 +41,9 @@
       "Bash(node:*)",
       "Bash(eslint:*)",
       "Bash(prettier:*)",
-      "Bash(tsc:*)"
+      "Bash(tsc:*)",
+      "Bash(libreoffice:*)",
+      "Bash(pdftoppm:*)"
     ],
     "deny": [
       "Bash(git branch -D:*)",
