@@ -32,7 +32,7 @@ module.exports = [
         x: 1.0, y: 4.1, w: 8, h: 0.6,
         fontSize: 13, fontFace: FONT.body, color: C.accent, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("Open discussion time. This is intentionally unstructured — let the audience share their experiences. The n8n question is a good provocation: low-code automation tools are being disrupted by AI agents. The context window question is the bridge to Part 2. For personal assistant tasks (summarize this email, draft a response), context needs are small. For coding, you need the AI to hold an entire project in its head. This tension is what spec-driven development solves.");
+      s.addNotes("Alright, let's open it up. I want to hear from you. [pause for responses] How are people using AI outside of code? Summarising emails, drafting documents, anything? [take a few answers] What about tools like n8n — anyone using low-code automation and noticing AI agents starting to overlap? [pause] And here's the bridge to Part 2: think about context. For a personal assistant task — summarise this email — the context is tiny. For coding, you need the AI to hold an entire project in its head. That tension between small and large context is exactly what we'll tackle next.");
     }
   },
 
@@ -62,7 +62,7 @@ module.exports = [
         fontSize: 16, fontFace: FONT.body, color: C.muted, margin: 0
       });
       s.addImage({ data: icons.book, x: 8.0, y: 3.8, w: 1.2, h: 1.2 });
-      s.addNotes("Part 2 is about the communication layer. Now that participants have AI integrated into their IDE, the question becomes: how do you tell it what to build? We'll discover that natural language prompts have limits, and structured specifications are the key to consistent, high-quality AI output. This is the leap from L2/L3 to being an effective AI engineering practitioner.");
+      s.addNotes("Part 2 is about the communication layer. You've got AI integrated into your IDE now — great. But the question becomes: how do you tell it what to build? We're going to discover that natural-language prompts have real limits, and that structured specifications are the key to consistent, high-quality AI output. This is what takes you from using AI tools to being an effective AI engineering practitioner.");
     }
   },
 
@@ -96,7 +96,7 @@ module.exports = [
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
       s.addImage({ data: icons.compass, x: 7.5, y: 0.8, w: 1.8, h: 1.8 });
-      s.addNotes("Revisit the vision from Part 1, but now with more nuance. The 'searching not generating' mental model is crucial — it helps people understand why specifications matter so much. If you think of the AI as searching through a vast space of possible code, then your prompt/spec is the search query. A vague query gets random results. A precise, well-structured query gets exactly what you need. This reframing is what makes the rest of Part 2 click.");
+      s.addNotes("Let's revisit the vision from Part 1, but with more nuance this time. Here's a mental model I want you to carry through the rest of the day: the AI isn't generating code from nothing — it's searching through a vast space of possible code. Your prompt is the search query. [pause] Think about that. A vague query gets random results. A precise, well-structured query gets exactly what you need. This reframing is what makes everything in Part 2 click.");
     }
   },
 
@@ -138,7 +138,7 @@ module.exports = [
         x: 1.0, y: 3.5, w: 8, h: 0.8,
         fontSize: 20, fontFace: FONT.head, color: C.white, bold: true, align: "center", valign: "middle", margin: 0
       });
-      s.addNotes("Important framing slide. Acknowledge the skeptics in the room — they've seen hype cycles before. Web3/NFTs promised to change everything and didn't. But AI is different. It's in the same category as PCs, the internet, and cloud computing: technologies that fundamentally changed how knowledge work is done. The key signal is that AI is already delivering real productivity gains, not just theoretical ones. The productivity improvements compound, which is what makes this evolutionary rather than hype.");
+      s.addNotes("I know some of you are thinking 'I've seen hype cycles before.' And you're right — Web3, NFTs, they promised to change everything and didn't. [pause] But AI is different. It's in the same category as PCs, the internet, and cloud computing — technologies that fundamentally changed how knowledge work is done. The key signal: AI is already delivering real productivity gains, not theoretical ones. And those gains compound. That's what makes this evolutionary rather than hype.");
     }
   },
 
@@ -199,7 +199,7 @@ module.exports = [
         x: 3.5, y: 4.3, w: 3, h: 0.25,
         fontSize: 10, fontFace: FONT.body, color: C.muted, align: "center", italic: true, margin: 0
       });
-      s.addNotes("Wardley Map evolution stages applied to AI engineering. This helps the audience place each technology on a maturity spectrum. The key insight is that coding agents and IDE integrations are already in the 'Product' phase — stable and widely adopted. But orchestration (multi-agent systems) is still in 'Genesis': novel, uncertain, and exciting. Specifications and agent loops are in 'Custom': they work but require expertise. This framing helps set expectations for Part 3.");
+      s.addNotes("This is a Wardley Map view of AI engineering maturity. [walk through the columns] On the right, Product — coding agents and IDE integrations are here. Stable, widely adopted, ready to use today. In the middle, Custom — specifications and agent loops. They work, but they require expertise. You need to invest time learning the patterns. And on the left, Genesis — orchestration, multi-agent systems. Novel, uncertain, and exciting. [pause] This framing helps set expectations: the Part 1 tools are mature. What we're about to cover in Part 2 is custom territory. And Part 3 will take us into genesis.");
     }
   },
 
@@ -251,7 +251,7 @@ module.exports = [
         x: 1.0, y: 4.3, w: 8, h: 0.6,
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
       });
-      s.addNotes("This is the first 'wrong approach' in Part 2. The micro-prompt is wishful thinking — we all want to just say 'build me Netflix' and have it happen. But the gap between that instruction and a working system is enormous. The AI has no way to resolve the thousands of ambiguous decisions. It either drowns you in clarifying questions or makes wild assumptions. This sets up the activity where participants discover this firsthand.");
+      s.addNotes("Here's our first 'wrong approach.' The micro-prompt. We all want to just say 'build me Netflix' and have it happen. [pause] But the gap between that instruction and a working system is enormous. The AI has no way to resolve the thousands of ambiguous decisions hiding in that sentence. It either drowns you in clarifying questions or — more often — makes wild assumptions and builds something you didn't want. You're about to discover this firsthand in the next activity.");
     }
   },
 
@@ -279,7 +279,7 @@ module.exports = [
         x: 0.8, y: 2.4, w: 8, h: 0.4,
         fontSize: 16, fontFace: FONT.body, color: "555555", margin: 0
       });
-      s.addNotes("Give people 5 minutes to write independently. Don't give them any hints about what you'll compare — you want their natural, unbiased response. Walk around the room. Resist the urge to clarify the prompt. The ambiguity IS the point. When time is up, advance to the next slide to reveal the comparison framework.");
+      s.addNotes("Here's what I want you to do: take 5 minutes and write a prompt to build a blog engine. That's it — that's the only instruction. Don't overthink it, just write what comes naturally. [pause, walk around the room] I'm deliberately not giving you more detail. Don't ask me to clarify. The ambiguity is the point. [after 5 minutes] Alright, pens down. Let's see what happened.");
     }
   },
 
@@ -331,7 +331,7 @@ module.exports = [
           { text: c.desc, options: { fontSize: 13, fontFace: FONT.body, color: "555555" } },
         ], { x: 1.6, y: y, w: 7, h: 0.45, valign: "middle", margin: 0 });
       });
-      s.addNotes("Now reveal the comparison framework. Have people share and compare. The results are always revealing: some people write 3 sentences, others write 3 pages. The requirements diverge wildly — one person envisions a WordPress clone, another a headless CMS, another a static site generator. The lesson: if humans can't agree on what 'blog engine' means, how can an AI? This is why specifications matter.");
+      s.addNotes("Now let's compare. [ask audience] Who wants to share what they wrote? [take 2-3 volunteers] Notice what happened: some of you wrote 3 sentences, others wrote 3 pages. And the requirements diverge wildly — I guarantee someone in this room envisioned a WordPress clone, someone else a headless CMS, and someone else a static site generator. [pause] If humans in the same room can't agree on what 'blog engine' means, how can an AI? This is why specifications matter.");
     }
   },
 
@@ -373,7 +373,7 @@ module.exports = [
         x: 1.0, y: 4.1, w: 8, h: 0.6,
         fontSize: 14, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
       });
-      s.addNotes("Second wrong approach. The mega-prompt is the overcorrection from the micro-prompt. People think 'more detail = better output,' but that's not how LLMs work. The 'Lost in the Middle' problem is well-documented in research — LLMs attend strongly to the beginning and end of context, but the middle gets less attention. A 2,000-word prompt buries critical requirements in the middle. Plus, maintaining a massive prompt is a nightmare. This motivates the spec-driven approach.");
+      s.addNotes("So if a tiny prompt doesn't work, the obvious fix is... a huge prompt, right? More detail, better output? [pause] Not quite. There's a well-documented phenomenon called 'Lost in the Middle' — LLMs attend strongly to the beginning and end of their context, but the middle gets less attention. A 2,000-word prompt buries your critical requirements right in that dead zone. Plus, maintaining a massive prompt is a nightmare — one change cascades everywhere. So if micro doesn't work and mega doesn't work... what does? That's next.");
     }
   },
 
@@ -419,7 +419,7 @@ module.exports = [
           fontSize: 11, fontFace: "Courier New", color: C.offWhite, align: "center", margin: 0
         });
       });
-      s.addNotes("This is the breakthrough moment of Part 2. Spec-driven development means writing structured markdown files that define exactly what you want, in a format the AI can reliably parse. The three components — role, context, and standards — map to how you'd brief a new team member. The role sets the AI's expertise and perspective. The context gives it the project-specific information. The standards define the guardrails. Tools like Agents.md and Spec-Kit make this workflow practical.");
+      s.addNotes("Here's the answer: spec-driven development. Instead of one massive prompt, you write structured markdown files that define exactly what you want — in a format the AI can reliably parse. [point to each component] Think of it like briefing a new team member. The role sets the AI's expertise and perspective — 'you are a senior backend engineer.' The context gives it project-specific information — your file structure, tech stack, existing patterns. And the standards define the guardrails — coding conventions, security requirements, testing expectations. Tools like Agents.md and Spec-Kit make this workflow practical today.");
     }
   },
 
@@ -473,7 +473,7 @@ module.exports = [
         x: 1.0, y: 4.6, w: 8, h: 0.45,
         fontSize: 12, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This is where participants apply what they just learned. The spec should be a markdown file with clear sections: role definition, project context (file structure, tech stack, existing patterns), standards references, and acceptance criteria. Encourage people to be as specific as possible — vague specs produce vague code. After writing the spec, they inject it into their AI tool (Cursor, Claude Code, etc.) and ask it to generate the blog feature. Compare the output quality to what they got from the micro-prompt and mega-prompt approaches earlier.");
+      s.addNotes("Time to put this into practice. Write a spec file — a markdown document with clear sections: role definition, project context including your file structure and tech stack, standards references, and acceptance criteria. Be as specific as possible — vague specs produce vague code. [pause] Once your spec is ready, inject it into your AI tool — Cursor, Claude Code, whatever you're using — and ask it to generate the blog feature. [after activity] Now compare this output to what you got from the micro-prompt and mega-prompt approaches earlier. Notice the difference?");
     }
   },
 
@@ -521,7 +521,7 @@ module.exports = [
           fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
         });
       });
-      s.addNotes("Standards are the secret sauce. Most people write coding standards but forget everything else. Walk through each category: coding standards cover naming and patterns, security covers authentication and secrets management, reliability defines SLOs and failure modes, frontend covers accessibility and responsiveness, data governance handles PII and compliance, and architecture defines system boundaries. Use Agent-OS for new codebases (template + customise) or discover standards from existing codebases. The activity is to create their own standards.md file.");
+      s.addNotes("Standards are the secret sauce that most people miss. Everyone writes coding standards, but that's just one category. [walk through each] Security — authentication, secrets management. Reliability — SLOs, failure modes. Frontend — accessibility, responsiveness. Data governance — PII handling, compliance. Architecture — system boundaries. [pause] For new codebases, tools like Agent-OS give you a template to customise. For existing codebases, you can discover standards from what's already there. Your activity: create your own standards.md file covering the categories relevant to your work.");
     }
   },
 
@@ -569,7 +569,7 @@ module.exports = [
           fontSize: 15, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
         });
       });
-      s.addNotes("This is a critical nuance that many people miss. You can't just dump all your standards into the prompt — that recreates the mega-prompt problem. The solution is index files: a single README that lists all your standards files with brief descriptions. The AI reads the index, determines which standards are relevant to the current task, and loads only those. This is the 'define once, reuse many' pattern. Geoffrey Huntley's specs/README.md pattern is the canonical example. The activity is to restructure standards into indexed files and try building the blog engine again.");
+      s.addNotes("Now here's a critical nuance. You can't just dump all your standards into the prompt — that recreates the mega-prompt problem we just talked about. The solution is index files. [pause] You create a single README that lists all your standards files with brief descriptions. The AI reads the index, determines which standards are relevant to the current task, and loads only those. Define once, reuse many. Geoffrey Huntley's specs/README.md pattern is the canonical example of this. Your activity: restructure your standards into indexed files, then try building the blog engine again and see how the output changes.");
     }
   },
 
@@ -622,7 +622,7 @@ module.exports = [
         x: 1.7, y: 4.25, w: 7, h: 0.55,
         fontSize: 15, fontFace: FONT.body, color: C.white, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("The recursive builder is the most mind-bending concept in Part 2. The AI doesn't just execute specs — it helps write them. An 'Architect Agent' interviews you using the Socratic method, asking probing questions to surface requirements you hadn't considered. It generates a brief, which is then combined with your standards to produce specific, actionable tasks. Each task is small enough for a 'Coder Agent' to execute reliably. The flow is: Interview → Brief → (Brief + Standards =) Tasks → Code. This is meta-prompting in action.");
+      s.addNotes("This is the most mind-bending concept in Part 2. What if the AI doesn't just execute specs — what if it helps write them? [pause] Picture this: an 'Architect Agent' interviews you using the Socratic method, asking probing questions to surface requirements you hadn't considered. It generates a brief. That brief gets combined with your standards to produce specific, actionable tasks. Each task is small enough for a 'Coder Agent' to execute reliably. [trace the flow] Interview, brief, brief plus standards equals tasks, tasks become code. This is meta-prompting in action — AI helping you communicate better with AI.");
     }
   },
 
@@ -707,7 +707,7 @@ module.exports = [
         x: 1.0, y: 4.7, w: 8, h: 0.4,
         fontSize: 12, fontFace: FONT.body, color: C.accent, italic: true, valign: "middle", margin: 0
       });
-      s.addNotes("This slide generalises the Recursive Builder concept. The Socratic Method is powerful but it's just one meta-prompting style. Walk through each briefly: the Prompt Improver is great when you have an existing prompt that's 'almost right' — the AI can spot vagueness, missing constraints, or ambiguous language. The Context Extractor is perfect when you don't know what you don't know — it surfaces the information you'd need before you even start writing. The Multi-Approach Generator prevents tunnel vision by forcing the AI to explore different architectures or strategies. The Constraint Builder is invaluable for non-functional requirements — ask it what constraints you'd need for security, or performance, or accessibility. The Assumption Challenger is the most underrated — it's particularly valuable for brownfield work where you carry hidden assumptions about existing systems. Encourage participants to try different styles in the upcoming activities.");
+      s.addNotes("The Socratic method is powerful, but it's just one flavour of meta-prompting. Let me walk through the others quickly. [point to each] Prompt Improver — great when you have a prompt that's 'almost right.' The AI spots vagueness, missing constraints, ambiguous language. Context Extractor — perfect when you don't know what you don't know. It surfaces the information you'd need before you start. Multi-Approach Generator — prevents tunnel vision by forcing the AI to explore different architectures. Constraint Builder — invaluable for non-functional requirements like security or performance. And Assumption Challenger — the most underrated. Especially valuable for brownfield work where you carry hidden assumptions about existing systems. [pause] Try different styles in the upcoming activities and see which ones click for you.");
     }
   },
 
@@ -760,7 +760,7 @@ module.exports = [
         x: 1.0, y: 4.85, w: 8, h: 0.35,
         fontSize: 11, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This activity builds directly on the Recursive Builder concept. Participants use a Spec-Writer prompt to generate a blog-feature.spec.md through Socratic dialogue. The key difference from the earlier activity (slide 24): this time the AI is doing the interviewing, not the human. Encourage participants to notice how the AI surfaces questions they hadn't considered — edge cases, error handling, backward compatibility. The brownfield callout is deliberate: adding a feature to an existing project is fundamentally different from greenfield. The AI should ask about existing patterns, database schema, API conventions, etc. This sets up the Great Divide discussion later.");
+      s.addNotes("Now you're going to experience the Recursive Builder firsthand. Use the Spec-Writer prompt to generate a blog-feature.spec.md through Socratic dialogue. [pause] Here's the key difference from the earlier activity: this time, the AI is interviewing *you*, not the other way around. Pay attention to the questions it asks — edge cases, error handling, backward compatibility. Things you probably hadn't considered. [pause] Notice the brownfield callout: you're adding a feature to an existing project, not starting from scratch. The AI should be asking about existing patterns, database schema, API conventions. That distinction matters — and we'll dig into it more later.");
     }
   },
 
@@ -813,7 +813,7 @@ module.exports = [
         { text: "You're extending your remit beyond engineering", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
       ];
       s.addText(whyItems, { x: 5.5, y: 2.9, w: 3.4, h: 1.6, margin: 0 });
-      s.addNotes("This is the contrasting activity. Where the previous activity was brownfield (adding to an existing project), this one is pure greenfield — inventing a product and its brand from scratch. The Socratic method should surface different questions here: who is the audience, what emotion should the brand evoke, what are the competitor brands, what's the price positioning? Participants should notice that the spec-driven approach works for non-code outputs too. Brand guidelines, design systems, content strategies — all benefit from structured specifications. This reinforces the 'Step In' message from later in Part 3: AI lets you extend into adjacent disciplines like design.");
+      s.addNotes("Now for the contrast. The previous activity was brownfield — adding to something that exists. This one is pure greenfield: invent a product and its brand from scratch. [pause] Notice how the Socratic method surfaces completely different questions this time: Who is the audience? What emotion should the brand evoke? What are the competitors? What's the price positioning? [pause] And here's what I really want you to notice: the spec-driven approach works for non-code outputs too. Brand guidelines, design systems, content strategies — they all benefit from structured specifications. AI lets you extend into disciplines you might not have touched before.");
     }
   },
 
@@ -834,7 +834,7 @@ module.exports = [
         fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
       });
       nestingDiagram(s, pres, 3);
-      s.addNotes("After the Socratic spec activity, participants have experienced the full Plan-Do-Review flow: they interviewed for requirements (plan), generated output (do), and refined it (review). This is the third layer of the nesting model. The dashed outer ring hints at the final level — loops — which we'll cover in Part 3 when we discuss self-correcting autonomous systems.");
+      s.addNotes("Look at what you just did. You interviewed for requirements — that's plan. You generated output — that's do. You refined it — that's review. [point to the three inner rings] That's these three layers of the nesting model: actions, tasks, and now flows. [gesture to dashed outer ring] See that outer ring? That's loops — self-correcting autonomous systems. We'll fill that one in during Part 3.");
     },
   },
 
@@ -871,7 +871,7 @@ module.exports = [
         { text: "The recursive builder: AI writes specs, AI executes specs", options: { bullet: true, fontSize: 14, fontFace: FONT.body, color: C.offWhite } },
       ];
       s.addText(concepts, { x: 0.8, y: 3.2, w: 8, h: 1.3, margin: 0 });
-      s.addNotes("Recap Part 2. The three key takeaways: (1) Structured specs beat unstructured prompts every time. (2) Context window management is a real engineering concern — index files and task decomposition are essential. (3) The recursive builder pattern turns AI from a code executor into a requirements analyst. These ideas compound: good specs + curated context + recursive building = reliable, high-quality AI output.");
+      s.addNotes("Let's recap Part 2. [point to each takeaway] First: structured specs beat unstructured prompts every time. You saw it with your own eyes in the blog engine exercise. Second: context window management is a real engineering concern — index files and task decomposition are essential, not optional. Third: the recursive builder pattern turns AI from a code executor into a requirements analyst. [pause] These ideas compound. Good specs plus curated context plus recursive building equals reliable, high-quality AI output. That's the formula.");
     }
   },
 
