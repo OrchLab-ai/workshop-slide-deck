@@ -530,14 +530,106 @@ module.exports = [
       const visionPts = [
         { text: "Agents plan, code, and test asynchronously", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
         { text: "The system pauses for human approval at key checkpoints", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "After approval, deployment proceeds automatically", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
+        { text: "After approval, deployment proceeds automatically", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
+        { text: "Self-healing: agents log mistakes to a learnings file and read it on every new run", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
       ];
-      s.addText(visionPts, { x: 0.8, y: 3.5, w: 8.4, h: 1.2, margin: 0 });
-      s.addNotes("Here's where it all comes together — the software factory. An asynchronous pipeline of specialist agents. [walk through the flow] You commit a spec file, and the system activates: Agent A creates a plan, Agent B writes code, Agent C runs tests. At defined checkpoints, the system pauses and asks a human for approval. That's 'human-on-the-loop' rather than 'human-in-the-loop.' After approval, Agent D deploys. [pause] Notice the shift: humans go from writing code to reviewing and approving. Tools like Loom are making this real today.");
+      s.addText(visionPts, { x: 0.8, y: 3.5, w: 8.4, h: 1.5, margin: 0 });
+      s.addNotes("Here's where it all comes together — the software factory. An asynchronous pipeline of specialist agents. [walk through the flow] You commit a spec file, and the system activates: Agent A creates a plan, Agent B writes code, Agent C runs tests. At defined checkpoints, the system pauses and asks a human for approval. That's 'human-on-the-loop' rather than 'human-in-the-loop.' After approval, Agent D deploys. [pause] Notice the shift: humans go from writing code to reviewing and approving. Tools like Loom are making this real today. [pause] The last bullet — self-healing — is deceptively simple but powerful. Agents can write to a learnings.md file whenever they hit an error or discover something unexpected. On every new run, they read that file first. Over time the system stops repeating the same mistakes without any human intervention. It's a cheap form of memory that makes the whole pipeline smarter run after run.");
     },
   },
 
-  // SLIDE 42 — Activity: Automated Code Review
+  // SLIDE 42 — Plan, Do, Review Loop
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, FT);
+      s.addText("Plan \u2192 Do \u2192 Review \u2192 Loop", {
+        x: 0.8, y: 0.4, w: 8.4, h: 0.7,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("From a linear flow to a continuous cycle.", {
+        x: 0.8, y: 1.1, w: 8, h: 0.35,
+        fontSize: 15, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      // --- Linear flow (the "before") ---
+      s.addText("Before: the flow terminates", {
+        x: 0.8, y: 1.7, w: 5, h: 0.3,
+        fontSize: 12, fontFace: FONT.body, color: C.muted, margin: 0
+      });
+      const linearSteps = ["Plan", "Do", "Review"];
+      linearSteps.forEach((label, i) => {
+        const x = 1.5 + i * 2.5;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y: 2.1, w: 1.8, h: 0.7,
+          fill: { color: C.cardBg }, shadow: makeShadow()
+        });
+        s.addText(label, {
+          x, y: 2.1, w: 1.8, h: 0.7,
+          fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
+        });
+        if (i < linearSteps.length - 1) {
+          s.addImage({ data: icons.arrowWhite, x: x + 1.85, y: 2.3, w: 0.2, h: 0.2 });
+        }
+      });
+      // terminal dot after Review box
+      s.addShape(pres.shapes.OVAL, {
+        x: 7.9, y: 2.35, w: 0.15, h: 0.15,
+        fill: { color: C.warnRed }
+      });
+
+      // --- Loop (the "after") ---
+      s.addText("After: review feeds back to plan", {
+        x: 0.8, y: 3.1, w: 5, h: 0.3,
+        fontSize: 12, fontFace: FONT.body, color: C.accent, margin: 0
+      });
+      const loopSteps = [
+        { label: "Plan", color: C.accent },
+        { label: "Do", color: C.accentDim },
+        { label: "Review", color: C.warnAmber },
+      ];
+      loopSteps.forEach((step, i) => {
+        const x = 1.5 + i * 2.5;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y: 3.5, w: 1.8, h: 0.7,
+          fill: { color: C.cardBg }, shadow: makeShadow()
+        });
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y: 3.5, w: 1.8, h: 0.06, fill: { color: step.color }
+        });
+        s.addText(step.label, {
+          x, y: 3.5, w: 1.8, h: 0.7,
+          fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
+        });
+        if (i < loopSteps.length - 1) {
+          s.addImage({ data: icons.arrowWhite, x: x + 1.85, y: 3.7, w: 0.2, h: 0.2 });
+        }
+      });
+      // feedback arrow label from Review back to Plan
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 1.5, y: 4.3, w: 6.3, h: 0.04, fill: { color: C.accent }
+      });
+      // sync icon after Review box
+      s.addImage({ data: icons.sync, x: 7.9, y: 3.65, w: 0.4, h: 0.4 });
+      s.addText("Learnings feed back \u2014 the system improves each cycle", {
+        x: 1.5, y: 4.4, w: 6.3, h: 0.3,
+        fontSize: 11, fontFace: FONT.body, color: C.accent, italic: true, align: "center", margin: 0
+      });
+
+      s.addText("Every review creates context that makes the next plan better.", {
+        x: 0.8, y: 4.9, w: 8.4, h: 0.35,
+        fontSize: 14, fontFace: FONT.body, color: C.offWhite, bold: true, margin: 0
+      });
+
+      s.addNotes("We just saw the linear pipeline \u2014 Plan, Do, Review, done. That works for a single task. But real engineering is iterative. [point to top row] In the linear version the output of Review goes nowhere \u2014 the flow terminates. [point to bottom row] In the loop version, the Review step feeds findings back into Plan. The agent reads what went wrong, what was learned, and uses that to write a better plan next time. This is the same learnings.md idea from the previous slide, but now it\u2019s structural: it\u2019s not just error recovery, it\u2019s continuous improvement. Each cycle the system gets smarter. [pause] This is the mental model shift: you\u2019re not building a pipeline, you\u2019re building a flywheel.");
+    },
+  },
+
+  // SLIDE 43 — Activity: Automated Code Review
   {
     type: "custom",
     render(pres, ctx) {
