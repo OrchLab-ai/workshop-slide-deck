@@ -9,7 +9,8 @@ const {
   FaHeart, FaEye, FaShieldAlt, FaDatabase, FaLayerGroup, FaArrowRight,
   FaCheck, FaTimes, FaStar, FaComments, FaCoffee, FaFlag, FaPuzzlePiece,
   FaProjectDiagram, FaChessKing, FaBook, FaHandshake, FaPlay,
-  FaStepForward, FaStepBackward, FaExpand, FaCompress, FaDraftingCompass, FaArrowUp
+  FaStepForward, FaStepBackward, FaExpand, FaCompress, FaDraftingCompass, FaArrowUp,
+  FaLock, FaTerminal, FaCodeBranch, FaKey, FaUserShield, FaDocker, FaServer
 } = require("react-icons/fa");
 
 const {
@@ -72,6 +73,12 @@ const iconList = [
   ["toolsWhite", FaTools, "#FFFFFF"],
   ["usersWhite", FaUsers, "#FFFFFF"],
   ["stepsWhite", FaStepForward, "#FFFFFF"],
+  ["lock", FaLock, "#E8B84A"],
+  ["terminal", FaTerminal, "#8CC26C"],
+  ["branch", FaCodeBranch, "#8CC26C"],
+  ["key", FaKey, "#E8B84A"],
+  ["userShield", FaUserShield, "#8CC26C"],
+  ["server", FaServer, "#A8B8A0"],
 ];
 
 async function iconToBase64Png(IconComponent, color, size = 256) {
