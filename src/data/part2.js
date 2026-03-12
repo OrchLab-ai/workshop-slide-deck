@@ -922,7 +922,60 @@ module.exports = [
     }
   },
 
-  // SLIDE 30 — Activity: Socratic Spec for Existing Project
+  // SLIDE 30 — Activity: Socratic Spec for New Product
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = lightSlide(pres, FT);
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Socratic Spec: Brand Design Guidelines for a New Product", {
+        x: 0.8, y: 1.0, w: 8.4, h: 0.5,
+        fontSize: 19, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      s.addText("Invent a product right now. Use the Socratic method to create Brand Design Guidelines for it. This time, you're starting from nothing.", {
+        x: 0.8, y: 1.6, w: 8.4, h: 0.6,
+        fontSize: 14, fontFace: FONT.body, color: "444444", margin: 0
+      });
+      addLightCard(s, 0.8, 2.4, 4.0, 2.4, C.accent, pres);
+      s.addText("Your Spec Should Cover", {
+        x: 1.1, y: 2.5, w: 3.4, h: 0.35,
+        fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      const coverItems = [
+        { text: "Brand voice and tone", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Colour palette and typography", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Logo usage and spacing rules", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Dos and Don'ts for visual identity", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Target audience and emotional goals", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+      ];
+      s.addText(coverItems, { x: 1.1, y: 2.9, w: 3.4, h: 1.6, margin: 0 });
+      addLightCard(s, 5.2, 2.4, 4.0, 2.4, C.warnAmber, pres);
+      s.addText("Why This Matters", {
+        x: 5.5, y: 2.5, w: 3.4, h: 0.35,
+        fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      const whyItems = [
+        { text: "This is greenfield — no existing constraints", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Compare the AI's questions to the brownfield activity that follows", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "Specs aren't just for code — they work for any structured output", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+        { text: "You're extending your remit beyond engineering", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
+      ];
+      s.addText(whyItems, { x: 5.5, y: 2.9, w: 3.4, h: 1.6, margin: 0 });
+      s.addNotes("Let's start with a greenfield exercise. You're going to invent a product from scratch and use the Socratic method to create brand design guidelines for it. [pause] Notice the kinds of questions the AI surfaces: Who is the audience? What emotion should the brand evoke? What are the competitors? What's the price positioning? These are things you might not think to specify upfront. [pause] And here's what I really want you to notice: the spec-driven approach works for non-code outputs too. Brand guidelines, design systems, content strategies — they all benefit from structured specifications. AI lets you extend into disciplines you might not have touched before.");
+    }
+  },
+
+  // SLIDE 31 — Activity: Socratic Spec for Existing Project
   {
     type: "custom",
     render(pres, ctx) {
@@ -967,64 +1020,11 @@ module.exports = [
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0.8, y: 4.85, w: 8.4, h: 0.35, fill: { color: C.midBg }
       });
-      s.addText("This is brownfield: you're adding to something that already exists. Notice how the AI's questions differ.", {
+      s.addText("This is brownfield: you're adding to something that already exists. Notice how the AI's questions differ from the greenfield activity.", {
         x: 1.0, y: 4.85, w: 8, h: 0.35,
         fontSize: 11, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("Now you're going to experience the Recursive Builder firsthand. Use the Spec-Writer prompt to generate a blog-feature.spec.md through Socratic dialogue. [pause] Here's the key difference from the earlier activity: this time, the AI is interviewing *you*, not the other way around. Pay attention to the questions it asks — edge cases, error handling, backward compatibility. Things you probably hadn't considered. [pause] Notice the brownfield callout: you're adding a feature to an existing project, not starting from scratch. The AI should be asking about existing patterns, database schema, API conventions. That distinction matters — and we'll dig into it more later.");
-    }
-  },
-
-  // SLIDE 31 — Activity: Socratic Spec for New Product
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = lightSlide(pres, FT);
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
-      });
-      s.addText("ACTIVITY", {
-        x: 0.8, y: 0.15, w: 3, h: 0.5,
-        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("Socratic Spec: Brand Design Guidelines for a New Product", {
-        x: 0.8, y: 1.0, w: 8.4, h: 0.5,
-        fontSize: 19, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
-      });
-      s.addText("Invent a product right now. Use the Socratic method to create Brand Design Guidelines for it. This time, you're starting from nothing.", {
-        x: 0.8, y: 1.6, w: 8.4, h: 0.6,
-        fontSize: 14, fontFace: FONT.body, color: "444444", margin: 0
-      });
-      addLightCard(s, 0.8, 2.4, 4.0, 2.4, C.accent, pres);
-      s.addText("Your Spec Should Cover", {
-        x: 1.1, y: 2.5, w: 3.4, h: 0.35,
-        fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
-      });
-      const coverItems = [
-        { text: "Brand voice and tone", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Colour palette and typography", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Logo usage and spacing rules", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Dos and Don'ts for visual identity", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Target audience and emotional goals", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-      ];
-      s.addText(coverItems, { x: 1.1, y: 2.9, w: 3.4, h: 1.6, margin: 0 });
-      addLightCard(s, 5.2, 2.4, 4.0, 2.4, C.warnAmber, pres);
-      s.addText("Why This Matters", {
-        x: 5.5, y: 2.5, w: 3.4, h: 0.35,
-        fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
-      });
-      const whyItems = [
-        { text: "This is greenfield — no existing constraints", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Notice how the AI's questions differ from the brownfield activity", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Specs aren't just for code — they work for any structured output", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "You're extending your remit beyond engineering", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-      ];
-      s.addText(whyItems, { x: 5.5, y: 2.9, w: 3.4, h: 1.6, margin: 0 });
-      s.addNotes("Now for the contrast. The previous activity was brownfield — adding to something that exists. This one is pure greenfield: invent a product and its brand from scratch. [pause] Notice how the Socratic method surfaces completely different questions this time: Who is the audience? What emotion should the brand evoke? What are the competitors? What's the price positioning? [pause] And here's what I really want you to notice: the spec-driven approach works for non-code outputs too. Brand guidelines, design systems, content strategies — they all benefit from structured specifications. AI lets you extend into disciplines you might not have touched before.");
+      s.addNotes("Now for the contrast. The previous activity was greenfield — creating something from nothing. This one is brownfield: you're adding a blog feature to an existing project. [pause] Use the Spec-Writer prompt to generate a blog-feature.spec.md through Socratic dialogue. The AI is interviewing *you* — pay attention to how the questions differ. Instead of asking about brand identity and audience, it should be asking about existing patterns, database schema, API conventions, backward compatibility. [pause] That greenfield-versus-brownfield distinction really matters. The same Socratic method surfaces completely different concerns depending on context.");
     }
   },
 
