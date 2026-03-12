@@ -15,11 +15,14 @@ module.exports = [
         fontSize: 32, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
       });
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 1.1, w: 8.4, h: 0.65, fill: { color: C.darkBg }
+        x: 0.8, y: 1.1, w: 8.4, h: 0.8, fill: { color: C.darkBg }
       });
-      s.addText("Everything we built today was greenfield, small, and solo. Most of your real work isn't.", {
-        x: 1.0, y: 1.1, w: 8, h: 0.65,
-        fontSize: 15, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
+      s.addText([
+        { text: "We've tasted both greenfield and brownfield today — but always small and solo.", options: { breakLine: true, fontSize: 15, fontFace: FONT.body, color: C.warnAmber, italic: true } },
+        { text: "Real work adds more dimensions.", options: { fontSize: 15, fontFace: FONT.body, color: C.warnAmber, italic: true } },
+      ], {
+        x: 1.0, y: 1.1, w: 8, h: 0.8,
+        valign: "middle", margin: 0
       });
       const dims = [
         { left: "Greenfield", right: "Brownfield", icon: "flag", desc: "New code from scratch vs. evolving a living codebase with years of decisions baked in" },
@@ -60,7 +63,7 @@ module.exports = [
         x: 1.0, y: 4.45, w: 8, h: 0.6,
         fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
       });
-      s.addNotes("Okay, time for a reality check. Everything we built today was greenfield, small, and solo. And it felt amazing. [pause] But most of your real work isn't like that. [walk through the four dimensions] Greenfield versus brownfield — new code from scratch versus a living codebase with years of decisions baked in. Small versus large — fits in one context window versus too big for any AI to see at once. Solo versus team — you directing agents versus five people with shared standards and merge conflicts. And risk appetite — a blog engine with zero consequences versus payment systems and production infrastructure. [pause] Most of those '10x productivity' tweets? Someone building a todo app from scratch, alone, with no consequences. Most real engineering looks like the right side of this chart. Part 3 is about how we get AI benefits in *that* world.");
+      s.addNotes("Okay, time for a reality check. We've tasted both greenfield and brownfield today, but always small and solo. And it felt pretty manageable. [pause] But most of your real work isn't like that. [walk through the four dimensions] Greenfield versus brownfield — new code from scratch versus a living codebase with years of decisions baked in. Small versus large — fits in one context window versus too big for any AI to see at once. Solo versus team — you directing agents versus five people with shared standards and merge conflicts. And risk appetite — a blog engine with zero consequences versus payment systems and production infrastructure. [pause] Most of those '10x productivity' tweets? Someone building a todo app from scratch, alone, with no consequences. Most real engineering looks like the right side of this chart. Part 3 is about how we get AI benefits in *that* world.");
     },
   },
 
@@ -176,7 +179,139 @@ module.exports = [
     },
   },
 
-  // SLIDE 38 — Activity: Build an Autonomous Agent
+  // SLIDE 38 — The Permission Problem / YOLO Mode
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, FT);
+      s.addText("The Permission Problem", {
+        x: 0.8, y: 0.3, w: 8, h: 0.7,
+        fontSize: 30, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
+      });
+      s.addText("You're stuck in a loop of your own:", {
+        x: 0.8, y: 1.1, w: 8, h: 0.35,
+        fontSize: 15, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      // The two extremes
+      const extremes = [
+        { icon: "times", label: "Say YES to everything", desc: "Agent rm -rf's your repo, installs malware, pushes to main", color: C.warnRed },
+        { icon: "clock", label: "Say NO / review each step", desc: "You become a human rubber-stamp — slower than doing it yourself", color: C.warnAmber },
+      ];
+      extremes.forEach((e, i) => {
+        const y = 1.65 + i * 0.75;
+        addCard(s, 0.8, y, 8.4, 0.6, e.color, pres);
+        iconCircle(s, e.icon, 1.0, y + 0.1, 0.4, C.darkBg, icons, pres);
+        s.addText([
+          { text: e.label + "  ", options: { bold: true, fontSize: 14, fontFace: FONT.head, color: e.color } },
+          { text: e.desc, options: { fontSize: 12, fontFace: FONT.body, color: C.muted } },
+        ], { x: 1.6, y: y, w: 7.4, h: 0.6, valign: "middle", margin: 0 });
+      });
+
+      // YOLO mode callout
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 3.3, w: 8.4, h: 1.3, fill: { color: C.darkBg }
+      });
+      s.addText("claude --dangerously-skip-permissions", {
+        x: 1.6, y: 3.4, w: 7.4, h: 0.45,
+        fontSize: 18, fontFace: "Courier New", color: C.warnRed, bold: true, margin: 0
+      });
+      iconCircle(s, "terminal", 1.0, 3.45, 0.4, "5A2020", icons, pres);
+      s.addText([
+        { text: "a.k.a. \"YOLO mode\"", options: { breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.warnAmber, italic: true } },
+        { text: "Skips every permission prompt. Maximum speed, maximum risk.", options: { breakLine: true, fontSize: 12, fontFace: FONT.body, color: C.muted } },
+        { text: "So how do we get speed AND safety?", options: { fontSize: 13, fontFace: FONT.head, color: C.accent, bold: true } },
+      ], { x: 1.6, y: 3.85, w: 7.4, h: 0.7, margin: 0 });
+
+      s.addNotes("So we've seen the Loop of Death — the agent goes off the rails. But there's a second loop that's just as painful: the permission loop. Every tool call, every file edit, every shell command — the agent asks you 'can I do this?' and you're sitting there hitting yes, yes, yes like a human rubber stamp. [pause] You're not reviewing anything. You're just clicking approve. At that point, you're slower than doing it yourself. [pause] Claude has a famous escape hatch: --dangerously-skip-permissions, affectionately known as YOLO mode. It does exactly what it says — skips every permission check. Maximum speed, maximum risk. But the real question is: how do we get the speed of YOLO mode without the risk? That's what the next slide is about.");
+    },
+  },
+
+  // SLIDE 39 — Levels of Safety
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, FT);
+      s.addText("Taming YOLO: Levels of Safety", {
+        x: 0.8, y: 0.3, w: 8, h: 0.6,
+        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Three layers to let agents run fast without running wild", {
+        x: 0.8, y: 0.9, w: 8, h: 0.35,
+        fontSize: 14, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+
+      const layers = [
+        {
+          title: "Isolation",
+          subtitle: "Contain the blast radius",
+          color: C.accent,
+          icon: "shield",
+          items: [
+            { label: "Worktrees", desc: "Disposable git branches — throw away bad work" },
+            { label: "Docker", desc: "Sandboxed filesystem and network" },
+            { label: "VMs / Cloud", desc: "Full machine isolation — nothing escapes" },
+          ]
+        },
+        {
+          title: "Permissions",
+          subtitle: "Control what the agent can do",
+          color: C.warnAmber,
+          icon: "lock",
+          items: [
+            { label: "Allow / Deny config", desc: "Whitelist safe commands, block dangerous ones" },
+            { label: "Firewall rules", desc: "Restrict network access to approved endpoints" },
+          ]
+        },
+        {
+          title: "Least Privilege",
+          subtitle: "Limit what damage is possible",
+          color: C.highlightYellow,
+          icon: "key",
+          items: [
+            { label: "Forks", desc: "Agent works on a fork — can't touch upstream" },
+            { label: "Branch protection", desc: "Main requires review — agent can't merge alone" },
+            { label: "PATs", desc: "Scoped tokens — read-only, single-repo, time-limited" },
+          ]
+        },
+      ];
+
+      let yPos = 1.4;
+      layers.forEach((layer) => {
+        const blockH = 0.35 + layer.items.length * 0.32;
+        addCard(s, 0.8, yPos, 8.4, blockH, layer.color, pres);
+        iconCircle(s, layer.icon, 1.0, yPos + 0.08, 0.35, C.darkBg, icons, pres);
+        s.addText(layer.title, {
+          x: 1.5, y: yPos + 0.02, w: 2.5, h: 0.3,
+          fontSize: 15, fontFace: FONT.head, color: layer.color, bold: true, margin: 0
+        });
+        s.addText(layer.subtitle, {
+          x: 4.0, y: yPos + 0.02, w: 5, h: 0.3,
+          fontSize: 11, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+        });
+        layer.items.forEach((item, j) => {
+          const iy = yPos + 0.38 + j * 0.32;
+          s.addText([
+            { text: item.label + "  ", options: { bold: true, fontSize: 12, fontFace: FONT.head, color: C.offWhite } },
+            { text: item.desc, options: { fontSize: 11, fontFace: FONT.body, color: C.muted } },
+          ], { x: 1.5, y: iy, w: 7.5, h: 0.3, valign: "middle", margin: 0 });
+        });
+        yPos += blockH + 0.12;
+      });
+
+      s.addNotes("There are three layers of safety, and the key insight is you can combine them. [pause] First, isolation — this is about blast radius. Worktrees give you a disposable git branch; if the agent makes a mess, delete the worktree. Docker sandboxes the filesystem and network. VMs or cloud instances give you full machine isolation — nothing escapes. [pause] Second, permissions. Claude's allow/deny config lets you whitelist safe commands like 'npm test' and block dangerous ones like 'rm -rf'. Firewall rules restrict network access so the agent can't exfiltrate data or hit random APIs. [pause] Third, least privilege. The agent works on a fork, so it literally cannot touch upstream. Branch protection means main requires human review — the agent can create a PR but can't merge it. And scoped personal access tokens mean the agent only has read access to one repo for a limited time. [pause] Layer these together and you can run in YOLO mode with confidence: the agent is fast, but the damage it can do is bounded.");
+    },
+  },
+
+  // SLIDE 40 — Activity: Build an Autonomous Agent
   {
     type: "custom",
     render(pres, ctx) {
