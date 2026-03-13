@@ -15,7 +15,7 @@ A Node.js script that generates the OrchLab Workshop presentation (`.pptx`) prog
 - **npm** packages (installed globally or locally):
 
 ```bash
-npm install pptxgenjs react-icons react react-dom sharp
+npm install
 ```
 
 ### Optional (for visual QA)
@@ -36,6 +36,22 @@ On Ubuntu:
 ```bash
 sudo apt install libreoffice-impress poppler-utils
 ```
+
+## Dev Container
+
+This repo includes a dev container with Node.js, GitHub CLI, LibreOffice, and Claude Code pre-installed. To use it, set a GitHub token in your host terminal before opening the container. If you've already run `gh auth login` on your host machine:
+
+**macOS / Linux (bash/zsh):**
+```bash
+export GH_TOKEN=$(gh auth token)
+```
+
+**Windows PowerShell:**
+```powershell
+$env:GH_TOKEN = $(gh auth token)
+```
+
+Then open the repo in VS Code and select **Dev Containers: Reopen in Container**. The token is forwarded automatically via `devcontainer.json`.
 
 ## Usage
 
@@ -71,29 +87,34 @@ xdg-open slide-09.jpg  # Linux
 ## Project structure
 
 ```
-build.js                  # The main generator script (~2500 lines)
-OrchLab_Workshop.pptx     # Generated output (git-ignored)
-README.md                 # This file
-package.json              # Dependencies (optional, for local install)
+build.js                   # Orchestrator — loads modules and writes the .pptx
+src/
+  branding.js              # Colour palette (C), fonts (FONT), makeShadow()
+  helpers.js               # darkSlide(), lightSlide(), addCard(), iconCircle(), etc.
+  icons.js                 # preRenderIcons() — react-icons → SVG → PNG (base64)
+  renderers.js             # Slide-type render functions
+  data/
+    intro.js               # Introduction slides
+    part1.js               # Part 1 — AI Coding
+    part2.js               # Part 2 — Prompt Engineering
+    part3.js               # Part 3 — Orchestration
+    closing.js             # Closing slides
+    appendix.js            # Appendix slides
+OrchLab_Workshop.pptx      # Generated output (git-ignored)
+package.json               # Dependencies
 ```
 
-## How the script is organised
+## How the codebase is organised
 
-The script follows a straightforward pattern:
-
-1. **Constants** — colour palette (`C`), font config (`FONT`)
-2. **Icon pre-rendering** — react-icons → SVG → PNG via sharp (cached as base64)
-3. **Helper functions** — `darkSlide()`, `lightSlide()`, `addCard()`, `iconCircle()`
-4. **Slide definitions** — each slide is a `{ }` block with a comment header like `// SLIDE 9 — ACTIVITY: DESIGN YOUR OWN CLAUDE CODE`
-5. **Write file** — `pres.writeFile()`
+Slides are data objects in arrays, exported from the `src/data/` modules. Each slide has a `type` (mapped to a renderer in `src/renderers.js`) or a `render` function for custom slides. `build.js` concatenates all slide arrays and iterates through them.
 
 ### To edit a slide
 
-Search for the slide comment (e.g. `SLIDE 28`) and modify the block. Each slide is self-contained — you can move, delete, or duplicate blocks freely.
+Find the slide in the relevant `src/data/*.js` file (search by title or slide number comment) and modify it. Each slide object is self-contained.
 
 ### To add a new slide
 
-Copy an existing block, update the comment number, and adjust the content. The slide order in the file IS the slide order in the deck.
+Add a new object to the appropriate `src/data/*.js` array. The order of objects in the array determines the slide order in the deck.
 
 ### Colour palette
 
@@ -104,8 +125,12 @@ Copy an existing block, update the comment number, and adjust the content. The s
 | `lightBg` | `45593C` | Lighter olive (use sparingly — low contrast) |
 | `accent` | `8CC26C` | Primary bright green |
 | `accentDim` | `6B9E4F` | Muted green |
-| `cardBg` | `4A5F40` | Card surface colour |
+| `white` | `FFFFFF` | Pure white text |
 | `offWhite` | `E8EDE5` | Light background for activity slides |
+| `muted` | `A8B8A0` | Muted/secondary text |
+| `darkText` | `1E2618` | Dark text on light backgrounds |
+| `cardBg` | `4A5F40` | Card surface colour |
+| `highlightYellow` | `D4E84A` | Highlight/emphasis |
 | `warnRed` | `E85D4A` | Danger/warning |
 | `warnAmber` | `E8B84A` | Caution/amber |
 
@@ -118,9 +143,9 @@ Copy an existing block, update the comment number, and adjust the content. The s
 
 ## Tips for editing with Claude Code / Cursor
 
-The script is structured so AI tools can work with it effectively:
+The codebase is structured so AI tools can work with it effectively:
 
-- Each slide is a clearly delimited block with a descriptive comment
-- Search by slide number or title to find what you need
-- The colour constants and helper functions are at the top
-- Speaker notes are in `s.addNotes()` at the end of each block
+- Each slide is a self-contained data object — search by title or comment to find it
+- Branding constants are in `src/branding.js`, helpers in `src/helpers.js`
+- Speaker notes go in `s.addNotes()` at the end of each slide's render function
+- Access branding via `ctx.branding` and helpers via `ctx.helpers` inside render functions
