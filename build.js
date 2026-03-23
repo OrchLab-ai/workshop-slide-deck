@@ -32,6 +32,10 @@ async function build() {
     "https://github.com/LeeCampbell/mars-mission-fund",
     { width: 200, margin: 1, color: { dark: "#333333FF", light: "#00000000" } }
   );
+  qrCodes.playwrightInDocker = await QRCode.toDataURL(
+    "https://github.com/OrchLab-ai/playwright-in-docker",
+    { width: 200, margin: 1, color: { dark: "#333333FF", light: "#00000000" } }
+  );
   qrCodes.workshopDeck = await QRCode.toDataURL(
     "https://orchlab.ai/workshop-deck",
     { width: 200, margin: 1, color: { dark: "#FFFFFFFF", light: "#00000000" } }
