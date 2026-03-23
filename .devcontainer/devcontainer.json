@@ -20,6 +20,7 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.claude,target=/home/node/.claude,type=bind,consistency=cached",
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.claude.json,target=/home/node/.claude.json,type=bind,consistency=cached"
   ],
+  "postStartCommand": "gh auth setup-git",
   "remoteEnv": {
     "GH_TOKEN": "${localEnv:GH_TOKEN}"
   },
