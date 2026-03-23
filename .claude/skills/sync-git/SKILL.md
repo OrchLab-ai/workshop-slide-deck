@@ -5,4 +5,4 @@ disable-model-invocation: true
 allowed-tools: Bash
 ---
 
-Run `bash scripts/synch-git.sh` and report the output to the user.
+Run `bash .claude/skills/sync-git/scripts/sync-git.sh` and report the output to the user.
