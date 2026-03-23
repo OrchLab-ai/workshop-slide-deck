@@ -1,7 +1,18 @@
 const FT = "OrchLab  |  AI Engineering Workshop";
 
 module.exports = [
-  // SLIDE 3 — A Vision of the Future
+  // SLIDE 4 — PART 1 DIVIDER
+  {
+    type: "divider",
+    partLabel: "PART 1",
+    title: "From Copy-Paste\nto Contextual Integration",
+    subtitle: "Getting AI into your development workflow",
+    iconKey: "code",
+    iconPos: { x: 8.0, y: 3.8, w: 1.2, h: 1.2 },
+    notes: "Part 1 is about the fundamentals. We start with a vision of where we're headed, then walk through the natural progression most people follow: starting with copy-paste from ChatGPT, hitting the limits, and discovering that context-aware tools are the key breakthrough. By the end of Part 1, everyone will have hands-on experience with integrated AI coding tools.",
+  },
+
+  // SLIDE 5 — A Vision of the Future
   {
     type: "custom",
     render(pres, ctx) {
@@ -337,19 +348,21 @@ module.exports = [
 
       // Right column — QR code + repo link
       const qrSize = 1.4;
-      const qrX = 7.7 + (1.5 - qrSize) / 2;
+      const colX = 7.5;
+      const colW = 2.2;
+      const qrX = colX + (colW - qrSize) / 2;
       const qrY = 2.0;
       s.addImage({
         data: ctx.qrCodes.marsMissionFund,
         x: qrX, y: qrY, w: qrSize, h: qrSize
       });
       s.addText("Scan to open the\nMMF repository", {
-        x: 7.7, y: qrY + qrSize + 0.15, w: 1.5, h: 0.45,
-        fontSize: 10, fontFace: FONT.head, color: C.darkText, bold: true, align: "center", margin: 0
+        x: colX, y: qrY + qrSize + 0.15, w: colW, h: 0.45,
+        fontSize: 10, fontFace: FONT.head, color: C.accentDim, bold: true, align: "center", margin: 0
       });
       s.addText("github.com/LeeCampbell/\nmars-mission-fund", {
-        x: 7.7, y: qrY + qrSize + 0.6, w: 1.5, h: 0.4,
-        fontSize: 8, fontFace: FONT.body, color: "888888", align: "center", margin: 0
+        x: colX, y: qrY + qrSize + 0.6, w: colW, h: 0.5,
+        fontSize: 12, fontFace: FONT.body, color: C.darkText, align: "center", margin: 0
       });
 
       s.addNotes("Alright, hands-on time! Pick whichever challenge interests you most. The refactor-rename is the most approachable if you want a quick win. The dependency upgrade is great if you've ever dealt with a painful major version bump. And the cross-cutting concern is the most architecturally interesting. All three are problems that are painful with copy-paste but very manageable with contextual AI tools. [pause] You've got 15 to 20 minutes. Use Cursor, Claude Code, Copilot — whatever you've got set up. We'll debrief as a group after.");
@@ -993,7 +1006,7 @@ module.exports = [
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0.8, y: 4.2, w: 8.4, h: 0.6, fill: { color: C.midBg }
       });
-      s.addText("Cheat Code:  github.com/LeeCampbell/mvce-playwright-in-docker", {
+      s.addText("Cheat Code:  github.com/OrchLab-ai/playwright-in-docker", {
         x: 1.0, y: 4.2, w: 8, h: 0.6,
         fontSize: 12, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });

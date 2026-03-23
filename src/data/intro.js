@@ -28,7 +28,7 @@ module.exports = [
       s.addImage({ data: ctx.qrCodes.workshopDeck, x: 7.8, y: 3.6, w: 1.2, h: 1.2 });
       s.addText("orchlab.ai/workshop-deck", {
         x: 6.7, y: 4.8, w: 3, h: 0.35,
-        fontSize: 9, fontFace: FONT.body, color: C.muted, align: "center", margin: 0,
+        fontSize: 12, fontFace: FONT.body, color: C.muted, align: "center", margin: 0,
         hyperlink: { url: "https://orchlab.ai/workshop-deck" },
       });
       s.addNotes("Welcome everyone to OrchLab. This workshop takes you on a journey from basic AI copy-paste coding all the way to orchestrating teams of AI agents. We'll move through three parts: first getting AI into your workflow, then learning to communicate effectively with AI through specs, and finally building autonomous agent systems. Each section builds on the last, so by the end you'll have a clear roadmap for where you are today and where you can go.");
@@ -155,14 +155,71 @@ module.exports = [
       s.addNotes("Before we dive in, let's set context. Not all software is the same. A quick shell script has different needs than a platform serving millions of users. And the intent behind what you're building shifts over time — you might start in discovery mode, push to market, then spend years maintaining and integrating. AI accelerates all of this. You'll write more throwaway scripts, spin up more prototypes, ship faster. But this workshop focuses specifically on the team-scale, long-lived end of the spectrum — where the stakes are highest and the practices matter most.");
     },
   },
-  // SLIDE 3 — PART 1 DIVIDER
+  // SLIDE 3 — Environment Check (setup verification)
   {
-    type: "divider",
-    partLabel: "PART 1",
-    title: "From Copy-Paste\nto Contextual Integration",
-    subtitle: "Getting AI into your development workflow",
-    iconKey: "code",
-    iconPos: { x: 8.0, y: 3.8, w: 1.2, h: 1.2 },
-    notes: "Part 1 is about the fundamentals. We start with a vision of where we're headed, then walk through the natural progression most people follow: starting with copy-paste from ChatGPT, hitting the limits, and discovering that context-aware tools are the key breakthrough. By the end of Part 1, everyone will have hands-on experience with integrated AI coding tools.",
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { lightSlide, addLightCard } = ctx.helpers;
+
+      const s = lightSlide(pres);
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Environment Check", {
+        x: 0.8, y: 1.0, w: 7, h: 0.5,
+        fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      s.addText("Before we write a single line — let's make sure your tools are alive.", {
+        x: 0.8, y: 1.55, w: 7.5, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: "444444", italic: true, margin: 0
+      });
+
+      const goals = [
+        { num: "01", title: "Docker is running", desc: "You can start a container and it doesn't explode." },
+        { num: "02", title: "Claude Code runs inside it", desc: "Your agent CLI is reachable from within the container." },
+        { num: "03", title: "Playwright takes a screenshot", desc: "A headless browser navigates a page and saves an image." },
+      ];
+      goals.forEach((g, i) => {
+        const y = 2.1 + i * 0.95;
+        addLightCard(s, 0.8, y, 6.5, 0.75, C.accentDim, pres);
+        s.addText(g.num, {
+          x: 1.0, y: y + 0.08, w: 0.55, h: 0.6,
+          fontSize: 22, fontFace: FONT.head, color: C.accentDim, bold: true, valign: "middle", margin: 0
+        });
+        s.addText(g.title, {
+          x: 1.7, y: y + 0.08, w: 5.2, h: 0.28,
+          fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+        });
+        s.addText(g.desc, {
+          x: 1.7, y: y + 0.38, w: 5.2, h: 0.28,
+          fontSize: 11, fontFace: FONT.body, color: "555555", margin: 0
+        });
+      });
+
+      // Right column — QR code + repo link
+      const qrSize = 1.4;
+      const colX = 7.5;
+      const colW = 2.2;
+      const qrX = colX + (colW - qrSize) / 2;
+      const qrY = 2.0;
+      s.addImage({
+        data: ctx.qrCodes.playwrightInDocker,
+        x: qrX, y: qrY, w: qrSize, h: qrSize
+      });
+      s.addText("Clone & run\nthis repo", {
+        x: colX, y: qrY + qrSize + 0.15, w: colW, h: 0.45,
+        fontSize: 10, fontFace: FONT.head, color: C.accentDim, bold: true, align: "center", margin: 0
+      });
+      s.addText("github.com/OrchLab-ai/\nplaywright-in-docker", {
+        x: colX, y: qrY + qrSize + 0.6, w: colW, h: 0.5,
+        fontSize: 12, fontFace: FONT.body, color: C.darkText, align: "center", margin: 0
+      });
+      s.addNotes("While we're getting settled — can everyone scan this QR code and clone this repo? [show QR code] Just clone it and run it. No coding required. Docker will start, Claude will run inside the container, and Playwright will take a screenshot of a simple web page. [pause] This verifies three things we'll rely on all day: your Docker setup, your agent CLI, and headless browser automation. If anything doesn't work, flag me now — much easier to fix before we're mid-exercise.");
+    }
   },
 ];
