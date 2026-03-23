@@ -740,6 +740,134 @@ module.exports = [
     }
   },
 
+  // SLIDE 10b — Scaffold: How the Pieces Fit Together (sequence diagram)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { lightSlide, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = lightSlide(pres, FT);
+
+      // ── Header bar ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+
+      // ── Title & subtitle ──
+      s.addText("How the Pieces Fit Together", {
+        x: 0.5, y: 0.85, w: 9, h: 0.35,
+        fontSize: 18, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      s.addText("A map of the components \u2014 use this as your starting point", {
+        x: 0.5, y: 1.15, w: 9, h: 0.25,
+        fontSize: 11, fontFace: FONT.body, color: "555555", italic: true, margin: 0
+      });
+
+      // ── 5 Participants across the full width ──
+      const parts = [
+        { label: "User",      icon: "users",    cx: 0.85, strength: "Knows intent & goal",     weakness: "Can't code at AI speed" },
+        { label: "System",    icon: "terminal",  cx: 2.85, strength: "Files, terminal, git",     weakness: "No intelligence" },
+        { label: "Coding\nAssistant", icon: "robot", cx: 4.85, strength: "Bridges human & system", weakness: "Power vs. safety" },
+        { label: "API",       icon: "server",    cx: 6.85, strength: "Scalable, auth & billing", weakness: "Latency, rate limits" },
+        { label: "LLM",       icon: "brain",     cx: 8.85, strength: "Generates code, reasons",  weakness: "Stateless, context limits, hallucinations" },
+      ];
+
+      const iconY = 1.42;
+      const labelY = 2.0;
+      const annoY1 = 2.32;
+      const annoY2 = 2.48;
+      const lifeTop = 2.7;
+      const lifeBot = 4.78;
+
+      parts.forEach((p) => {
+        // Icon
+        iconCircle(s, p.icon, p.cx - 0.22, iconY, 0.44, C.midBg, icons, pres);
+        // Label
+        s.addText(p.label, {
+          x: p.cx - 0.55, y: labelY, w: 1.1, h: 0.3,
+          fontSize: 9, fontFace: FONT.head, color: C.darkText, bold: true,
+          align: "center", valign: "top", margin: 0
+        });
+        // Strength
+        s.addText([
+          { text: "\u25CF ", options: { color: C.accent, fontSize: 7, fontFace: FONT.body } },
+          { text: p.strength, options: { color: "555555", fontSize: 7, fontFace: FONT.body } },
+        ], { x: p.cx - 0.7, y: annoY1, w: 1.4, h: 0.16, align: "center", margin: 0 });
+        // Weakness
+        s.addText([
+          { text: "\u25CF ", options: { color: C.warnAmber, fontSize: 7, fontFace: FONT.body } },
+          { text: p.weakness, options: { color: "555555", fontSize: 7, fontFace: FONT.body } },
+        ], { x: p.cx - 0.7, y: annoY2, w: 1.4, h: 0.16, align: "center", margin: 0 });
+        // Dashed lifeline
+        const dashCount = 12;
+        const dashH = (lifeBot - lifeTop) / (dashCount * 2);
+        for (let i = 0; i < dashCount; i++) {
+          s.addShape(pres.shapes.RECTANGLE, {
+            x: p.cx - 0.012, y: lifeTop + i * dashH * 2, w: 0.024, h: dashH,
+            fill: { color: C.muted }
+          });
+        }
+      });
+
+      // ── Sequence arrows (vertical order = time order) ──
+      // Label sits vertically aligned with the arrow (just above the line)
+      // Label placed near the arrowhead end to avoid crossing unrelated lifelines
+      function seqArrow(fromCx, toCx, y, label) {
+        const goingRight = toCx > fromCx;
+        // Arrow image at the receiving end
+        if (goingRight) {
+          s.addImage({ data: icons.arrow, x: toCx - 0.2, y: y - 0.1, w: 0.2, h: 0.2 });
+          // Label: right-aligned, placed just before arrowhead
+          s.addText(label, {
+            x: toCx - 1.7, y: y - 0.12, w: 1.45, h: 0.2,
+            fontSize: 8, fontFace: FONT.body, color: C.darkText, align: "right",
+            valign: "middle", margin: 0
+          });
+        } else {
+          s.addImage({ data: icons.arrow, x: toCx, y: y - 0.1, w: 0.2, h: 0.2, flipH: true });
+          // Label: left-aligned, placed just after arrowhead
+          s.addText(label, {
+            x: toCx + 0.25, y: y - 0.12, w: 1.45, h: 0.2,
+            fontSize: 8, fontFace: FONT.body, color: C.darkText, align: "left",
+            valign: "middle", margin: 0
+          });
+        }
+      }
+
+      const U = parts[0].cx;   // User
+      const SY = parts[1].cx;  // System
+      const CA = parts[2].cx;  // Coding Assistant
+      const AP = parts[3].cx;  // API
+      const LM = parts[4].cx;  // LLM
+
+      // Steps flow downward — 0.28" per step
+      seqArrow(U,  CA, 2.88, "Prompt");
+      seqArrow(CA, AP, 3.16, "Synthesised Prompt");
+      seqArrow(AP, LM, 3.44, "Pass Request to LLM");
+      seqArrow(LM, AP, 3.72, "Provide Response");
+      seqArrow(AP, CA, 4.00, "Synthesised Response");
+      seqArrow(CA, SY, 4.28, "Manipulate System");
+      seqArrow(CA, U,  4.56, "Inform User");
+
+      // ── Bottom callout ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 4.9, w: 9, h: 0.22, fill: { color: C.midBg }
+      });
+      s.addText("Each component has a superpower and a constraint. Your design choices live in the gaps.", {
+        x: 0.7, y: 4.9, w: 8.6, h: 0.22,
+        fontSize: 9, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
+      });
+
+      s.addNotes("This slide is a scaffold to help you get oriented before the activity. Read it like a sequence diagram \u2014 time flows downward.\n\nThe User sends a prompt to the Coding Assistant. The assistant synthesises that into a full API request \u2014 adding system prompt, file context, tool definitions. The API handles auth and billing, then passes the request to the LLM. The LLM generates a response, which flows back through the API to the assistant. The assistant then synthesises that response \u2014 parsing code blocks, commands, and explanations. It manipulates the local system (editing files, running commands) and finally informs the user of the results.\n\nNotice the annotations under each participant. Every component has a superpower and a weakness. The user knows what they want but can't write code at machine speed. The system has files and tools but no intelligence. The coding assistant bridges human and machine but must balance power with safety. The API is scalable but adds latency. The LLM can reason and generate code but has context limits and can hallucinate.\n\nAs you work through the four stations, think about how your design handles each of these trade-offs.");
+    }
+  },
+
   // SLIDE 11 — The Agentic Tool User
   {
     type: "custom",
