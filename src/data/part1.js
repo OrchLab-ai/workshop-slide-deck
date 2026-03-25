@@ -319,19 +319,19 @@ module.exports = [
         x: 0.8, y: 0.15, w: 3, h: 0.5,
         fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
       });
-      s.addText("Using integrated tooling (Cursor, Claude Code, Co-Pilot), tackle one of these challenges:", {
+      s.addText("Pick one challenge. This would take half a day without AI. You have 20 minutes.", {
         x: 0.8, y: 1.1, w: 8.4, h: 0.5,
         fontSize: 14, fontFace: FONT.body, color: C.darkText, margin: 0
       });
       const challenges = [
         { num: "01", title: "Refactor-Rename", desc: "Rename MMF's 'Campaign' to 'Proposal' across the entire codebase, including endpoints, docs, and DB references.", color: C.accent },
-        { num: "02", title: "Dependency Upgrade", desc: "Make the breaking change from ESLint v8 to v9. Handle all configuration and API changes.", color: C.accentDim },
-        { num: "03", title: "Cross-Cutting Concern", desc: "Add structured logging with correlation-IDs across the MMF codebase.", color: C.midBg },
+        { num: "02", title: "Observability", desc: "Add structured JSON request logging (method, path, status, duration, correlation ID) using the existing pino logger.", color: C.accentDim },
+        { num: "03", title: "New Feature", desc: "Add a 'Trending Missions' section to the Explore page: the 3 most popular live campaigns by contributor count, shown above the main grid.", color: C.midBg },
       ];
       const cardW = 6.7;
       challenges.forEach((ch, i) => {
-        const y = 1.8 + i * 1.1;
-        addLightCard(s, 0.8, y, cardW, 0.9, ch.color, pres);
+        const y = 1.8 + i * 1.15;
+        addLightCard(s, 0.8, y, cardW, 1.0, ch.color, pres);
         s.addText(ch.num, {
           x: 1.1, y: y + 0.1, w: 0.6, h: 0.7,
           fontSize: 28, fontFace: FONT.head, color: ch.color, bold: true, valign: "middle", margin: 0
@@ -341,7 +341,7 @@ module.exports = [
           fontSize: 16, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
         });
         s.addText(ch.desc, {
-          x: 1.8, y: y + 0.45, w: cardW - 0.7, h: 0.35,
+          x: 1.8, y: y + 0.45, w: cardW - 0.7, h: 0.5,
           fontSize: 12, fontFace: FONT.body, color: "555555", margin: 0
         });
       });
@@ -365,7 +365,7 @@ module.exports = [
         fontSize: 12, fontFace: FONT.body, color: C.darkText, align: "center", margin: 0
       });
 
-      s.addNotes("Alright, hands-on time! Pick whichever challenge interests you most. The refactor-rename is the most approachable if you want a quick win. The dependency upgrade is great if you've ever dealt with a painful major version bump. And the cross-cutting concern is the most architecturally interesting. All three are problems that are painful with copy-paste but very manageable with contextual AI tools. [pause] You've got 15 to 20 minutes. Use Cursor, Claude Code, Copilot — whatever you've got set up. We'll debrief as a group after.");
+      s.addNotes("Alright, hands-on time! Pick whichever challenge interests you most. The refactor-rename touches 87 files including DB migrations — it really shows the power of contextual AI for large-scale changes. The observability exercise adds structured request logging on top of existing infrastructure. And the new feature exercise builds a visible Trending Missions section end-to-end. Each of these would normally take half a day. You have 20 minutes. Use Cursor, Claude Code, Copilot — whatever you've got set up. We'll debrief as a group after.");
     }
   },
 
