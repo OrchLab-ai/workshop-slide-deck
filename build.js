@@ -10,6 +10,7 @@ const allSlides = [
   ...require("./src/data/part1"),
   ...require("./src/data/part2"),
   ...require("./src/data/part3"),
+  ...require("./src/data/feedback"),
   ...require("./src/data/closing"),
   ...require("./src/data/appendix"),
 ];
@@ -38,6 +39,14 @@ async function build() {
   );
   qrCodes.workshopDeck = await QRCode.toDataURL(
     "https://orchlab.ai/workshop-deck",
+    { width: 200, margin: 1, color: { dark: "#FFFFFFFF", light: "#00000000" } }
+  );
+  qrCodes.feedbackForm = await QRCode.toDataURL(
+    "https://docs.google.com/forms/d/e/1FAIpQLSfCxv13-D8M47PVMkbHWYpiMBOUFez3tF1wkeZQqsIr3LXHLQ/viewform?usp=publish-editor",
+    { width: 200, margin: 1, color: { dark: "#FFFFFFFF", light: "#00000000" } }
+  );
+  qrCodes.discord = await QRCode.toDataURL(
+    "https://discord.gg/RJS785wXmv",
     { width: 200, margin: 1, color: { dark: "#FFFFFFFF", light: "#00000000" } }
   );
 
