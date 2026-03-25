@@ -222,4 +222,102 @@ module.exports = [
       s.addNotes("While we're getting settled — can everyone scan this QR code and clone this repo? [show QR code] Just clone it and run it. No coding required. Docker will start, Claude will run inside the container, and Playwright will take a screenshot of a simple web page. [pause] This verifies three things we'll rely on all day: your Docker setup, your agent CLI, and headless browser automation. If anything doesn't work, flag me now — much easier to fix before we're mid-exercise.");
     }
   },
+  // SLIDE — YOUR JOURNEY TODAY (Advance Organizer / Roadmap)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres);
+
+      // Title
+      s.addText("Your Journey Today", {
+        x: 0.8, y: 0.35, w: 8.4, h: 0.6,
+        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Three steps from where you are now to where you could be.", {
+        x: 0.8, y: 0.95, w: 8.4, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, margin: 0
+      });
+
+      // Three part cards as a horizontal journey
+      const parts = [
+        {
+          num: "1", icon: "code", color: C.accent,
+          title: "AI Coding",
+          desc: "Move from copy-paste to tools that see your whole codebase."
+        },
+        {
+          num: "2", icon: "clipboard", color: C.accentDim,
+          title: "Prompt Engineering",
+          desc: "Learn to write specs that give AI the context it needs to succeed."
+        },
+        {
+          num: "3", icon: "sitemap", color: C.warnAmber,
+          title: "Orchestration",
+          desc: "Coordinate multiple agents into autonomous workflows."
+        },
+      ];
+
+      const cardW = 2.6;
+      const cardH = 2.4;
+      const cardY = 1.7;
+      const gap = 0.3;
+      const startX = (10 - (parts.length * cardW + (parts.length - 1) * gap)) / 2;
+
+      parts.forEach((p, i) => {
+        const x = startX + i * (cardW + gap);
+
+        // Card background
+        addCard(s, x, cardY, cardW, cardH, p.color, pres);
+
+        // Part number
+        s.addText("PART " + p.num, {
+          x: x + 0.2, y: cardY + 0.15, w: cardW - 0.4, h: 0.3,
+          fontSize: 10, fontFace: FONT.head, color: p.color, bold: true, charSpacing: 3, margin: 0
+        });
+
+        // Icon
+        iconCircle(s, p.icon, x + (cardW - 0.55) / 2, cardY + 0.55, 0.55, p.color, icons, pres);
+
+        // Title
+        s.addText(p.title, {
+          x: x + 0.15, y: cardY + 1.25, w: cardW - 0.3, h: 0.35,
+          fontSize: 15, fontFace: FONT.head, color: C.white, bold: true, align: "center", margin: 0
+        });
+
+        // Description
+        s.addText(p.desc, {
+          x: x + 0.15, y: cardY + 1.6, w: cardW - 0.3, h: 0.7,
+          fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
+        });
+
+        // Arrow between cards
+        if (i < parts.length - 1) {
+          const arrowX = x + cardW + (gap - 0.3) / 2;
+          s.addText("\u25B6", {
+            x: arrowX, y: cardY + cardH / 2 - 0.2, w: 0.3, h: 0.4,
+            fontSize: 14, fontFace: FONT.body, color: C.muted, align: "center", valign: "middle", margin: 0
+          });
+        }
+      });
+
+      // Bottom anchor — connects to what they already know
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 4.5, w: 8.4, h: 0.7,
+        fill: { color: C.cardBg }, shadow: makeShadow(), rectRadius: 0.08
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 4.5, w: 0.06, h: 0.7, fill: { color: C.accent }
+      });
+      s.addText("Each part builds on the last. By the end, you\u2019ll have hands-on experience at every level.", {
+        x: 1.1, y: 4.5, w: 7.8, h: 0.7,
+        fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
+      });
+
+      s.addNotes("Before we jump in, here\u2019s the roadmap. We\u2019re going on a journey through three stages. Part 1 is about getting AI tools integrated into your actual workflow \u2014 not just copy-pasting from a chat window. Part 2 is about learning to communicate with AI effectively, using specs and structured prompts instead of ad-hoc instructions. And Part 3 is where it gets really interesting \u2014 orchestrating multiple AI agents into autonomous workflows that can handle complex tasks. Each section builds on the one before it. So if you\u2019re brand new to AI coding, Part 1 will get you up to speed. If you\u2019re already using Copilot or Claude, Parts 2 and 3 will take you to the next level. Let\u2019s get started.");
+    }
+  },
 ];
