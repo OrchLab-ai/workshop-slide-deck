@@ -57,12 +57,6 @@ module.exports = [
         hyperlink: { url: "https://docs.google.com/forms/d/e/1FAIpQLSfCxv13-D8M47PVMkbHWYpiMBOUFez3tF1wkeZQqsIr3LXHLQ/viewform?usp=publish-editor" }
       });
 
-      // Follow OrchLab
-      s.addText("Follow OrchLab on LinkedIn", {
-        x: col1x + 0.15, y: cardY + 3.35, w: cardW - 0.3, h: 0.3,
-        fontSize: 10, fontFace: FONT.body, color: C.muted, align: "center", margin: 0,
-        hyperlink: { url: "https://www.linkedin.com/company/orchlab" }
-      });
 
       // ── Column 2: Slides ──
       const col2x = 3.55;
@@ -94,36 +88,41 @@ module.exports = [
         fontSize: 16, fontFace: FONT.head, color: C.white, bold: true, align: "center", margin: 0
       });
 
-      // LinkedIn — logo + base path, then individual suffixes
+      // LinkedIn — logo + base, then all three paths
       s.addImage({
-        data: icons.linkedin, x: col3x + 0.25, y: cardY + 1.35, w: 0.28, h: 0.28
+        data: icons.linkedin, x: col3x + 0.25, y: cardY + 1.3, w: 0.26, h: 0.26
       });
-      s.addText("linkedin.com/in", {
-        x: col3x + 0.6, y: cardY + 1.33, w: cardW - 0.85, h: 0.3,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+      s.addText("linkedin.com", {
+        x: col3x + 0.58, y: cardY + 1.28, w: cardW - 0.85, h: 0.28,
+        fontSize: 10.5, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
-      s.addText("/lecampbell", {
-        x: col3x + 0.6, y: cardY + 1.63, w: cardW - 0.85, h: 0.25,
-        fontSize: 11, fontFace: FONT.body, color: C.accent, margin: 0,
+      s.addText("/in/lecampbell", {
+        x: col3x + 0.58, y: cardY + 1.54, w: cardW - 0.85, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.accent, margin: 0,
         hyperlink: { url: "https://www.linkedin.com/in/lecampbell/" }
       });
-      s.addText("/leegoldsworthy", {
-        x: col3x + 0.6, y: cardY + 1.88, w: cardW - 0.85, h: 0.25,
-        fontSize: 11, fontFace: FONT.body, color: C.accent, margin: 0,
+      s.addText("/in/leegoldsworthy", {
+        x: col3x + 0.58, y: cardY + 1.76, w: cardW - 0.85, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.accent, margin: 0,
         hyperlink: { url: "https://www.linkedin.com/in/leegoldsworthy/" }
       });
+      s.addText("/company/orchlab", {
+        x: col3x + 0.58, y: cardY + 1.98, w: cardW - 0.85, h: 0.22,
+        fontSize: 10, fontFace: FONT.body, color: C.accent, margin: 0,
+        hyperlink: { url: "https://www.linkedin.com/company/orchlab" }
+      });
 
-      // Discord — QR code + label
+      // Discord — logo + label + QR code
       s.addImage({
-        data: icons.discord, x: col3x + 0.25, y: cardY + 2.35, w: 0.28, h: 0.28
+        data: icons.discord, x: col3x + 0.25, y: cardY + 2.4, w: 0.26, h: 0.26
       });
       s.addText("Agentic Builders AU", {
-        x: col3x + 0.6, y: cardY + 2.33, w: cardW - 0.85, h: 0.3,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
+        x: col3x + 0.58, y: cardY + 2.38, w: cardW - 0.85, h: 0.28,
+        fontSize: 10.5, fontFace: FONT.body, color: C.offWhite, margin: 0
       });
       s.addImage({
         data: qrCodes.discord,
-        x: col3x + 0.9, y: cardY + 2.65, w: 0.95, h: 0.95
+        x: col3x + 0.9, y: cardY + 2.7, w: 0.9, h: 0.9
       });
 
       s.addNotes("Before we wrap up, I have one ask. You are on the leading edge, and that makes your perspective incredibly valuable. We need your honest, frank and fearless feedback to make this better for the next group. [gesture to screen] You can scan that QR code right now — it takes about 60 seconds. Tell us what worked, what didn't, what you'd want more or less of. The slides are attached to the calendar invite, so you'll have everything we covered today. And if you want to stay connected — Lee and I are both on LinkedIn, we'd love to connect. There is also a vibrant Discord community called Agentic Builders AU — it's brand new, so don't be surprised if it's a little quiet at first, but that's where we'll be sharing resources and continuing the conversation. If you feel strongly about some of the feedback, feel free to follow OrchLab on LinkedIn and post and tag us — I'll owe you a favour. [pause] Now, some parting thoughts...");
