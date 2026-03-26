@@ -946,20 +946,20 @@ module.exports = [
       const tools = [
         {
           title: "Static Prompts", color: C.muted, icon: "clipboard",
-          items: ["Well-known at execution time", "May require peer review", "Documentation: slow-moving", "Too large for a prompt"]
+          items: ["AI interprets guidelines freely", "Output varies with each run", "CLAUDE.md, coding standards", "Broad context, no guarantees"]
         },
         {
-          title: "MCP Servers", color: C.accent, icon: "robot",
-          items: ["Built for AI tools", "Heavy token usage (ironic!)", "Best for dynamic content", "Account info, knowledge bases"]
+          title: "Dynamic Tools", color: C.accent, icon: "robot",
+          items: ["AI queries live systems", "MCP: Salesforce CRM data", "CLI: AWS infrastructure", "Real-time, but token-heavy"]
         },
         {
-          title: "CLI Tools", color: C.accentDim, icon: "tools",
-          items: ["Excellent for AI agents", "Standard usage patterns", "Light token footprint", "Test, lint, build, deploy"]
+          title: "Scripts & Programs", color: C.accentDim, icon: "code",
+          items: ["Same input \u2192 same output", "No AI in the execution path", "Test, lint, build, deploy", "Fast and fully predictable"]
         },
       ];
       tools.forEach((t, i) => {
         const x = 0.8 + i * 3.05;
-        addCard(s, x, 1.3, 2.75, 3.5, t.color, pres);
+        addCard(s, x, 1.3, 2.75, 3.2, t.color, pres);
         iconCircle(s, t.icon, x + 0.9, 1.5, 0.55, C.darkBg, icons, pres);
         s.addText(t.title, {
           x: x + 0.15, y: 2.2, w: 2.45, h: 0.35,
@@ -971,7 +971,30 @@ module.exports = [
         }));
         s.addText(bullets, { x: x + 0.2, y: 2.65, w: 2.35, h: 1.8, margin: 0 });
       });
-      s.addNotes("Not all tools are created equal, so let's talk about choosing the right interface for your AI. [point to each column] Static prompts — these are your documentation and coding standards. They change slowly, get loaded once. MCP servers are powerful but token-hungry; use them for dynamic content like account information or live knowledge bases. And CLI tools are the sweet spot for most engineering tasks: standard input/output patterns, lightweight, and the AI already knows how to use them. [pause] As you're setting up your own tooling, think about which category each of your tools falls into. That'll guide how you expose them to the AI.");
+
+      // Spectrum arrow bar
+      const barY = 4.7;
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 1.2, y: barY, w: 7.2, h: 0.04, fill: { color: C.muted }
+      });
+      s.addText("\u25C4", {
+        x: 0.85, y: barY - 0.15, w: 0.4, h: 0.3,
+        fontSize: 14, fontFace: FONT.body, color: C.muted, align: "center", margin: 0
+      });
+      s.addText("\u25BA", {
+        x: 8.35, y: barY - 0.15, w: 0.4, h: 0.3,
+        fontSize: 14, fontFace: FONT.body, color: C.accentDim, align: "center", margin: 0
+      });
+      s.addText("Non-deterministic \u00B7 Adaptable", {
+        x: 0.8, y: barY + 0.12, w: 3, h: 0.3,
+        fontSize: 10, fontFace: FONT.body, color: C.muted, align: "left", margin: 0
+      });
+      s.addText("Deterministic \u00B7 Predictable", {
+        x: 6.0, y: barY + 0.12, w: 3, h: 0.3,
+        fontSize: 10, fontFace: FONT.body, color: C.accentDim, align: "right", margin: 0
+      });
+
+      s.addNotes("Let's talk about choosing the right tool interface \u2014 and it's really about determinism. [point left] Static prompts \u2014 CLAUDE.md, coding standards. The AI interprets these freely, so output varies every time. Non-deterministic by nature, but hugely adaptable. [point center] Dynamic tools \u2014 MCP servers pulling live CRM data from Salesforce, or CLI tools querying your AWS infrastructure. The AI decides what to query, but the data source is structured. Semi-deterministic. [point right] Scripts and programs \u2014 same input, same output, every time. No AI in the execution path. Your test runners, linters, build scripts. Fully deterministic and fast. [gesture across the arrow] The spectrum runs from non-deterministic and adaptable on the left to deterministic and predictable on the right. A well-tooled AI agent uses all three \u2014 prompts for context, dynamic tools for discovery, scripts for reliability.");
     }
   },
 
