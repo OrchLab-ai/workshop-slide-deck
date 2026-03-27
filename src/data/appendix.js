@@ -70,10 +70,7 @@ module.exports = [
           fontSize: 10, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
         });
         if (i < steps.length - 1) {
-          s.addText("\u25B6", {
-            x: x + 1.9, y: y + 0.75, w: 0.3, h: 0.4,
-            fontSize: 16, fontFace: FONT.body, color: C.accent, align: "center", valign: "middle", margin: 0
-          });
+          s.addImage({ data: icons.arrow, x: x + 1.875, y: y + 0.825, w: 0.35, h: 0.35 });
         }
       });
 
@@ -396,10 +393,7 @@ module.exports = [
       });
 
       // Arrow from Ollama to tools
-      s.addText("\u25B6", {
-        x: 4.15, y: 2.75, w: 0.4, h: 0.4,
-        fontSize: 20, fontFace: FONT.body, color: C.accent, align: "center", valign: "middle", margin: 0
-      });
+      s.addImage({ data: icons.arrow, x: 4.175, y: 2.775, w: 0.35, h: 0.35 });
 
       // Tools grid — right side (3 rows x 2 cols, compact)
       const tools = [
