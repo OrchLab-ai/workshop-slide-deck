@@ -11,7 +11,7 @@ const {
   FaProjectDiagram, FaChessKing, FaBook, FaHandshake, FaPlay,
   FaStepForward, FaStepBackward, FaExpand, FaCompress, FaDraftingCompass, FaArrowUp,
   FaLock, FaTerminal, FaCodeBranch, FaKey, FaUserShield, FaDocker, FaServer,
-  FaLinkedin, FaDiscord
+  FaLinkedin, FaDiscord, FaPlug, FaWifi, FaBellSlash
 } = require("react-icons/fa");
 
 const {
@@ -84,6 +84,9 @@ const iconList = [
   ["linkedinWhite", FaLinkedin, "#FFFFFF"],
   ["discord", FaDiscord, "#8CC26C"],
   ["discordWhite", FaDiscord, "#FFFFFF"],
+  ["plug", FaPlug, "#E8B84A"],
+  ["wifi", FaWifi, "#E8B84A"],
+  ["bellSlash", FaBellSlash, "#E8B84A"],
 ];
 
 async function iconToBase64Png(IconComponent, color, size = 256) {
