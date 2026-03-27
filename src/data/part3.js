@@ -504,7 +504,7 @@ module.exports = [
         { label: "Agent B\nCodes", color: C.accentDim },
         { label: "Agent C\nTests", color: C.midBg },
         { label: "Human\nApproves", color: C.warnAmber },
-        { label: "Agent D\nDeploys", color: C.darkBg },
+        { label: "Pipeline\nDeploys", color: C.darkBg },
       ];
       pipeline.forEach((p, i) => {
         const x = 0.3 + i * 1.95;
