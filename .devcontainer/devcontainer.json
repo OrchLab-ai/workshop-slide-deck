@@ -1,11 +1,15 @@
 {
   "name": "OrchLab Workshop Slides",
   "image": "mcr.microsoft.com/devcontainers/javascript-node:22",
+  "runArgs": [
+    "--env-file",
+    "${localWorkspaceFolder}/.devcontainer/.env"
+  ],
   "features": {
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/devcontainers/features/python:1": {}
   },
-  "postCreateCommand": "npm install && sudo npm install -g @anthropic-ai/claude-code && sudo apt-get update && sudo apt-get install -y libreoffice-impress poppler-utils && pip install 'markitdown[pptx]'",
+  "postCreateCommand": "npm install && sudo npm install -g @anthropic-ai/claude-code && sudo apt-get update && sudo apt-get install -y libreoffice-impress poppler-utils && pip install --break-system-packages 'markitdown[pptx]'",
   "customizations": {
     "vscode": {
       "settings": {
@@ -21,9 +25,10 @@
     "source=${localEnv:HOME}${localEnv:USERPROFILE}/.claude.json,target=/home/node/.claude.json,type=bind,consistency=cached"
   ],
   "postStartCommand": "gh auth setup-git",
-  "remoteEnv": {
-    "GH_TOKEN": "${localEnv:GH_TOKEN}"
-  },
+  // "remoteEnv": {
+  //   "GH_TOKEN": "${localEnv:GH_TOKEN}",
+  //   "CLAUDE_CODE_OAUTH_TOKEN": "${localEnv:CLAUDE_CODE_OAUTH_TOKEN}"
+  // },
   "forwardPorts": [],
   "remoteUser": "node"
 }
