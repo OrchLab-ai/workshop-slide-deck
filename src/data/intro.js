@@ -31,6 +31,11 @@ module.exports = [
         fontSize: 12, fontFace: FONT.body, color: C.muted, align: "center", margin: 0,
         hyperlink: { url: "https://orchlab.ai/workshop-deck" },
       });
+      // Presenter reminders (top-right, icons only)
+      ["plug", "wifi", "bellSlash"].forEach((icon, i) => {
+        s.addImage({ data: icons[icon], x: 9.08 - i * 0.4, y: 0.12, w: 0.28, h: 0.28 });
+      });
+
       s.addNotes("Welcome everyone to OrchLab. This workshop takes you on a journey from basic AI copy-paste coding all the way to orchestrating teams of AI agents. We'll move through three parts: first getting AI into your workflow, then learning to communicate effectively with AI through specs, and finally building autonomous agent systems. Each section builds on the last, so by the end you'll have a clear roadmap for where you are today and where you can go.");
     },
   },
