@@ -520,7 +520,7 @@ module.exports = [
           fontSize: 12, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
         });
         if (i < pipeline.length - 1) {
-          s.addImage({ data: icons.arrowWhite, x: x + 1.72, y: 1.95, w: 0.2, h: 0.2 });
+          s.addImage({ data: icons.arrow, x: x + 1.675, y: 2.05, w: 0.3, h: 0.3 });
         }
       });
       s.addText("You commit a spec. The swarm wakes up.", {
@@ -573,7 +573,7 @@ module.exports = [
           fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
         });
         if (i < linearSteps.length - 1) {
-          s.addImage({ data: icons.arrowWhite, x: x + 1.85, y: 2.3, w: 0.2, h: 0.2 });
+          s.addImage({ data: icons.arrow, x: x + 1.975, y: 2.275, w: 0.35, h: 0.35 });
         }
       });
       // terminal dot after Review box
@@ -606,7 +606,7 @@ module.exports = [
           fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
         });
         if (i < loopSteps.length - 1) {
-          s.addImage({ data: icons.arrowWhite, x: x + 1.85, y: 3.7, w: 0.2, h: 0.2 });
+          s.addImage({ data: icons.arrow, x: x + 1.975, y: 3.675, w: 0.35, h: 0.35 });
         }
       });
       // feedback arrow label from Review back to Plan
@@ -955,6 +955,7 @@ module.exports = [
     render(pres, ctx) {
       const { C, FONT, makeShadow } = ctx.branding;
       const { darkSlide, addCard } = ctx.helpers;
+      const { icons } = ctx;
 
       const s = darkSlide(pres, FT);
       s.addText("Scaling the Loop", {
@@ -1006,11 +1007,7 @@ module.exports = [
           align: "center", valign: "middle", margin: 0
         });
         if (i < 2) {
-          s.addText("\u2192", {
-            x: sx + stepW, y: 3.05, w: stepGap, h: 0.55,
-            fontSize: 18, fontFace: FONT.body, color: C.muted,
-            align: "center", valign: "middle", margin: 0
-          });
+          s.addImage({ data: icons.arrow, x: sx + stepW + (stepGap - 0.35) / 2, y: 3.15, w: 0.35, h: 0.35 });
         }
       });
 

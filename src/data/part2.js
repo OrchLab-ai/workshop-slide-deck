@@ -658,7 +658,7 @@ module.exports = [
       });
       flowSteps.forEach((fs, i) => {
         if (i < flowSteps.length - 1) {
-          s.addImage({ data: icons.arrowWhite, x: fs.x + 1.9, y: 2.15, w: 0.5, h: 0.5 });
+          s.addImage({ data: icons.arrow, x: fs.x + 1.825, y: 2.275, w: 0.35, h: 0.35 });
         }
       });
       s.addText("Use an \"Architect Agent\" to interview you (Socratic method), generate the brief, combine it with standards to create tasks, then generate code from tasks.", {

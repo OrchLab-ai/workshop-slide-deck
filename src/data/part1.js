@@ -257,7 +257,7 @@ module.exports = [
         { text: "Together you trial and refine ideas", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
       ];
       s.addText(pairItems, { x: 5.5, y: 2.3, w: 3.4, h: 1.8, margin: 0 });
-      s.addImage({ data: icons.arrow, x: 4.55, y: 2.7, w: 0.5, h: 0.5 });
+      s.addImage({ data: icons.arrow, x: 4.825, y: 2.825, w: 0.35, h: 0.35 });
       s.addNotes("Think about the last time you phoned a friend for coding advice. They say 'oh yeah, just refactor the service layer' — and it sounds great in theory. But they can't see your screen. They don't know your dependencies, your test setup, your deployment pipeline. Now compare that with pair programming — your partner sees your screen, knows the codebase, and you collaborate in real time. [pause] That's exactly the difference between browser-based AI chat and contextually integrated AI tools. We want to move from the phone call on the left to the pairing session on the right.");
     }
   },
@@ -534,10 +534,7 @@ module.exports = [
           fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
         });
         // Arrow separator
-        s.addText("→", {
-          x: 4.55, y: y + 0.05, w: 0.4, h: 0.7,
-          fontSize: 20, fontFace: FONT.head, color: C.muted, valign: "middle", align: "center", margin: 0
-        });
+        s.addImage({ data: icons.arrow, x: 4.575, y: y + 0.225, w: 0.35, h: 0.35 });
         // AI side
         s.addText(r.ai, {
           x: 5.1, y: y + 0.05, w: 3.8, h: 0.3,

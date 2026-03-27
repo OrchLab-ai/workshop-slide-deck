@@ -39,7 +39,149 @@ module.exports = [
       s.addNotes("Welcome everyone to OrchLab. This workshop takes you on a journey from basic AI copy-paste coding all the way to orchestrating teams of AI agents. We'll move through three parts: first getting AI into your workflow, then learning to communicate effectively with AI through specs, and finally building autonomous agent systems. Each section builds on the last, so by the end you'll have a clear roadmap for where you are today and where you can go.");
     },
   },
-  // SLIDE 2 — CONTEXT SETTING: Software Development Is a Spectrum
+  // SLIDE 2 — YOUR JOURNEY TODAY (Advance Organizer / Roadmap)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT, makeShadow } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres);
+
+      // Title
+      s.addText("Your Journey Today", {
+        x: 0.8, y: 0.35, w: 8.4, h: 0.6,
+        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Three steps from where you are now to where you could be.", {
+        x: 0.8, y: 0.95, w: 8.4, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, margin: 0
+      });
+
+      // Three part cards as a horizontal journey
+      const parts = [
+        {
+          num: "1", icon: "code", color: C.accent,
+          title: "AI Coding",
+          desc: "Move from copy-paste to tools that see your whole codebase."
+        },
+        {
+          num: "2", icon: "clipboard", color: C.accentDim,
+          title: "Prompt Engineering",
+          desc: "Learn to write specs that give AI the context it needs to succeed."
+        },
+        {
+          num: "3", icon: "sitemap", color: C.warnAmber,
+          title: "Orchestration",
+          desc: "Coordinate multiple agents into autonomous workflows."
+        },
+      ];
+
+      const cardW = 2.6;
+      const cardH = 2.4;
+      const cardY = 1.7;
+      const gap = 0.3;
+      const startX = (10 - (parts.length * cardW + (parts.length - 1) * gap)) / 2;
+
+      parts.forEach((p, i) => {
+        const x = startX + i * (cardW + gap);
+
+        // Card background
+        addCard(s, x, cardY, cardW, cardH, p.color, pres);
+
+        // Part number
+        s.addText("PART " + p.num, {
+          x: x + 0.2, y: cardY + 0.15, w: cardW - 0.4, h: 0.3,
+          fontSize: 10, fontFace: FONT.head, color: p.color, bold: true, charSpacing: 3, margin: 0
+        });
+
+        // Icon
+        iconCircle(s, p.icon, x + (cardW - 0.55) / 2, cardY + 0.55, 0.55, p.color, icons, pres);
+
+        // Title
+        s.addText(p.title, {
+          x: x + 0.15, y: cardY + 1.25, w: cardW - 0.3, h: 0.35,
+          fontSize: 15, fontFace: FONT.head, color: C.white, bold: true, align: "center", margin: 0
+        });
+
+        // Description
+        s.addText(p.desc, {
+          x: x + 0.15, y: cardY + 1.6, w: cardW - 0.3, h: 0.7,
+          fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
+        });
+
+        // Arrow between cards
+        if (i < parts.length - 1) {
+          const arrowX = x + cardW + (gap - 0.3) / 2;
+          s.addImage({ data: icons.arrow, x: arrowX, y: cardY + cardH / 2 - 0.15, w: 0.3, h: 0.3 });
+        }
+      });
+
+      // Bottom anchor — connects to what they already know
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 4.5, w: 8.4, h: 0.7,
+        fill: { color: C.cardBg }, shadow: makeShadow(), rectRadius: 0.08
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.8, y: 4.5, w: 0.06, h: 0.7, fill: { color: C.accent }
+      });
+      s.addText("Each part builds on the last. By the end, you\u2019ll have hands-on experience at every level.", {
+        x: 1.1, y: 4.5, w: 7.8, h: 0.7,
+        fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
+      });
+
+      s.addNotes("Before we jump in, here\u2019s the roadmap. We\u2019re going on a journey through three stages. Part 1 is about getting AI tools integrated into your actual workflow \u2014 not just copy-pasting from a chat window. Part 2 is about learning to communicate with AI effectively, using specs and structured prompts instead of ad-hoc instructions. And Part 3 is where it gets really interesting \u2014 orchestrating multiple AI agents into autonomous workflows that can handle complex tasks. Each section builds on the one before it. So if you\u2019re brand new to AI coding, Part 1 will get you up to speed. If you\u2019re already using Copilot or Claude, Parts 2 and 3 will take you to the next level. Let\u2019s get started.");
+    }
+  },
+  // SLIDE 3 — WELCOME & INTRODUCTIONS
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { lightSlide, addLightCard } = ctx.helpers;
+
+      const s = lightSlide(pres);
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Welcome & Introductions", {
+        x: 0.8, y: 1.0, w: 7, h: 0.5,
+        fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      s.addText("~1 min each \u2014 we\u2019ll go around the room", {
+        x: 0.8, y: 1.55, w: 7.5, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: "444444", italic: true, margin: 0
+      });
+
+      const prompts = [
+        { num: "01", title: "Your name" },
+        { num: "02", title: "Who you work for" },
+        { num: "03", title: "What AI tools are you using today?" },
+        { num: "04", title: "What are you hoping to get out of today?" },
+      ];
+      // 4 cards: start=2.05, spacing=0.82, h=0.65 → last bottom = 2.05+3*0.82+0.65 = 5.16 (fits in 5.625)
+      prompts.forEach((p, i) => {
+        const y = 2.05 + i * 0.82;
+        addLightCard(s, 0.8, y, 6.5, 0.65, C.accentDim, pres);
+        s.addText(p.num, {
+          x: 1.0, y: y, w: 0.55, h: 0.65,
+          fontSize: 20, fontFace: FONT.head, color: C.accentDim, bold: true, valign: "middle", margin: 0
+        });
+        s.addText(p.title, {
+          x: 1.7, y: y, w: 5.2, h: 0.65,
+          fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, valign: "middle", margin: 0
+        });
+      });
+
+      s.addNotes("Go first yourself \u2014 it models the format and sets the pace. Keep your own intro to 30 seconds. Listen for experience signals on question 03: who's using AI daily vs. who's brand new. That tells you how much to slow down in Part 1. Question 04 often surfaces specific goals you can call back to later in the workshop.");
+    }
+  },
+  // SLIDE 4 — CONTEXT SETTING: Software Development Is a Spectrum
   {
     type: "custom",
     render(pres, ctx) {
@@ -160,7 +302,7 @@ module.exports = [
       s.addNotes("Before we dive in, let's set context. Not all software is the same. A quick shell script has different needs than a platform serving millions of users. And the intent behind what you're building shifts over time — you might start in discovery mode, push to market, then spend years maintaining and integrating. AI accelerates all of this. You'll write more throwaway scripts, spin up more prototypes, ship faster. But this workshop focuses specifically on the team-scale, long-lived end of the spectrum — where the stakes are highest and the practices matter most.");
     },
   },
-  // SLIDE 3 — Environment Check (setup verification)
+  // SLIDE 5 — Environment Check (setup verification)
   {
     type: "custom",
     render(pres, ctx) {
@@ -225,104 +367,6 @@ module.exports = [
         fontSize: 12, fontFace: FONT.body, color: C.darkText, align: "center", margin: 0
       });
       s.addNotes("While we're getting settled — can everyone scan this QR code and clone this repo? [show QR code] Just clone it and run it. No coding required. Docker will start, Claude will run inside the container, and Playwright will take a screenshot of a simple web page. [pause] This verifies three things we'll rely on all day: your Docker setup, your agent CLI, and headless browser automation. If anything doesn't work, flag me now — much easier to fix before we're mid-exercise.");
-    }
-  },
-  // SLIDE — YOUR JOURNEY TODAY (Advance Organizer / Roadmap)
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, addCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres);
-
-      // Title
-      s.addText("Your Journey Today", {
-        x: 0.8, y: 0.35, w: 8.4, h: 0.6,
-        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      s.addText("Three steps from where you are now to where you could be.", {
-        x: 0.8, y: 0.95, w: 8.4, h: 0.4,
-        fontSize: 13, fontFace: FONT.body, color: C.muted, margin: 0
-      });
-
-      // Three part cards as a horizontal journey
-      const parts = [
-        {
-          num: "1", icon: "code", color: C.accent,
-          title: "AI Coding",
-          desc: "Move from copy-paste to tools that see your whole codebase."
-        },
-        {
-          num: "2", icon: "clipboard", color: C.accentDim,
-          title: "Prompt Engineering",
-          desc: "Learn to write specs that give AI the context it needs to succeed."
-        },
-        {
-          num: "3", icon: "sitemap", color: C.warnAmber,
-          title: "Orchestration",
-          desc: "Coordinate multiple agents into autonomous workflows."
-        },
-      ];
-
-      const cardW = 2.6;
-      const cardH = 2.4;
-      const cardY = 1.7;
-      const gap = 0.3;
-      const startX = (10 - (parts.length * cardW + (parts.length - 1) * gap)) / 2;
-
-      parts.forEach((p, i) => {
-        const x = startX + i * (cardW + gap);
-
-        // Card background
-        addCard(s, x, cardY, cardW, cardH, p.color, pres);
-
-        // Part number
-        s.addText("PART " + p.num, {
-          x: x + 0.2, y: cardY + 0.15, w: cardW - 0.4, h: 0.3,
-          fontSize: 10, fontFace: FONT.head, color: p.color, bold: true, charSpacing: 3, margin: 0
-        });
-
-        // Icon
-        iconCircle(s, p.icon, x + (cardW - 0.55) / 2, cardY + 0.55, 0.55, p.color, icons, pres);
-
-        // Title
-        s.addText(p.title, {
-          x: x + 0.15, y: cardY + 1.25, w: cardW - 0.3, h: 0.35,
-          fontSize: 15, fontFace: FONT.head, color: C.white, bold: true, align: "center", margin: 0
-        });
-
-        // Description
-        s.addText(p.desc, {
-          x: x + 0.15, y: cardY + 1.6, w: cardW - 0.3, h: 0.7,
-          fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
-        });
-
-        // Arrow between cards
-        if (i < parts.length - 1) {
-          const arrowX = x + cardW + (gap - 0.3) / 2;
-          s.addText("\u25B6", {
-            x: arrowX, y: cardY + cardH / 2 - 0.2, w: 0.3, h: 0.4,
-            fontSize: 14, fontFace: FONT.body, color: C.muted, align: "center", valign: "middle", margin: 0
-          });
-        }
-      });
-
-      // Bottom anchor — connects to what they already know
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.5, w: 8.4, h: 0.7,
-        fill: { color: C.cardBg }, shadow: makeShadow(), rectRadius: 0.08
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.5, w: 0.06, h: 0.7, fill: { color: C.accent }
-      });
-      s.addText("Each part builds on the last. By the end, you\u2019ll have hands-on experience at every level.", {
-        x: 1.1, y: 4.5, w: 7.8, h: 0.7,
-        fontSize: 13, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
-      });
-
-      s.addNotes("Before we jump in, here\u2019s the roadmap. We\u2019re going on a journey through three stages. Part 1 is about getting AI tools integrated into your actual workflow \u2014 not just copy-pasting from a chat window. Part 2 is about learning to communicate with AI effectively, using specs and structured prompts instead of ad-hoc instructions. And Part 3 is where it gets really interesting \u2014 orchestrating multiple AI agents into autonomous workflows that can handle complex tasks. Each section builds on the one before it. So if you\u2019re brand new to AI coding, Part 1 will get you up to speed. If you\u2019re already using Copilot or Claude, Parts 2 and 3 will take you to the next level. Let\u2019s get started.");
     }
   },
 ];
