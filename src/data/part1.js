@@ -698,59 +698,226 @@ module.exports = [
     }
   },
 
-  // SLIDE 10 — Activity: Design Your Own Claude Code
+  // SLIDE 10 — Activity: Trace the Request — Four Lenses (role cards)
   {
     type: "custom",
     render(pres, ctx) {
       const { C, FONT } = ctx.branding;
-      const { lightSlide, addLightCard } = ctx.helpers;
+      const { lightSlide, addLightCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
 
       const s = lightSlide(pres, FT);
+
+      // ── Header bar ──
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
       s.addText("ACTIVITY", {
-        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        x: 0.8, y: 0.15, w: 3.5, h: 0.5,
         fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
       });
-      s.addText("Design Your Own AI Coding Tool", {
-        x: 0.8, y: 0.95, w: 8.4, h: 0.5,
+      s.addText("Facilitated Role-Play  \u2502  Groups of 3\u20134", {
+        x: 5.2, y: 0.2, w: 4.5, h: 0.42,
+        fontSize: 11, fontFace: FONT.body, color: C.muted, align: "right", valign: "middle", margin: 0
+      });
+
+      // ── Title block ──
+      s.addText("Trace the Request: Four Lenses", {
+        x: 0.8, y: 0.88, w: 8.4, h: 0.38,
         fontSize: 20, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
       });
-      s.addText("Classroom exercise — sticky notes on the wall. Demystify the magic.", {
-        x: 0.8, y: 1.45, w: 8.4, h: 0.35,
-        fontSize: 13, fontFace: FONT.body, color: "555555", italic: true, margin: 0
+      s.addText("Each role owns a slice of the system. Round 1: simple query. Round 2: complex query.", {
+        x: 0.8, y: 1.28, w: 8.4, h: 0.28,
+        fontSize: 12, fontFace: FONT.body, color: "555555", italic: true, margin: 0
       });
-      const stations = [
-        { num: "01", title: "The HTTP Call", desc: "The LLM is just an API on a foreign machine. What do you send? What comes back? Map the request and response.", color: C.accent },
-        { num: "02", title: "The Context Problem", desc: "Your project has 500 files. The LLM has a context window. What do you send and when? How do you decide?", color: C.accentDim },
-        { num: "03", title: "Parsing the Response", desc: "The response mixes code, commands, questions, and explanations. How do you tell them apart? What's executable?", color: C.warnAmber },
-        { num: "04", title: "Trust & Execution", desc: "You've identified a command. Do you run it? Always? Sometimes? Who decides — the tool or the human?", color: C.warnRed },
+
+      // ── 2×2 role cards ──
+      const roles = [
+        {
+          icon: "plug",   color: C.accent,
+          name: "Protocol Engineer",
+          tagline: "Owns the wire: formats, headers, message flow",
+          owns: ["HTTP request / response schema", "JSON message structure & fields", "What enters and exits every component"],
+        },
+        {
+          icon: "shield", color: C.warnRed,
+          name: "Security Engineer",
+          tagline: "Owns trust: auth, permissions, risk",
+          owns: ["API key management & auth headers", "File access boundaries & ACLs", "Prompt injection & command trust decisions"],
+        },
+        {
+          icon: "chart",  color: C.warnAmber,
+          name: "FinOps Engineer",
+          tagline: "Owns cost: token budgets, rates, approval gates",
+          owns: ["Token counting & cost per request", "Rate limit headroom", "Approval gates before expensive calls"],
+        },
+        {
+          icon: "eye",    color: C.accentDim,
+          name: "UX Engineer",
+          tagline: "Owns experience: input modes, output, confirmations",
+          owns: ["Input modalities (typed, voice, commands)", "Output presentation & diff views", "Confirmation dialogs & undo flows"],
+        },
       ];
-      stations.forEach((st, i) => {
-        const y = 1.95 + i * 0.6;
-        addLightCard(s, 0.8, y, 8.4, 0.5, st.color, pres);
-        s.addText(st.num, {
-          x: 1.1, y: y + 0.02, w: 0.6, h: 0.45,
-          fontSize: 20, fontFace: FONT.head, color: st.color, bold: true, valign: "middle", margin: 0
+
+      const cols = [0.5, 5.1];
+      const rows = [1.65, 3.25];
+      const cw = 4.4, ch = 1.5;
+
+      roles.forEach((r, i) => {
+        const x = cols[i % 2];
+        const y = rows[Math.floor(i / 2)];
+
+        addLightCard(s, x, y, cw, ch, C.accent, pres);
+
+        // Icon — vertically centred in card
+        iconCircle(s, r.icon, x + 0.18, y + 0.475, 0.55, C.midBg, icons, pres);
+
+        // Role name
+        s.addText(r.name, {
+          x: x + 0.88, y: y + 0.1, w: 3.4, h: 0.36,
+          fontSize: 14, fontFace: FONT.head, color: C.darkText, bold: true, valign: "middle", margin: 0
         });
-        s.addText([
-          { text: st.title + "  ", options: { bold: true, fontSize: 13, fontFace: FONT.head, color: C.darkText } },
-          { text: st.desc, options: { fontSize: 11, fontFace: FONT.body, color: "555555" } },
-        ], { x: 1.8, y: y, w: 7, h: 0.5, valign: "middle", margin: 0 });
+
+        // Tagline
+        s.addText(r.tagline, {
+          x: x + 0.88, y: y + 0.48, w: 3.4, h: 0.22,
+          fontSize: 9.5, fontFace: FONT.body, color: "555555", italic: true, margin: 0
+        });
+
+        // Owns bullets
+        r.owns.forEach((line, li) => {
+          s.addText([
+            { text: "\u25B8 ", options: { color: C.accent, fontSize: 9, fontFace: FONT.body } },
+            { text: line,      options: { color: "555555", fontSize: 9, fontFace: FONT.body } },
+          ], { x: x + 0.88, y: y + 0.73 + li * 0.22, w: 3.4, h: 0.2, margin: 0 });
+        });
       });
+
+      // ── Bottom callout bar ──
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.55, w: 8.4, h: 0.5, fill: { color: C.midBg }
+        x: 0.5, y: 4.88, w: 9, h: 0.25, fill: { color: C.midBg }
       });
-      s.addText("When you understand the plumbing, the \"magic\" becomes engineering. This is what your tools do under the hood.", {
-        x: 1.0, y: 4.55, w: 8, h: 0.5,
-        fontSize: 11, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
+      s.addText("Your role shapes what questions you ask. In Round 2, you\u2019ll see why every seat at the table matters.", {
+        x: 0.7, y: 4.88, w: 8.6, h: 0.25,
+        fontSize: 9, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
-      s.addNotes("This is a collaborative, hands-on exercise. You'll find four stations around the room, each with a large sheet of paper. Grab sticky notes and markers and spend about 10 to 15 minutes rotating through them.\n\n[describe each station] Station 1, The HTTP Call — draw what a request to an LLM API actually looks like. System prompt, messages array, temperature, model name. Then draw the response. The point is: it's just JSON over HTTPS. No magic.\n\nStation 2, The Context Problem — this is the hardest one. You have 500 files and a 200k token window. What do you include? File tree? Open files? Git diff? Error output? Propose your strategies on sticky notes.\n\nStation 3, Parsing the Response — you'll see a real LLM response that mixes a code block, a shell command, a question, and explanatory text. Draw boxes around each type. How would a tool know which is which?\n\nStation 4, Trust and Execution — the AI says 'run rm -rf /tmp/cache.' Do you run it? What about 'git push --force'? Create a trust spectrum from 'always auto-run' to 'always ask.'\n\n[after activity] Here's the punchline: everything you just designed is exactly how Cursor, Claude Code, and Copilot work. The differences between those tools are just different answers to these four questions.");
+
+      s.addNotes("Get into groups of 3 or 4. Each person picks one role card from the screen. Only one of each role per group. Groups of 3 should drop UX for now — that is itself a point worth making later.\n\nQuick role primers [30 seconds each]:\n- Protocol Engineer: you care about the format of every byte on the wire. When I ask 'what does the request look like?' I'm asking you.\n- Security Engineer: you own every trust decision. When I ask 'can the agent read this file?' that's yours.\n- FinOps Engineer: you own every token and every dollar. When I ask 'how much did that cost?' you answer.\n- UX Engineer: you own every moment the human sees or touches the tool. When I ask 'how does the user confirm this?' that's yours.\n\nOnce everyone has a role, switch to the diagram slide. Keep this slide visible on a secondary screen if possible — it's a reference card for the group.");
     }
   },
 
-  // SLIDE 10b — Scaffold: How the Pieces Fit Together (sequence diagram)
+  // SLIDE 10a — Inside Every API Call (context window composition)
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { lightSlide } = ctx.helpers;
+
+      const s = lightSlide(pres, FT);
+
+      // ── Header bar ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3.5, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+
+      // ── Title & subtitle ──
+      s.addText("Inside Every API Call", {
+        x: 0.8, y: 0.88, w: 8.4, h: 0.36,
+        fontSize: 20, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      });
+      s.addText("The Coding Assistant composes this payload before each request \u2014 most of it isn\u2019t your instruction", {
+        x: 0.8, y: 1.26, w: 8.4, h: 0.24,
+        fontSize: 11, fontFace: FONT.body, color: "555555", italic: true, margin: 0
+      });
+
+      // ── Horizontal stacked bar (proportional context window) ──
+      const barX = 0.5, barY = 1.58, barH = 0.46, barW = 9.0;
+      // Green progression: dark → bright, matching the Context Usage palette
+      const sections = [
+        { label: "System Prompt",    pct: 0.18, fill: C.midBg,   text: C.muted    },
+        { label: "History",          pct: 0.24, fill: "3F5E33",  text: C.muted    },
+        { label: "Selected Files",   pct: 0.33, fill: "4A6A3A",  text: C.offWhite },
+        { label: "Tool Definitions", pct: 0.16, fill: "5A7A4A",  text: C.darkText },
+        { label: "Your prompt",      pct: 0.05, fill: C.accent,  text: C.darkText },
+        { label: "",                 pct: 0.04, fill: C.muted,   text: C.darkText },
+      ];
+
+      let curX = barX;
+      sections.forEach((sec) => {
+        const w = barW * sec.pct;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: curX, y: barY, w, h: barH, fill: { color: sec.fill }
+        });
+        if (w >= 1.0 && sec.label) {
+          s.addText(sec.label, {
+            x: curX + 0.05, y: barY, w: w - 0.1, h: barH,
+            fontSize: 7, fontFace: FONT.body, color: sec.text,
+            align: "center", valign: "middle", margin: 0
+          });
+        }
+        curX += w;
+      });
+
+      // Overflow label
+      s.addText("\u2191 limit", {
+        x: 9.06, y: barY + 0.06, w: 0.44, h: 0.34,
+        fontSize: 7, fontFace: FONT.body, color: C.warnRed,
+        align: "center", valign: "middle", margin: 0
+      });
+
+      // ── 5 annotation rows ──
+      const rows = [
+        { fill: C.midBg,   name: "System Prompt",
+          desc: "Persona, repo context, standing instructions",
+          problem: "Written once \u2014 grows stale as the codebase evolves" },
+        { fill: "3F5E33",  name: "Conversation History",
+          desc: "Every prior turn in this session, re-included verbatim",
+          problem: "Grows with every exchange. By turn 10, history may consume more budget than your code" },
+        { fill: "4A6A3A",  name: "Selected Files",
+          desc: "A subset of your codebase chosen by the agent",
+          problem: "Which 10 of 500? Keyword match? Embedding search? Open editor tabs? Each strategy gives different results" },
+        { fill: "5A7A4A",  name: "Tool Definitions",
+          desc: "Function signatures for every action the agent can take",
+          problem: "Fixed overhead on every request \u2014 even a trivial question pays this cost" },
+        { fill: C.accent,  name: "Your Instruction",
+          desc: "The prompt you actually typed",
+          problem: "Often the smallest thing in the entire payload. Everything else is infrastructure" },
+      ];
+
+      const rowY0 = 2.14, rowStep = 0.50, dotSz = 0.15;
+      rows.forEach((r, i) => {
+        const ry = rowY0 + i * rowStep;
+        s.addShape(pres.shapes.OVAL, {
+          x: 0.5, y: ry + 0.05, w: dotSz, h: dotSz, fill: { color: r.fill }
+        });
+        s.addText([
+          { text: r.name + "  ", options: { bold: true, fontSize: 11, fontFace: FONT.head, color: C.darkText } },
+          { text: r.desc,        options: { fontSize: 10, fontFace: FONT.body, color: "555555" } },
+        ], { x: 0.78, y: ry, w: 8.72, h: 0.26, valign: "middle", margin: 0 });
+        s.addText("\u25B8  " + r.problem, {
+          x: 0.78, y: ry + 0.26, w: 8.72, h: 0.22,
+          fontSize: 9.5, fontFace: FONT.body, color: C.warnAmber, italic: true, margin: 0
+        });
+      });
+
+      // ── Bottom callout ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 4.88, w: 9, h: 0.24, fill: { color: C.midBg }
+      });
+      s.addText("By turn 5 of a complex task, your actual instruction may be under 3% of the payload. This is the context problem.", {
+        x: 0.7, y: 4.88, w: 8.6, h: 0.24,
+        fontSize: 9, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
+      });
+
+      s.addNotes("Use this as a 3-minute teacher moment before starting the first trace. Point to the bar.\n\n'Before we trace arrows, I want you to understand what the Coding Assistant actually sends to the API. This bar shows what a typical mid-session request looks like.'\n\n[Point to amber History section] 'Conversation history is one of the largest pieces. Every time you send a new message, ALL prior turns are re-included. The LLM has no memory of its own \u2014 it can only see what you put in front of it each time. By turn 10 of a complex task, you are paying for nine previous turns of context just to get to your new question. This is the statelessness problem.'\n\n[Point to Files] 'The agent has to decide which files to include. It cannot fit all 500 \u2014 the context window is finite. So it makes a selection. Some tools use open editor tabs. Some use keyword search. Some use embedding similarity. This selection strategy is a major design decision and dramatically affects quality.'\n\n[Point to the tiny green Your Instruction section] 'There it is. Your actual prompt. Often 3\u20135% of the total payload. Everything else is infrastructure.\n\n[Call on roles] Protocol: you are responsible for this payload schema. FinOps: if history roughly doubles each turn, what is your budget strategy?\n\nThen move to the diagram.'");
+    }
+  },
+
+  // SLIDE 10b — How the Pieces Fit Together (4-participant sequence diagram, no User lane)
   {
     type: "custom",
     render(pres, ctx) {
@@ -774,46 +941,44 @@ module.exports = [
         x: 0.5, y: 0.85, w: 9, h: 0.35,
         fontSize: 18, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
       });
-      s.addText("A map of the components \u2014 use this as your starting point", {
-        x: 0.5, y: 1.15, w: 9, h: 0.25,
+      s.addText("Time flows downward \u2014 trace each arrow with your role lens", {
+        x: 0.5, y: 1.18, w: 9, h: 0.24,
         fontSize: 11, fontFace: FONT.body, color: "555555", italic: true, margin: 0
       });
 
-      // ── 5 Participants across the full width ──
+      // ── 4 Participants — evenly spaced across full width ──
       const parts = [
-        { label: "User",      icon: "users",    cx: 0.85, strength: "Knows intent & goal",     weakness: "Can't code at AI speed" },
-        { label: "System",    icon: "terminal",  cx: 2.85, strength: "Files, terminal, git",     weakness: "No intelligence" },
-        { label: "Coding\nAssistant", icon: "robot", cx: 4.85, strength: "Bridges human & system", weakness: "Power vs. safety" },
-        { label: "API",       icon: "server",    cx: 6.85, strength: "Scalable, auth & billing", weakness: "Latency, rate limits" },
-        { label: "LLM",       icon: "brain",     cx: 8.85, strength: "Generates code, reasons",  weakness: "Stateless, context limits, hallucinations" },
+        { label: "System",           icon: "terminal", cx: 1.3,  strength: "Files, terminal, git, MCP tools", weakness: "No intelligence" },
+        { label: "Coding\nAssistant", icon: "robot",   cx: 4.0,  strength: "Bridges inputs & system",         weakness: "Power vs. safety" },
+        { label: "API",              icon: "server",   cx: 6.7,  strength: "Scalable, auth & billing",        weakness: "Latency, rate limits" },
+        { label: "LLM",              icon: "brain",    cx: 9.2,  strength: "Generates code, reasons",         weakness: "Stateless, context limits, hallucinations" },
       ];
 
-      const iconY = 1.42;
-      const labelY = 2.0;
-      const annoY1 = 2.32;
-      const annoY2 = 2.48;
-      const lifeTop = 2.7;
-      const lifeBot = 4.78;
+      const iconY  = 1.86;
+      const annoY1 = 2.44;
+      const annoY2 = 2.68;
+      const lifeTop = 2.88;
+      const lifeBot = 4.80;
 
       parts.forEach((p) => {
+        // Label above icon, bottom-aligned so it sits flush on the icon top
+        s.addText(p.label, {
+          x: p.cx - 0.55, y: 1.42, w: 1.1, h: 0.44,
+          fontSize: 9, fontFace: FONT.head, color: C.darkText, bold: true,
+          align: "center", valign: "bottom", margin: 0
+        });
         // Icon
         iconCircle(s, p.icon, p.cx - 0.22, iconY, 0.44, C.midBg, icons, pres);
-        // Label
-        s.addText(p.label, {
-          x: p.cx - 0.55, y: labelY, w: 1.1, h: 0.3,
-          fontSize: 9, fontFace: FONT.head, color: C.darkText, bold: true,
-          align: "center", valign: "top", margin: 0
-        });
         // Strength
         s.addText([
-          { text: "\u25CF ", options: { color: C.accent, fontSize: 7, fontFace: FONT.body } },
+          { text: "\u25CF ", options: { color: C.accent,    fontSize: 7, fontFace: FONT.body } },
           { text: p.strength, options: { color: "555555", fontSize: 7, fontFace: FONT.body } },
-        ], { x: p.cx - 0.7, y: annoY1, w: 1.4, h: 0.16, align: "center", margin: 0 });
+        ], { x: p.cx - 0.9, y: annoY1, w: 1.8, h: 0.22, align: "left", margin: 0 });
         // Weakness
         s.addText([
           { text: "\u25CF ", options: { color: C.warnAmber, fontSize: 7, fontFace: FONT.body } },
           { text: p.weakness, options: { color: "555555", fontSize: 7, fontFace: FONT.body } },
-        ], { x: p.cx - 0.7, y: annoY2, w: 1.4, h: 0.16, align: "center", margin: 0 });
+        ], { x: p.cx - 0.9, y: annoY2, w: 1.8, h: 0.22, align: "left", margin: 0 });
         // Dashed lifeline
         const dashCount = 12;
         const dashH = (lifeBot - lifeTop) / (dashCount * 2);
@@ -826,55 +991,142 @@ module.exports = [
       });
 
       // ── Sequence arrows (vertical order = time order) ──
-      // Label sits vertically aligned with the arrow (just above the line)
-      // Label placed near the arrowhead end to avoid crossing unrelated lifelines
       function seqArrow(fromCx, toCx, y, label) {
         const goingRight = toCx > fromCx;
-        // Arrow image at the receiving end
         if (goingRight) {
           s.addImage({ data: icons.arrow, x: toCx - 0.2, y: y - 0.1, w: 0.2, h: 0.2 });
-          // Label: right-aligned, placed just before arrowhead
           s.addText(label, {
-            x: toCx - 1.7, y: y - 0.12, w: 1.45, h: 0.2,
+            x: toCx - 1.85, y: y - 0.12, w: 1.6, h: 0.2,
             fontSize: 8, fontFace: FONT.body, color: C.darkText, align: "right",
             valign: "middle", margin: 0
           });
         } else {
           s.addImage({ data: icons.arrow, x: toCx, y: y - 0.1, w: 0.2, h: 0.2, flipH: true });
-          // Label: left-aligned, placed just after arrowhead
           s.addText(label, {
-            x: toCx + 0.25, y: y - 0.12, w: 1.45, h: 0.2,
+            x: toCx + 0.25, y: y - 0.12, w: 1.6, h: 0.2,
             fontSize: 8, fontFace: FONT.body, color: C.darkText, align: "left",
             valign: "middle", margin: 0
           });
         }
       }
 
-      const U = parts[0].cx;   // User
-      const SY = parts[1].cx;  // System
-      const CA = parts[2].cx;  // Coding Assistant
-      const AP = parts[3].cx;  // API
-      const LM = parts[4].cx;  // LLM
+      const SY = parts[0].cx;
+      const CA = parts[1].cx;
+      const AP = parts[2].cx;
+      const LM = parts[3].cx;
 
       // Steps flow downward — 0.28" per step
-      seqArrow(U,  CA, 2.88, "Prompt");
-      seqArrow(CA, AP, 3.16, "Synthesised Prompt");
-      seqArrow(AP, LM, 3.44, "Pass Request to LLM");
-      seqArrow(LM, AP, 3.72, "Provide Response");
-      seqArrow(AP, CA, 4.00, "Synthesised Response");
-      seqArrow(CA, SY, 4.28, "Manipulate System");
-      seqArrow(CA, U,  4.56, "Inform User");
+      seqArrow(SY, CA, 3.24, "Context: files, tool results");
+      seqArrow(CA, AP, 3.52, "Synthesised Prompt");
+      seqArrow(AP, LM, 3.80, "Pass Request to LLM");
+      seqArrow(LM, AP, 4.08, "Provide Response");
+      seqArrow(AP, CA, 4.36, "Synthesised Response");
+      seqArrow(CA, SY, 4.64, "Manipulate System");
 
       // ── Bottom callout ──
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.5, y: 4.9, w: 9, h: 0.22, fill: { color: C.midBg }
+        x: 0.5, y: 4.88, w: 9, h: 0.24, fill: { color: C.midBg }
       });
-      s.addText("Each component has a superpower and a constraint. Your design choices live in the gaps.", {
-        x: 0.7, y: 4.9, w: 8.6, h: 0.22,
+      s.addText("System feeds in from multiple directions. The Coding Assistant synthesises all inputs \u2014 your design choices live in that synthesis.", {
+        x: 0.7, y: 4.88, w: 8.6, h: 0.24,
         fontSize: 9, fontFace: FONT.body, color: C.accent, valign: "middle", margin: 0
       });
 
-      s.addNotes("This slide is a scaffold to help you get oriented before the activity. Read it like a sequence diagram \u2014 time flows downward.\n\nThe User sends a prompt to the Coding Assistant. The assistant synthesises that into a full API request \u2014 adding system prompt, file context, tool definitions. The API handles auth and billing, then passes the request to the LLM. The LLM generates a response, which flows back through the API to the assistant. The assistant then synthesises that response \u2014 parsing code blocks, commands, and explanations. It manipulates the local system (editing files, running commands) and finally informs the user of the results.\n\nNotice the annotations under each participant. Every component has a superpower and a weakness. The user knows what they want but can't write code at machine speed. The system has files and tools but no intelligence. The coding assistant bridges human and machine but must balance power with safety. The API is scalable but adds latency. The LLM can reason and generate code but has context limits and can hallucinate.\n\nAs you work through the four stations, think about how your design handles each of these trade-offs.");
+      s.addNotes("Read it like a sequence diagram — time flows downward. Notice the User is gone. The System is the entry point now, and it has multiple input channels: console input, file reads, MCP / tool results.\n\n=== ROUND 1: 'What model are you?' ===\n\nArrow 1 — System to Coding Assistant. [Protocol] How is input received? What does the context look like? [Expected: plain text prompt, possibly wrapped in a message object. Confirm: a string, the user's typed input.]\n\nArrow 2 — Coding Assistant synthesises. [Protocol] What does the API payload look like? [Expected: JSON — messages array, system prompt, model field.] [Security] Any auth concerns? [Expected: API key in Authorization header, HTTPS.] [FinOps] Token count for 'What model are you?' [Expected: maybe 10-20 tokens input, 10-20 output — fractions of a cent.]\n\nArrow 3 — API to LLM. [FinOps] Any rate-limit check? [Expected: yes, but trivially passes.]\n\nArrow 4 — LLM responds. [Protocol] What does the response look like? Just a string? [Expected: JSON — choices array, message object, content field, usage field with token counts.]\n\nArrow 5 — API to Coding Assistant. [Protocol] Does the assistant just print it? [Expected: parse the JSON, extract content.]\n\nArrow 6 — Manipulate System. [Security] Does 'What model are you?' require system manipulation? [Expected: No. Just displays the result.]\n\n[Pause] Security: you barely had anything to do. FinOps: you ticked one box for almost nothing. Round 1 is nearly boring from your perspectives. That is intentional.\n\n=== ROUND 2: 'Rename foo() to bar() across the entire codebase' ===\n\nArrow 1 — System to Coding Assistant. [Security] Before reading files, what permissions does the agent need? Which files can it access? What about .env or config files with secrets? [FinOps] The agent is about to read potentially hundreds of files. What is your concern? [Expected: token cost, need for an approval gate before the expensive LLM call.]\n\nArrow 2 — Coding Assistant synthesises. [Protocol] What is in the messages array now? [Expected: system prompt, file contents, the rename instruction, tool definitions for file editing.] [FinOps] Rough estimate: 87 files, average 50 lines, 30 tokens/line = ~130k tokens input. At current pricing that could be $0.50-$2. Is there an approval gate?\n\nArrow 3 — API to LLM. [FinOps] Does the token count on the response side matter too?\n\nArrow 4 — LLM responds. [Protocol] The response is no longer a string — it is a list of file edit operations. What is the schema? [Expected: tool_use blocks with filename and replacement text.] [Security] The LLM has seen your entire codebase. Should the agent sanitise the proposed edits?\n\nArrow 5 — API to Coding Assistant. [UX] Before any files change, how does the user see what is about to happen? [Expected: diff preview, list of affected files.] Is there a confirmation step?\n\nArrow 6 — Manipulate System. [Security] 87 files are about to change. Does the tool require a clean git state? Does it create a branch? [UX] How does the user verify it worked? What about a method name that appears in a log string the rename won't catch — who surfaces that risk?\n\n[Debrief] Every single role had something critical to say. Protocol was busy the whole time. Security had a dozen decision points. FinOps had a genuine cost conversation. UX had the most complex moment of all. Switch to the next slide.");
+    }
+  },
+
+  // SLIDE 10c — Debrief: Two Rounds, One Insight
+  {
+    type: "custom",
+    render(pres, ctx) {
+      const { C, FONT } = ctx.branding;
+      const { darkSlide, addCard, iconCircle } = ctx.helpers;
+      const { icons } = ctx;
+
+      const s = darkSlide(pres, FT);
+
+      // ── Header bar ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.darkBg }
+      });
+      s.addText("ACTIVITY", {
+        x: 0.8, y: 0.15, w: 3, h: 0.5,
+        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+
+      // ── Title ──
+      s.addText("Two Rounds, One Insight", {
+        x: 0.8, y: 0.88, w: 8.4, h: 0.38,
+        fontSize: 20, fontFace: FONT.head, color: C.offWhite, bold: true, margin: 0
+      });
+
+      // ── Two comparison cards ──
+      const cardDefs = [
+        {
+          x: 0.5, accentColor: C.accentDim,
+          title: 'Round 1: "What model are you?"', titleColor: C.accent,
+          iconBg: C.darkBg, nameColor: C.muted,
+          rows: [
+            { icon: "plug",   name: "Protocol", activity: "Basic parsing — extract content string" },
+            { icon: "shield", name: "Security", activity: "Minimal — HTTPS + API key" },
+            { icon: "chart",  name: "FinOps",   activity: "Trivial cost — under 20 tokens" },
+            { icon: "eye",    name: "UX",       activity: "Display response inline" },
+          ],
+        },
+        {
+          x: 5.2, accentColor: C.accent,
+          title: 'Round 2: "Rename foo() \u2192 bar()"', titleColor: C.accent,
+          iconBg: C.midBg, nameColor: C.offWhite,
+          rows: [
+            { icon: "plug",   name: "Protocol", activity: "Schema design, tool_use parsing" },
+            { icon: "shield", name: "Security", activity: "File ACL, git state, sanitisation" },
+            { icon: "chart",  name: "FinOps",   activity: "~130k tokens, approval gate" },
+            { icon: "eye",    name: "UX",       activity: "Diff preview, confirm, undo flow" },
+          ],
+        },
+      ];
+
+      cardDefs.forEach((card) => {
+        addCard(s, card.x, 1.32, 4.3, 3.5, card.accentColor, pres);
+
+        // Round title
+        s.addText(card.title, {
+          x: card.x + 0.2, y: 1.42, w: 4.0, h: 0.38,
+          fontSize: 12, fontFace: FONT.head, color: card.titleColor, bold: true, margin: 0
+        });
+
+        // Divider
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: card.x + 0.1, y: 1.82, w: 4.1, h: 0.02,
+          fill: { color: C.muted }
+        });
+
+        // Role rows
+        card.rows.forEach((row, ri) => {
+          const ry = 1.87 + ri * 0.72;
+          iconCircle(s, row.icon, card.x + 0.18, ry, 0.32, card.iconBg, icons, pres);
+          s.addText(row.name, {
+            x: card.x + 0.62, y: ry, w: 3.55, h: 0.3,
+            fontSize: 11, fontFace: FONT.head, color: card.nameColor, bold: true, margin: 0
+          });
+          s.addText(row.activity, {
+            x: card.x + 0.62, y: ry + 0.3, w: 3.55, h: 0.35,
+            fontSize: 9.5, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+          });
+        });
+      });
+
+      // ── Bottom callout bar ──
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 4.88, w: 9, h: 0.25, fill: { color: C.darkBg }
+      });
+      s.addText("Complexity reveals the design surface. Simple queries mask it. This is why toy demos mislead.", {
+        x: 0.7, y: 4.88, w: 8.6, h: 0.25,
+        fontSize: 11, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
+      });
+
+      s.addNotes("Look at the two columns. Round 1 barely touched Security, barely cost FinOps anything, UX was almost invisible. Round 2 made every role essential. That is the point.\n\nIf you evaluate an AI coding tool with toy queries like 'What model are you?' you will miss all the interesting design decisions. The differences between Claude Code, Cursor, and Copilot live entirely in Round 2 territory — they make different choices for every one of those arrows.\n\nThe next section shows you the production-grade plumbing so you can understand — and make — those choices yourself.");
     }
   },
 
