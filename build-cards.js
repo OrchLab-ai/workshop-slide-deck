@@ -96,21 +96,32 @@ function renderFront(pres, role, icons) {
 
   // Role name (centered)
   s.addText(role.name, {
-    x: 0.18, y: 2.32, w: W - 0.36, h: 0.48,
+    x: 0.18, y: 2.32, w: W - 0.36, h: 0.44,
     fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true,
     align: "center", valign: "middle", margin: 0,
   });
 
+  // Optional subtitle (e.g. FinOps explanation) — sits between name and tagline
+  let taglineY = 2.82;
+  if (role.subtitle) {
+    s.addText(role.subtitle, {
+      x: 0.18, y: 2.78, w: W - 0.36, h: 0.22,
+      fontSize: 9, fontFace: FONT.body, color: C.muted,
+      italic: true, align: "center", margin: 0,
+    });
+    taglineY = 3.02;
+  }
+
   // Tagline (centered, italic)
   s.addText(role.tagline, {
-    x: 0.18, y: 2.86, w: W - 0.36, h: 0.3,
+    x: 0.18, y: taglineY, w: W - 0.36, h: 0.28,
     fontSize: 11, fontFace: FONT.body, color: "555555",
     italic: true, align: "center", margin: 0,
   });
 
-  // White card panel for "YOU OWN" section — fills down to the bottom bar
+  // White card panel for "YOU OWN" + "KEY TERMS" sections
   const cardX = CONTENT_X;
-  const cardY = 3.32;
+  const cardY = role.subtitle ? 3.44 : 3.32;
   const cardW = W - CONTENT_X - 0.18;
   const cardH = BOTTOM_BAR_Y - cardY - 0.18;
 
@@ -136,23 +147,52 @@ function renderFront(pres, role, icons) {
     fill: { color: C.offWhite },
   });
 
-  // Bullets — distribute evenly across the remaining card height
+  // Bullets — capped at 0.55" each so key terms section fits below
   const bulletsTop = cardY + 0.62;
   const bulletsBot = cardY + cardH - 0.16;
-  const step       = (bulletsBot - bulletsTop) / role.owns.length;
+  const step       = Math.min((bulletsBot - bulletsTop) / role.owns.length, 0.55);
 
   role.owns.forEach((line, i) => {
     const y = bulletsTop + i * step;
     s.addShape(pres.shapes.RECTANGLE, {
-      x: cardX + 0.2, y: y + 0.1, w: 0.07, h: step * 0.4,
+      x: cardX + 0.2, y: y + 0.1, w: 0.07, h: step * 0.42,
       fill: { color: role.color },
     });
     s.addText(line, {
-      x: cardX + 0.38, y, w: cardW - 0.48, h: step * 0.8,
-      fontSize: 15, fontFace: FONT.body, color: C.darkText,
+      x: cardX + 0.38, y, w: cardW - 0.48, h: step,
+      fontSize: 14, fontFace: FONT.body, color: C.darkText,
       valign: "middle", margin: 0,
     });
   });
+
+  // KEY TERMS section — uses space freed by capped bullet spacing
+  if (role.keyTerms && role.keyTerms.length) {
+    const termsTop  = bulletsTop + role.owns.length * step + 0.18;
+    const termsSepY = termsTop + 0.28;
+    const termsStart = termsSepY + 0.06;
+    const termsAvail = bulletsBot - termsStart;
+    const termH     = Math.min(0.34, termsAvail / role.keyTerms.length);
+
+    s.addText("KEY TERMS", {
+      x: cardX + 0.2, y: termsTop, w: 2, h: 0.26,
+      fontSize: 9, fontFace: FONT.head, color: role.color, bold: true, margin: 0,
+    });
+    s.addShape(pres.shapes.RECTANGLE, {
+      x: cardX + 0.2, y: termsSepY, w: cardW - 0.28, h: 0.018,
+      fill: { color: C.offWhite },
+    });
+
+    role.keyTerms.forEach(({ term, def }, i) => {
+      const ty = termsStart + i * termH;
+      s.addText([
+        { text: term + "  ",      options: { color: role.color, fontSize: 10, fontFace: FONT.body, bold: true } },
+        { text: "\u2014  " + def, options: { color: "555555",   fontSize: 9,  fontFace: FONT.body } },
+      ], {
+        x: cardX + 0.2, y: ty, w: cardW - 0.3, h: termH,
+        valign: "middle", margin: 0,
+      });
+    });
+  }
 
   // Primer quote as bottom callout
   bottomBar(s, pres, role.primer);
@@ -180,33 +220,54 @@ function renderBack(pres, role, icons) {
 
   let curY = 0.9;
 
-  // Optional thinking-lens note (e.g. STRIDE, or the 5 FinOps lenses)
-  if (role.lensNote) {
-    s.addText(role.lensNote, {
-      x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.24,
-      fontSize: 8, fontFace: FONT.body, color: C.muted, italic: true, margin: 0,
+  // HOW TO PARTICIPATE block — tells students when and how to speak
+  if (role.howToParticipate) {
+    const blockH = 0.52;
+    s.addShape(pres.shapes.RECTANGLE, {
+      x: CONTENT_X, y: curY, w: CONTENT_W, h: blockH,
+      fill: { color: C.lightBg },
     });
-    curY += 0.3;
+    s.addShape(pres.shapes.RECTANGLE, {
+      x: CONTENT_X, y: curY, w: 0.06, h: blockH,
+      fill: { color: role.color },
+    });
+    s.addText(role.howToParticipate, {
+      x: CONTENT_X + 0.14, y: curY + 0.04, w: CONTENT_W - 0.16, h: blockH - 0.06,
+      fontSize: 8.5, fontFace: FONT.body, color: C.offWhite,
+      valign: "middle", margin: 0,
+    });
+    curY += blockH + 0.1;
   }
 
-  // Helper: render one hint bullet — supports plain strings and {label, text} objects
-  function hintBullet(q) {
+  // Lens note — larger and more visible than before
+  if (role.lensNote) {
+    s.addText(role.lensNote, {
+      x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.28,
+      fontSize: 9, fontFace: FONT.body, color: C.offWhite, margin: 0,
+    });
+    curY += 0.34;
+  }
+
+  // Helper: render one hint bullet — first Round 1 bullet gets a ★ starter marker
+  function hintBullet(q, isStarter) {
+    const prefix      = isStarter ? "\u2605  " : "\u25B8  ";
+    const prefixColor = isStarter ? role.color  : C.accent;
     const segments = typeof q === "object"
       ? [
-          { text: "\u25B8  ", options: { color: C.accent,    fontSize: 9.5, fontFace: FONT.body } },
-          { text: q.label,   options: { color: role.color,  fontSize: 9.5, fontFace: FONT.body, bold: true } },
-          { text: "  \u2014  ",options: { color: C.muted,    fontSize: 9.5, fontFace: FONT.body } },
-          { text: q.text,    options: { color: C.offWhite,  fontSize: 9.5, fontFace: FONT.body } },
+          { text: prefix,        options: { color: prefixColor, fontSize: 9.5, fontFace: FONT.body } },
+          { text: q.label,       options: { color: role.color,  fontSize: 9.5, fontFace: FONT.body, bold: true } },
+          { text: "  \u2014  ",  options: { color: C.muted,     fontSize: 9.5, fontFace: FONT.body } },
+          { text: q.text,        options: { color: C.offWhite,  fontSize: 9.5, fontFace: FONT.body } },
         ]
       : [
-          { text: "\u25B8  ", options: { color: C.accent,   fontSize: 9.5, fontFace: FONT.body } },
-          { text: q,         options: { color: C.offWhite, fontSize: 9.5, fontFace: FONT.body } },
+          { text: prefix, options: { color: prefixColor, fontSize: 9.5, fontFace: FONT.body } },
+          { text: q,      options: { color: C.offWhite,  fontSize: 9.5, fontFace: FONT.body } },
         ];
     s.addText(segments, {
       x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.36,
       valign: "top", margin: 0,
     });
-    curY += 0.4;
+    curY += 0.38;
   }
 
   // Round 1
@@ -215,7 +276,7 @@ function renderBack(pres, role, icons) {
     fontSize: 10, fontFace: FONT.head, color: C.accent, bold: true, margin: 0,
   });
   curY += 0.32;
-  role.hints.round1.forEach(hintBullet);
+  role.hints.round1.forEach((q, i) => hintBullet(q, i === 0));
 
   // Gap + separator
   curY += 0.1;
@@ -231,7 +292,35 @@ function renderBack(pres, role, icons) {
     fontSize: 10, fontFace: FONT.head, color: C.accent, bold: true, margin: 0,
   });
   curY += 0.32;
-  role.hints.round2.forEach(hintBullet);
+  role.hints.round2.forEach((q) => hintBullet(q, false));
+
+  // KEY TERMS box — fills the blank space that previously went unused
+  const remainingH = BOTTOM_BAR_Y - curY;
+  if (role.keyTerms && role.keyTerms.length && remainingH >= 1.4) {
+    const boxY     = curY + 0.14;
+    const termH    = Math.min(0.34, (remainingH - 0.62) / role.keyTerms.length);
+    const termStart = boxY + 0.34;
+
+    s.addText("KEY TERMS", {
+      x: CONTENT_X, y: boxY, w: 2, h: 0.24,
+      fontSize: 9, fontFace: FONT.head, color: role.color, bold: true, margin: 0,
+    });
+    s.addShape(pres.shapes.RECTANGLE, {
+      x: CONTENT_X, y: boxY + 0.26, w: CONTENT_W, h: 0.016,
+      fill: { color: C.lightBg },
+    });
+
+    role.keyTerms.forEach(({ term, def }, i) => {
+      const ty = termStart + i * termH;
+      s.addText([
+        { text: term + "  ",      options: { color: role.color, fontSize: 9,   fontFace: FONT.body, bold: true } },
+        { text: "\u2014  " + def, options: { color: C.muted,    fontSize: 8.5, fontFace: FONT.body } },
+      ], {
+        x: CONTENT_X, y: ty, w: CONTENT_W, h: termH,
+        valign: "middle", margin: 0,
+      });
+    });
+  }
 
   // Bottom callout
   s.addShape(pres.shapes.RECTANGLE, {
