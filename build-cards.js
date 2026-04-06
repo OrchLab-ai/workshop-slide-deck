@@ -129,16 +129,11 @@ function renderFront(pres, role, icons) {
     x: cardX, y: cardY, w: cardW, h: cardH,
     fill: { color: "FFFFFF" }, shadow: makeShadow(),
   });
-  // Role-coloured left accent on card
-  s.addShape(pres.shapes.RECTANGLE, {
-    x: cardX, y: cardY, w: 0.08, h: cardH,
-    fill: { color: role.color },
-  });
 
-  // "YOU OWN" label inside card
+  // "YOU OWN" label inside card — neutral color, no accent
   s.addText("YOU OWN", {
     x: cardX + 0.2, y: cardY + 0.18, w: 2, h: 0.28,
-    fontSize: 9, fontFace: FONT.head, color: role.color, bold: true, margin: 0,
+    fontSize: 9, fontFace: FONT.head, color: "888888", bold: true, margin: 0,
   });
 
   // Separator rule inside card
@@ -154,9 +149,10 @@ function renderFront(pres, role, icons) {
 
   role.owns.forEach((line, i) => {
     const y = bulletsTop + i * step;
+    // Neutral grey bullet marker
     s.addShape(pres.shapes.RECTANGLE, {
       x: cardX + 0.2, y: y + 0.1, w: 0.07, h: step * 0.42,
-      fill: { color: role.color },
+      fill: { color: "CCCCCC" },
     });
     s.addText(line, {
       x: cardX + 0.38, y, w: cardW - 0.48, h: step,
@@ -167,15 +163,16 @@ function renderFront(pres, role, icons) {
 
   // KEY TERMS section — uses space freed by capped bullet spacing
   if (role.keyTerms && role.keyTerms.length) {
-    const termsTop  = bulletsTop + role.owns.length * step + 0.18;
-    const termsSepY = termsTop + 0.28;
+    const termsTop   = bulletsTop + role.owns.length * step + 0.18;
+    const termsSepY  = termsTop + 0.28;
     const termsStart = termsSepY + 0.06;
     const termsAvail = bulletsBot - termsStart;
-    const termH     = Math.min(0.34, termsAvail / role.keyTerms.length);
+    const termH      = Math.min(0.34, termsAvail / role.keyTerms.length);
 
+    // Neutral label — no accent color
     s.addText("KEY TERMS", {
       x: cardX + 0.2, y: termsTop, w: 2, h: 0.26,
-      fontSize: 9, fontFace: FONT.head, color: role.color, bold: true, margin: 0,
+      fontSize: 9, fontFace: FONT.head, color: "888888", bold: true, margin: 0,
     });
     s.addShape(pres.shapes.RECTANGLE, {
       x: cardX + 0.2, y: termsSepY, w: cardW - 0.28, h: 0.018,
@@ -185,7 +182,7 @@ function renderFront(pres, role, icons) {
     role.keyTerms.forEach(({ term, def }, i) => {
       const ty = termsStart + i * termH;
       s.addText([
-        { text: term + "  ",      options: { color: role.color, fontSize: 10, fontFace: FONT.body, bold: true } },
+        { text: term + "  ",      options: { color: C.darkText, fontSize: 10, fontFace: FONT.body, bold: true } },
         { text: "\u2014  " + def, options: { color: "555555",   fontSize: 9,  fontFace: FONT.body } },
       ], {
         x: cardX + 0.2, y: ty, w: cardW - 0.3, h: termH,
@@ -207,39 +204,39 @@ function renderBack(pres, role, icons) {
   accentBar(s, pres, role.color);
   headerBar(s, pres);
 
-  // Header text
+  // Small icon badge in header, then role name to its right
+  const badgeSize = 0.36;
+  const badgeY    = (HEADER_H - badgeSize) / 2;
+  iconCircle(s, pres, role.icon, CONTENT_X, badgeY, badgeSize, C.lightBg, icons);
+
   s.addText(role.name, {
-    x: CONTENT_X, y: 0.14, w: 3.2, h: 0.44,
+    x: CONTENT_X + badgeSize + 0.1, y: 0.14, w: 2.7, h: 0.44,
     fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, margin: 0,
   });
   s.addText("YOUR QUESTIONS", {
     x: 2.8, y: 0.2, w: 2.85, h: 0.34,
-    fontSize: 9, fontFace: FONT.head, color: C.accent, bold: true,
+    fontSize: 9, fontFace: FONT.head, color: C.muted, bold: true,
     align: "right", valign: "middle", margin: 0,
   });
 
   let curY = 0.9;
 
-  // HOW TO PARTICIPATE block — tells students when and how to speak
+  // HOW TO PARTICIPATE block — no accent bar, just a panel
   if (role.howToParticipate) {
     const blockH = 0.52;
     s.addShape(pres.shapes.RECTANGLE, {
       x: CONTENT_X, y: curY, w: CONTENT_W, h: blockH,
       fill: { color: C.lightBg },
     });
-    s.addShape(pres.shapes.RECTANGLE, {
-      x: CONTENT_X, y: curY, w: 0.06, h: blockH,
-      fill: { color: role.color },
-    });
     s.addText(role.howToParticipate, {
-      x: CONTENT_X + 0.14, y: curY + 0.04, w: CONTENT_W - 0.16, h: blockH - 0.06,
+      x: CONTENT_X + 0.12, y: curY + 0.04, w: CONTENT_W - 0.14, h: blockH - 0.06,
       fontSize: 8.5, fontFace: FONT.body, color: C.offWhite,
       valign: "middle", margin: 0,
     });
     curY += blockH + 0.1;
   }
 
-  // Lens note — larger and more visible than before
+  // Lens note
   if (role.lensNote) {
     s.addText(role.lensNote, {
       x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.28,
@@ -248,20 +245,18 @@ function renderBack(pres, role, icons) {
     curY += 0.34;
   }
 
-  // Helper: render one hint bullet — first Round 1 bullet gets a ★ starter marker
-  function hintBullet(q, isStarter) {
-    const prefix      = isStarter ? "\u2605  " : "\u25B8  ";
-    const prefixColor = isStarter ? role.color  : C.accent;
+  // Helper: uniform ▸ bullet in muted color — no star, no per-role accent
+  function hintBullet(q) {
     const segments = typeof q === "object"
       ? [
-          { text: prefix,        options: { color: prefixColor, fontSize: 9.5, fontFace: FONT.body } },
-          { text: q.label,       options: { color: role.color,  fontSize: 9.5, fontFace: FONT.body, bold: true } },
-          { text: "  \u2014  ",  options: { color: C.muted,     fontSize: 9.5, fontFace: FONT.body } },
-          { text: q.text,        options: { color: C.offWhite,  fontSize: 9.5, fontFace: FONT.body } },
+          { text: "\u25B8  ", options: { color: C.muted,    fontSize: 9.5, fontFace: FONT.body } },
+          { text: q.label,   options: { color: C.offWhite, fontSize: 9.5, fontFace: FONT.body, bold: true } },
+          { text: "  \u2014  ", options: { color: C.muted,  fontSize: 9.5, fontFace: FONT.body } },
+          { text: q.text,    options: { color: C.offWhite, fontSize: 9.5, fontFace: FONT.body } },
         ]
       : [
-          { text: prefix, options: { color: prefixColor, fontSize: 9.5, fontFace: FONT.body } },
-          { text: q,      options: { color: C.offWhite,  fontSize: 9.5, fontFace: FONT.body } },
+          { text: "\u25B8  ", options: { color: C.muted,    fontSize: 9.5, fontFace: FONT.body } },
+          { text: q,          options: { color: C.offWhite, fontSize: 9.5, fontFace: FONT.body } },
         ];
     s.addText(segments, {
       x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.36,
@@ -273,10 +268,10 @@ function renderBack(pres, role, icons) {
   // Round 1
   s.addText('ROUND 1  \u2014  \u201CWhat model are you?\u201D', {
     x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.28,
-    fontSize: 10, fontFace: FONT.head, color: C.accent, bold: true, margin: 0,
+    fontSize: 10, fontFace: FONT.head, color: C.offWhite, bold: true, margin: 0,
   });
   curY += 0.32;
-  role.hints.round1.forEach((q, i) => hintBullet(q, i === 0));
+  role.hints.round1.forEach(hintBullet);
 
   // Gap + separator
   curY += 0.1;
@@ -289,21 +284,21 @@ function renderBack(pres, role, icons) {
   // Round 2
   s.addText('ROUND 2  \u2014  \u201CRename foo() \u2192 bar()\u201D', {
     x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.28,
-    fontSize: 10, fontFace: FONT.head, color: C.accent, bold: true, margin: 0,
+    fontSize: 10, fontFace: FONT.head, color: C.offWhite, bold: true, margin: 0,
   });
   curY += 0.32;
-  role.hints.round2.forEach((q) => hintBullet(q, false));
+  role.hints.round2.forEach(hintBullet);
 
   // KEY TERMS box — fills the blank space that previously went unused
   const remainingH = BOTTOM_BAR_Y - curY;
   if (role.keyTerms && role.keyTerms.length && remainingH >= 1.4) {
-    const boxY     = curY + 0.14;
-    const termH    = Math.min(0.34, (remainingH - 0.62) / role.keyTerms.length);
+    const boxY      = curY + 0.14;
+    const termH     = Math.min(0.34, (remainingH - 0.62) / role.keyTerms.length);
     const termStart = boxY + 0.34;
 
     s.addText("KEY TERMS", {
       x: CONTENT_X, y: boxY, w: 2, h: 0.24,
-      fontSize: 9, fontFace: FONT.head, color: role.color, bold: true, margin: 0,
+      fontSize: 9, fontFace: FONT.head, color: C.muted, bold: true, margin: 0,
     });
     s.addShape(pres.shapes.RECTANGLE, {
       x: CONTENT_X, y: boxY + 0.26, w: CONTENT_W, h: 0.016,
@@ -313,7 +308,7 @@ function renderBack(pres, role, icons) {
     role.keyTerms.forEach(({ term, def }, i) => {
       const ty = termStart + i * termH;
       s.addText([
-        { text: term + "  ",      options: { color: role.color, fontSize: 9,   fontFace: FONT.body, bold: true } },
+        { text: term + "  ",      options: { color: C.offWhite, fontSize: 9,   fontFace: FONT.body, bold: true } },
         { text: "\u2014  " + def, options: { color: C.muted,    fontSize: 8.5, fontFace: FONT.body } },
       ], {
         x: CONTENT_X, y: ty, w: CONTENT_W, h: termH,
