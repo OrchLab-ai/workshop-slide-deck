@@ -256,10 +256,10 @@ function renderBack(pres, role, icons) {
           { text: q,          options: { color: C.offWhite, fontSize: 9.5, fontFace: FONT.body } },
         ];
     s.addText(segments, {
-      x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.36,
+      x: CONTENT_X, y: curY, w: CONTENT_W, h: 0.44,
       valign: "top", margin: 0,
     });
-    curY += 0.38;
+    curY += 0.44;
   }
 
   // Round 1
@@ -288,7 +288,7 @@ function renderBack(pres, role, icons) {
 
   // KEY TERMS box — fills the blank space that previously went unused
   const remainingH = BOTTOM_BAR_Y - curY;
-  if (role.keyTerms && role.keyTerms.length && remainingH >= 1.4) {
+  if (role.keyTerms && role.keyTerms.length && remainingH >= 1.1) {
     const boxY      = curY + 0.14;
     const termH     = Math.min(0.34, (remainingH - 0.62) / role.keyTerms.length);
     const termStart = boxY + 0.34;
