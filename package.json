@@ -5,6 +5,7 @@
   "main": "build.js",
   "scripts": {
     "build": "node build.js",
+    "build:cards": "node build-cards.js",
     "qa": "python3 -m markitdown OrchLab_Workshop.pptx"
   },
   "dependencies": {
