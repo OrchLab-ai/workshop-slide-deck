@@ -149,14 +149,11 @@ function renderFront(pres, role, icons) {
 
   role.owns.forEach((line, i) => {
     const y = bulletsTop + i * step;
-    // Neutral grey bullet marker
-    s.addShape(pres.shapes.RECTANGLE, {
-      x: cardX + 0.2, y: y + 0.1, w: 0.07, h: step * 0.42,
-      fill: { color: "CCCCCC" },
-    });
-    s.addText(line, {
-      x: cardX + 0.38, y, w: cardW - 0.48, h: step,
-      fontSize: 14, fontFace: FONT.body, color: C.darkText,
+    s.addText([
+      { text: "\u2022  ", options: { color: "AAAAAA", fontSize: 14, fontFace: FONT.body } },
+      { text: line,       options: { color: C.darkText, fontSize: 14, fontFace: FONT.body } },
+    ], {
+      x: cardX + 0.2, y, w: cardW - 0.3, h: step,
       valign: "middle", margin: 0,
     });
   });
