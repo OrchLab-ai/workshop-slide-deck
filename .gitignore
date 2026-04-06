@@ -6,3 +6,4 @@ slide-*.jpg
 .env
 .DS_Store
 *.local.json
+cards/
