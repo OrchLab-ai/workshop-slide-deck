@@ -7,7 +7,7 @@ module.exports = [
   {
     slug:     "card-protocol-engineer",
     icon:     "plug",
-    color:    C.accent,       // #8CC26C
+    color:    C.steel,        // #6B8FA2
     name:     "Protocol Engineer",
     tagline:  "Owns the wire: formats, headers, message flow",
     owns: [
