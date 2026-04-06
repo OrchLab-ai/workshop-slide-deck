@@ -12,6 +12,7 @@ const C = {
   warnRed:   "E85D4A",
   warnAmber: "E8B84A",
   highlightYellow: "D4E84A",
+  steel:     "6B8FA2",  // muted blue-grey — used for Protocol Engineer
 };
 
 const FONT = { head: "Trebuchet MS", body: "Calibri" };
