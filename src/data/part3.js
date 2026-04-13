@@ -364,7 +364,8 @@ module.exports = [
     },
   },
 
-  // SLIDE 39 — Handoffs & Routines
+
+  // SLIDE 56 — You Need to Be Tall Enough to Ride This Train
   {
     type: "custom",
     render(pres, ctx) {
@@ -373,59 +374,80 @@ module.exports = [
       const { icons } = ctx;
 
       const s = darkSlide(pres, FT);
-      s.addText("Handoffs & Routines", {
-        x: 0.8, y: 0.4, w: 8, h: 0.7,
-        fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("Specialisation. One agent shouldn't do everything.", {
-        x: 0.8, y: 1.15, w: 8, h: 0.35,
-        fontSize: 15, fontFace: FONT.body, color: C.warnAmber, italic: true, margin: 0
-      });
+
+      // Warning stripe header
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 3.5, y: 1.7, w: 3, h: 0.9,
-        fill: { color: C.accent }, shadow: makeShadow()
+        x: 0, y: 0, w: 10, h: 1.0, fill: { color: "5A3A00" }
       });
-      s.addText("Triage Agent", {
-        x: 3.5, y: 1.7, w: 3, h: 0.9,
-        fontSize: 16, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", valign: "middle", margin: 0
+      s.addText("You Need to Be Tall Enough to Ride This Train", {
+        x: 0.8, y: 0.1, w: 8.4, h: 0.8,
+        fontSize: 28, fontFace: FONT.head, color: C.warnAmber, bold: true, valign: "middle", margin: 0
       });
-      s.addShape(pres.shapes.LINE, {
-        x: 4.2, y: 2.6, w: 0, h: 0.4, line: { color: C.muted, width: 2 }
+      s.addText("Before AI can multiply your output, these foundations must already be in place.", {
+        x: 0.8, y: 1.1, w: 8.4, h: 0.45,
+        fontSize: 14, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
       });
-      s.addShape(pres.shapes.LINE, {
-        x: 5.8, y: 2.6, w: 0, h: 0.4, line: { color: C.muted, width: 2 }
+
+      const pillars = [
+        {
+          icon: "code",
+          title: "Source Control",
+          desc: "Every change is tracked, attributable, and reversible. Without this, AI-generated code is unauditable noise.",
+          color: C.accent,
+        },
+        {
+          icon: "check",
+          title: "Unit Tests",
+          desc: "AI writes code fast. Tests are the only signal telling you whether that code is correct.",
+          color: C.accent,
+        },
+        {
+          icon: "layers",
+          title: "Consistency",
+          desc: "Standards, linters, compilers — a shared language the whole team (and the AI) speaks.",
+          color: C.accent,
+        },
+        {
+          icon: "bolt",
+          title: "Fast Feedback",
+          desc: "CI/CD that closes the loop in seconds, not hours. AI loops on feedback — slow feedback = slow AI.",
+          color: C.warnAmber,
+        },
+      ];
+
+      pillars.forEach((p, i) => {
+        const x = 0.8 + i * 2.15;
+        const y = 1.7;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y, w: 2.0, h: 2.8, fill: { color: C.cardBg }, shadow: makeShadow()
+        });
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y, w: 2.0, h: 0.06, fill: { color: p.color }
+        });
+        iconCircle(s, p.icon, x + 0.6, y + 0.15, 0.45, C.darkBg, icons, pres);
+        s.addText(p.title, {
+          x: x + 0.1, y: y + 0.75, w: 1.8, h: 0.4,
+          fontSize: 13, fontFace: FONT.head, color: p.color, bold: true, align: "center", valign: "middle", margin: 0
+        });
+        s.addText(p.desc, {
+          x: x + 0.1, y: y + 1.2, w: 1.8, h: 1.3,
+          fontSize: 10, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
+        });
       });
+
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 2.5, y: 3.0, w: 2.2, h: 0.9,
-        fill: { color: C.cardBg }, shadow: makeShadow()
+        x: 0.8, y: 4.65, w: 8.4, h: 0.42, fill: { color: "5A2020" }
       });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 2.5, y: 3.0, w: 0.06, h: 0.9, fill: { color: C.accentDim }
+      s.addText("If any of these are missing, AI tooling will make you faster at producing the wrong thing.", {
+        x: 1.0, y: 4.65, w: 8.0, h: 0.42,
+        fontSize: 12, fontFace: FONT.body, color: C.offWhite, valign: "middle", margin: 0
       });
-      s.addText("SQL Agent", {
-        x: 2.5, y: 3.0, w: 2.2, h: 0.9,
-        fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 5.3, y: 3.0, w: 2.2, h: 0.9,
-        fill: { color: C.cardBg }, shadow: makeShadow()
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 5.3, y: 3.0, w: 0.06, h: 0.9, fill: { color: C.accentDim }
-      });
-      s.addText("UI Agent", {
-        x: 5.3, y: 3.0, w: 2.2, h: 0.9,
-        fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addText("The Handoff: Passing context from Developer → Reviewer preserves knowledge across agent boundaries.", {
-        x: 0.8, y: 4.2, w: 8.4, h: 0.5,
-        fontSize: 13, fontFace: FONT.body, color: C.offWhite, margin: 0
-      });
-      s.addNotes("So how do we solve the chaos problem? Specialisation. Orchestration frameworks like Swarm, Agora, or custom setups work the same way a well-run engineering team does. [walk through the flow] A Triage Agent reads the request and decides: is this a database task or a UI task? Then it hands off to the appropriate specialist. That specialist has focused context and focused tools. The handoff includes relevant context so the specialist doesn't start from scratch. [pause] Think about your own team: the tech lead triages tickets, the backend dev handles APIs, the frontend dev handles UI. Same principle — but with AI agents.");
+
+      s.addNotes("Before we talk about what AI can do for your engineering, we need to talk about what needs to already be true. [pause] Think of this as the height requirement for a theme park ride. AI amplifies — it does not create foundations that aren't there. [pause] Source control: if you can't track changes, you can't safely accept AI-generated code at scale. Unit tests: fast AI code generation with no tests is just faster debt creation. Consistency — standards, linters, compilers — means the AI is writing to the same contract as your team. And fast feedback: AI agents loop on feedback. If your pipeline takes 30 minutes, the agent will spin for 30 minutes before it learns anything. [pause] These aren't aspirational. These are the minimum viable foundations. Let's figure out where you stand on each.");
     },
   },
 
-  // SLIDE 40 — Activity: Plan-First Orchestration
+  // SLIDE 57 — Let's Split Into 2 Groups
   {
     type: "custom",
     render(pres, ctx) {
@@ -437,52 +459,96 @@ module.exports = [
       s.addShape(pres.shapes.RECTANGLE, {
         x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
       });
-      s.addText("ACTIVITY", {
-        x: 0.8, y: 0.15, w: 3, h: 0.5,
-        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      s.addText("Let's Split Into 2 Groups", {
+        x: 0.8, y: 0.12, w: 8.4, h: 0.6,
+        fontSize: 26, fontFace: FONT.head, color: C.accent, bold: true, valign: "middle", margin: 0
       });
-      s.addText("Plan-First Orchestration", {
-        x: 0.8, y: 1.0, w: 8.4, h: 0.5,
-        fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      s.addText("Two workstreams. Same goal: raise the floor so AI can raise the ceiling.", {
+        x: 0.8, y: 0.9, w: 8.4, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: "555555", italic: true, margin: 0
       });
-      s.addText("Same upgrade, different approach. This time a Planning Agent writes the plan, then a separate Coding Agent executes it.", {
-        x: 0.8, y: 1.55, w: 8.4, h: 0.55,
-        fontSize: 13, fontFace: FONT.body, color: "444444", margin: 0
-      });
-      addLightCard(s, 0.8, 2.3, 4.0, 2.0, C.accent, pres);
-      s.addText("Planning Agent", {
-        x: 1.1, y: 2.4, w: 3.4, h: 0.3,
-        fontSize: 15, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
-      });
-      const planItems = [
-        { text: "Use meta-prompting to create a structured upgrade plan", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Identify breaking changes, affected files, and migration steps", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Define verification criteria (what tests must pass)", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-      ];
-      s.addText(planItems, { x: 1.1, y: 2.8, w: 3.4, h: 1.3, margin: 0 });
-      addLightCard(s, 5.2, 2.3, 4.0, 2.0, C.accentDim, pres);
-      s.addText("Coding Agent", {
-        x: 5.5, y: 2.4, w: 3.4, h: 0.3,
-        fontSize: 15, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
-      });
-      const codeItems = [
-        { text: "Receives the plan — not a vague instruction", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Executes each step in Docker with tests", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-        { text: "Uses Playwright to verify UI hasn't broken", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: "444444" } },
-      ];
-      s.addText(codeItems, { x: 5.5, y: 2.8, w: 3.4, h: 1.3, margin: 0 });
+
+      // Group 1 — Platform
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.6, w: 8.4, h: 0.45, fill: { color: C.midBg }
+        x: 0.5, y: 1.4, w: 4.2, h: 3.55, fill: { color: C.midBg }, shadow: makeShadow()
       });
-      s.addText("Compare the output quality to Activity 1. The plan is the difference.", {
-        x: 1.0, y: 4.6, w: 8, h: 0.45,
-        fontSize: 12, fontFace: FONT.body, color: C.accent, italic: true, valign: "middle", margin: 0
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 1.4, w: 4.2, h: 0.07, fill: { color: C.accent }
       });
-      s.addNotes("Same task as before — the dependency upgrade. Same Docker environment. But now with a structured handoff. [walk through the steps] First, a Planning Agent uses meta-prompting — Context Extractor plus Constraint Builder work well here — to produce a detailed upgrade plan: which files are affected, what breaking changes exist, what the migration steps are, and what tests must pass. Then that plan gets fed to the Coding Agent as its instruction set. The Coding Agent doesn't need to figure out 'what to do' — it just executes. [after activity] Compare this output to your first attempt. The quality difference shows why specialisation matters. The planner has broad context; the coder has focused execution.");
+      s.addText("Group 1", {
+        x: 0.7, y: 1.5, w: 3.8, h: 0.35,
+        fontSize: 11, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      });
+      s.addText("Level Next Platform", {
+        x: 0.7, y: 1.85, w: 3.8, h: 0.45,
+        fontSize: 17, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Define what \"good\" looks like", {
+        x: 0.7, y: 2.3, w: 3.8, h: 0.3,
+        fontSize: 11, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+      const platformItems = [
+        "Define Service Tier 1 standards across:",
+        "  • Architecture (Code, Service, System, Landscape)",
+        "  • Security (STRIDE, DREAD)",
+        "  • SRE (Road to SRE)",
+        "  • Data (OLTP/OLAP frameworks)",
+      ];
+      s.addText(platformItems.map((t, i) => ({
+        text: t + (i < platformItems.length - 1 ? "\n" : ""),
+        options: { fontSize: i === 0 ? 12 : 11, fontFace: FONT.body, color: i === 0 ? C.offWhite : C.muted, bold: i === 0 }
+      })), { x: 0.7, y: 2.65, w: 3.8, h: 2.1, margin: 0 });
+
+      // Group 2 — Ramp
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 5.3, y: 1.4, w: 4.2, h: 3.55, fill: { color: C.midBg }, shadow: makeShadow()
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 5.3, y: 1.4, w: 4.2, h: 0.07, fill: { color: C.warnAmber }
+      });
+      s.addText("Group 2", {
+        x: 5.5, y: 1.5, w: 3.8, h: 0.35,
+        fontSize: 11, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
+      });
+      s.addText("Level Next Ramp", {
+        x: 5.5, y: 1.85, w: 3.8, h: 0.45,
+        fontSize: 17, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+      s.addText("Identify and remediate now", {
+        x: 5.5, y: 2.3, w: 3.8, h: 0.3,
+        fontSize: 11, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+      });
+      const rampItems = [
+        "Find low-hanging fruit in your codebase:",
+        "  • Mine Confluence, incident reports, code",
+        "  • Name what's wrong",
+        "  • Define what good looks like",
+        "  • Create a task prompt to fix it",
+      ];
+      s.addText(rampItems.map((t, i) => ({
+        text: t + (i < rampItems.length - 1 ? "\n" : ""),
+        options: { fontSize: i === 0 ? 12 : 11, fontFace: FONT.body, color: i === 0 ? C.offWhite : C.muted, bold: i === 0 }
+      })), { x: 5.5, y: 2.65, w: 3.8, h: 2.1, margin: 0 });
+
+      // VS divider
+      s.addText("vs.", {
+        x: 4.55, y: 2.9, w: 0.9, h: 0.4,
+        fontSize: 18, fontFace: FONT.head, color: C.muted, align: "center", bold: true, margin: 0
+      });
+
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 5.05, w: 9.0, h: 0.42, fill: { color: "F5F0E8" }
+      });
+      s.addText("Both groups report back: what did you find, what will you build, who owns it?", {
+        x: 0.7, y: 5.05, w: 8.6, h: 0.42,
+        fontSize: 12, fontFace: FONT.body, color: "444444", italic: true, valign: "middle", margin: 0
+      });
+
+      s.addNotes("We're going to split into two groups and work in parallel for the next session. [pause] Group 1 — the Platform group — your job is to define what 'good' looks like. You are setting the tier 1 standards that the rest of the organisation will be measured against. Architecture, security, SRE, data. When you're done, you should have a clear definition of what a well-engineered service looks like. [pause] Group 2 — the Ramp group — your job is to find the gap between where you are and where you need to be. Use Confluence, incident reports, and static analysis. Name things that are wrong. Define what good looks like for that specific thing. Then build a task prompt that an AI agent could execute to close the gap. [pause] Both groups report back at the end. Facilitator: assign teams now.");
     },
   },
 
-  // SLIDE 41 — Human-on-the-Loop
+  // SLIDE 58 — Level Next Platform (detail)
   {
     type: "custom",
     render(pres, ctx) {
@@ -491,145 +557,74 @@ module.exports = [
       const { icons } = ctx;
 
       const s = darkSlide(pres, FT);
-      s.addText("Human-on-the-Loop & Self-Healing", {
-        x: 0.8, y: 0.4, w: 8, h: 0.7,
-        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("The \"Software Factory\"", {
-        x: 0.8, y: 1.15, w: 5, h: 0.35,
-        fontSize: 15, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
-      });
-      const pipeline = [
-        { label: "Agent A\nPlans", color: C.accent },
-        { label: "Agent B\nCodes", color: C.accentDim },
-        { label: "Agent C\nTests", color: C.midBg },
-        { label: "Human\nApproves", color: C.warnAmber },
-        { label: "Pipeline\nDeploys", color: C.darkBg },
-      ];
-      pipeline.forEach((p, i) => {
-        const x = 0.3 + i * 1.95;
-        s.addShape(pres.shapes.RECTANGLE, {
-          x, y: 1.7, w: 1.7, h: 1.0,
-          fill: { color: C.cardBg }, shadow: makeShadow()
-        });
-        s.addShape(pres.shapes.RECTANGLE, {
-          x, y: 1.7, w: 1.7, h: 0.06, fill: { color: p.color }
-        });
-        s.addText(p.label, {
-          x, y: 1.8, w: 1.7, h: 0.85,
-          fontSize: 12, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
-        });
-        if (i < pipeline.length - 1) {
-          s.addImage({ data: icons.arrow, x: x + 1.675, y: 2.05, w: 0.3, h: 0.3 });
-        }
-      });
-      s.addText("You commit a spec. The swarm wakes up.", {
-        x: 0.8, y: 3.0, w: 8, h: 0.4,
-        fontSize: 16, fontFace: FONT.body, color: C.accent, bold: true, margin: 0
-      });
-      const visionPts = [
-        { text: "Agents plan, code, and test asynchronously", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "The system pauses for human approval at key checkpoints", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "After approval, deployment proceeds automatically", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "Self-healing: agents log mistakes to a learnings file and read it on every new run", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-      ];
-      s.addText(visionPts, { x: 0.8, y: 3.5, w: 8.4, h: 1.5, margin: 0 });
-      s.addNotes("Here's where it all comes together — the software factory. An asynchronous pipeline of specialist agents. [walk through the flow] You commit a spec file, and the system activates: Agent A creates a plan, Agent B writes code, Agent C runs tests. At defined checkpoints, the system pauses and asks a human for approval. That's 'human-on-the-loop' rather than 'human-in-the-loop.' After approval, Agent D deploys. [pause] Notice the shift: humans go from writing code to reviewing and approving. Tools like Loom are making this real today. [pause] The last bullet — self-healing — is deceptively simple but powerful. Agents can write to a learnings.md file whenever they hit an error or discover something unexpected. On every new run, they read that file first. Over time the system stops repeating the same mistakes without any human intervention. It's a cheap form of memory that makes the whole pipeline smarter run after run.");
-    },
-  },
-
-  // SLIDE 42 — Plan, Do, Review Loop
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("Plan \u2192 Do \u2192 Review \u2192 Loop", {
-        x: 0.8, y: 0.4, w: 8.4, h: 0.7,
-        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("From a linear flow to a continuous cycle.", {
-        x: 0.8, y: 1.1, w: 8, h: 0.35,
-        fontSize: 15, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
-      });
-
-      // --- Linear flow (the "before") ---
-      s.addText("Before: the flow terminates", {
-        x: 0.8, y: 1.7, w: 5, h: 0.3,
-        fontSize: 12, fontFace: FONT.body, color: C.muted, margin: 0
-      });
-      const linearSteps = ["Plan", "Do", "Review"];
-      linearSteps.forEach((label, i) => {
-        const x = 1.5 + i * 2.5;
-        s.addShape(pres.shapes.RECTANGLE, {
-          x, y: 2.1, w: 1.8, h: 0.7,
-          fill: { color: C.cardBg }, shadow: makeShadow()
-        });
-        s.addText(label, {
-          x, y: 2.1, w: 1.8, h: 0.7,
-          fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
-        });
-        if (i < linearSteps.length - 1) {
-          s.addImage({ data: icons.arrow, x: x + 1.975, y: 2.275, w: 0.35, h: 0.35 });
-        }
-      });
-      // terminal dot after Review box
-      s.addShape(pres.shapes.OVAL, {
-        x: 7.9, y: 2.35, w: 0.15, h: 0.15,
-        fill: { color: C.warnRed }
-      });
-
-      // --- Loop (the "after") ---
-      s.addText("After: review feeds back to plan", {
-        x: 0.8, y: 3.1, w: 5, h: 0.3,
-        fontSize: 12, fontFace: FONT.body, color: C.accent, margin: 0
-      });
-      const loopSteps = [
-        { label: "Plan", color: C.accent },
-        { label: "Do", color: C.accentDim },
-        { label: "Review", color: C.warnAmber },
-      ];
-      loopSteps.forEach((step, i) => {
-        const x = 1.5 + i * 2.5;
-        s.addShape(pres.shapes.RECTANGLE, {
-          x, y: 3.5, w: 1.8, h: 0.7,
-          fill: { color: C.cardBg }, shadow: makeShadow()
-        });
-        s.addShape(pres.shapes.RECTANGLE, {
-          x, y: 3.5, w: 1.8, h: 0.06, fill: { color: step.color }
-        });
-        s.addText(step.label, {
-          x, y: 3.5, w: 1.8, h: 0.7,
-          fontSize: 14, fontFace: FONT.head, color: C.offWhite, bold: true, align: "center", valign: "middle", margin: 0
-        });
-        if (i < loopSteps.length - 1) {
-          s.addImage({ data: icons.arrow, x: x + 1.975, y: 3.675, w: 0.35, h: 0.35 });
-        }
-      });
-      // feedback arrow label from Review back to Plan
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 1.5, y: 4.3, w: 6.3, h: 0.04, fill: { color: C.accent }
+        x: 0, y: 0, w: 10, h: 0.85, fill: { color: C.midBg }
       });
-      // sync icon after Review box
-      s.addImage({ data: icons.sync, x: 7.9, y: 3.65, w: 0.4, h: 0.4 });
-      s.addText("Learnings feed back \u2014 the system improves each cycle", {
-        x: 1.5, y: 4.4, w: 6.3, h: 0.3,
-        fontSize: 11, fontFace: FONT.body, color: C.accent, italic: true, align: "center", margin: 0
+      s.addText("Level Next Platform", {
+        x: 0.8, y: 0.1, w: 6, h: 0.65,
+        fontSize: 26, fontFace: FONT.head, color: C.accent, bold: true, valign: "middle", margin: 0
+      });
+      s.addText("Group 1", {
+        x: 7.5, y: 0.2, w: 2.1, h: 0.45,
+        fontSize: 13, fontFace: FONT.head, color: C.muted, align: "right", bold: true, margin: 0
+      });
+      s.addText("Define Service Tier 1 standards — the baseline every team must meet before AI can safely accelerate them.", {
+        x: 0.8, y: 0.95, w: 8.4, h: 0.45,
+        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
       });
 
-      s.addText("Every review creates context that makes the next plan better.", {
-        x: 0.8, y: 4.9, w: 8.4, h: 0.35,
-        fontSize: 14, fontFace: FONT.body, color: C.offWhite, bold: true, margin: 0
+      const domains = [
+        {
+          icon: "layers",
+          title: "Architecture",
+          color: C.accent,
+          items: ["Code — patterns, structure, naming, cohesion", "Service — contracts, versioning, boundaries", "System — dependencies, data flow, resilience", "Landscape — ownership, topology, docs"],
+        },
+        {
+          icon: "shield",
+          title: "Security",
+          color: C.warnRed,
+          items: ["STRIDE — threat modelling (Spoofing, Tampering, Repudiation, Info Disclosure, DoS, Elevation)", "DREAD — risk scoring (Damage, Reproducibility, Exploitability, Affected Users, Discoverability)"],
+        },
+        {
+          icon: "chart",
+          title: "SRE",
+          color: C.warnAmber,
+          items: ["Road to SRE: SLIs, SLOs, error budgets", "Observability: logs, metrics, traces", "Incident management & post-mortems", "On-call hygiene & runbooks"],
+        },
+        {
+          icon: "brain",
+          title: "Data",
+          color: C.steel,
+          items: ["OLTP — ACID guarantees, data modelling, normalisation", "OLAP — FAIR principles (Findable, Accessible, Interoperable, Reusable)", "DAMA quality: Accuracy, Completeness, Consistency, Timeliness, Validity, Uniqueness"],
+        },
+      ];
+
+      domains.forEach((d, i) => {
+        const x = 0.4 + (i % 2) * 4.8;
+        const y = 1.5 + Math.floor(i / 2) * 2.0;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y, w: 4.4, h: 1.8, fill: { color: C.cardBg }, shadow: makeShadow()
+        });
+        s.addShape(pres.shapes.RECTANGLE, {
+          x, y, w: 0.07, h: 1.8, fill: { color: d.color }
+        });
+        iconCircle(s, d.icon, x + 0.15, y + 0.15, 0.4, C.darkBg, icons, pres);
+        s.addText(d.title, {
+          x: x + 0.65, y: y + 0.1, w: 3.6, h: 0.4,
+          fontSize: 14, fontFace: FONT.head, color: d.color, bold: true, valign: "middle", margin: 0
+        });
+        s.addText(d.items.map((item, j) => ({
+          text: "• " + item + (j < d.items.length - 1 ? "\n" : ""),
+          options: { fontSize: 9.5, fontFace: FONT.body, color: C.offWhite }
+        })), { x: x + 0.2, y: y + 0.55, w: 4.1, h: 1.2, margin: 0 });
       });
 
-      s.addNotes("We just saw the linear pipeline \u2014 Plan, Do, Review, done. That works for a single task. But real engineering is iterative. [point to top row] In the linear version the output of Review goes nowhere \u2014 the flow terminates. [point to bottom row] In the loop version, the Review step feeds findings back into Plan. The agent reads what went wrong, what was learned, and uses that to write a better plan next time. This is the same learnings.md idea from the previous slide, but now it\u2019s structural: it\u2019s not just error recovery, it\u2019s continuous improvement. Each cycle the system gets smarter. [pause] This is the mental model shift: you\u2019re not building a pipeline, you\u2019re building a flywheel.");
+      s.addNotes("Group 1, here are your four domains. Work through each one and ask: what does 'good' look like for us, specifically? Not what the internet says, not what the framework docs say — what do WE need for a service to be considered production-ready? [pause] Architecture covers four levels: the code itself, how a single service is structured, how services interact, and how the whole landscape hangs together. [pause] Security uses STRIDE for threat modelling and DREAD for risk prioritisation. Both frameworks are AI-friendly — you can feed them a service spec and get a structured threat model in minutes once the standard exists. [pause] SRE is the road from 'it works' to 'we know when it doesn't'. SLIs, error budgets, runbooks. [pause] Data is split: OLTP is about transactional integrity, OLAP is about analytical quality. DAMA's six dimensions are your data quality checklist. [pause] Deliverable: one slide per domain. What's the standard? Who owns it? How do you measure it?");
     },
   },
 
-  // SLIDE 43 — Activity: Automated Code Review
+  // SLIDE 59 — Level Next Ramp (detail)
   {
     type: "custom",
     render(pres, ctx) {
@@ -639,535 +634,87 @@ module.exports = [
 
       const s = lightSlide(pres, FT);
       s.addShape(pres.shapes.RECTANGLE, {
-        x: 0, y: 0, w: 10, h: 0.8, fill: { color: C.midBg }
+        x: 0, y: 0, w: 10, h: 0.85, fill: { color: C.midBg }
       });
-      s.addText("ACTIVITY", {
-        x: 0.8, y: 0.15, w: 3, h: 0.5,
-        fontSize: 24, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
+      s.addText("Level Next Ramp", {
+        x: 0.8, y: 0.1, w: 6, h: 0.65,
+        fontSize: 26, fontFace: FONT.head, color: C.warnAmber, bold: true, valign: "middle", margin: 0
       });
-      s.addText("Automated Code Review", {
-        x: 0.8, y: 1.0, w: 8.4, h: 0.5,
-        fontSize: 22, fontFace: FONT.head, color: C.darkText, bold: true, margin: 0
+      s.addText("Group 2", {
+        x: 7.5, y: 0.2, w: 2.1, h: 0.45,
+        fontSize: 13, fontFace: FONT.head, color: "888888", align: "right", bold: true, margin: 0
       });
-      s.addText("Feed the output from Activity 2 to a Review Agent. Generate a summary suitable for yourself or upper management.", {
-        x: 0.8, y: 1.55, w: 8.4, h: 0.5,
-        fontSize: 13, fontFace: FONT.body, color: "444444", margin: 0
+      s.addText("Find the gaps. Build the prompts. Prove the fixes.", {
+        x: 0.8, y: 0.95, w: 8.4, h: 0.4,
+        fontSize: 13, fontFace: FONT.body, color: "555555", italic: true, margin: 0
       });
-      const reviewSteps = [
-        { num: "01", title: "Diff Review", desc: "Feed the git diff to a Review Agent — ask it to identify risks, regressions, and style violations" },
-        { num: "02", title: "Test Summary", desc: "Have the agent summarise test results: what passed, what failed, what's missing" },
-        { num: "03", title: "Executive Summary", desc: "Generate a 3-sentence summary for leadership: what changed, what risk, what's next" },
+
+      // Phase 1: Identify
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 1.45, w: 4.3, h: 3.55, fill: { color: C.midBg }, shadow: makeShadow()
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 0.5, y: 1.45, w: 4.3, h: 0.07, fill: { color: C.warnAmber }
+      });
+      s.addText("Phase 1 — Identify Low-Hanging Fruit", {
+        x: 0.7, y: 1.55, w: 3.9, h: 0.5,
+        fontSize: 13, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
+
+      const identifySteps = [
+        { num: "01", label: "Mine the evidence", detail: "Confluence docs, incident reports, static analysis, PR comments" },
+        { num: "02", label: "Name what's wrong", detail: "Be specific: \"no retry logic on external calls\" not \"code quality\"" },
+        { num: "03", label: "Define what good looks like", detail: "Write the acceptance criteria before you write any prompt" },
+        { num: "04", label: "Measure the gap", detail: "How far is wrong from good? Effort estimate and risk level" },
+        { num: "05", label: "Write the task prompt", detail: "A prompt an AI agent could execute today to close this specific gap" },
       ];
-      reviewSteps.forEach((step, i) => {
-        const y = 2.3 + i * 0.7;
-        addLightCard(s, 0.8, y, 8.4, 0.55, C.accent, pres);
+      identifySteps.forEach((step, i) => {
+        const y = 2.1 + i * 0.57;
+        s.addShape(pres.shapes.RECTANGLE, {
+          x: 0.65, y, w: 3.95, h: 0.48, fill: { color: "3A4534" }, shadow: makeShadow()
+        });
         s.addText(step.num, {
-          x: 1.1, y: y + 0.03, w: 0.6, h: 0.5,
-          fontSize: 22, fontFace: FONT.head, color: C.accent, bold: true, valign: "middle", margin: 0
+          x: 0.72, y: y + 0.02, w: 0.42, h: 0.44,
+          fontSize: 13, fontFace: FONT.head, color: C.warnAmber, bold: true, valign: "middle", align: "center", margin: 0
         });
         s.addText([
-          { text: step.title + "  ", options: { bold: true, fontSize: 14, fontFace: FONT.head, color: C.darkText } },
-          { text: step.desc, options: { fontSize: 12, fontFace: FONT.body, color: "555555" } },
-        ], { x: 1.8, y: y, w: 7, h: 0.55, valign: "middle", margin: 0 });
+          { text: step.label + "  ", options: { bold: true, fontSize: 11, fontFace: FONT.head, color: C.white } },
+          { text: step.detail, options: { fontSize: 10, fontFace: FONT.body, color: C.muted } },
+        ], { x: 1.18, y, w: 3.3, h: 0.48, valign: "middle", margin: 0 });
       });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.55, w: 8.4, h: 0.55, fill: { color: C.midBg }
-      });
-      s.addText("You just planned a feature, delegated it to an agent, and reviewed the output. You didn't write a single line of code.", {
-        x: 1.0, y: 4.55, w: 8, h: 0.55,
-        fontSize: 12, fontFace: FONT.body, color: C.accent, bold: true, valign: "middle", margin: 0
-      });
-      s.addNotes("This completes the pipeline. The Review Agent is a different specialist with a different prompt — it's looking for risks, regressions, and style issues, not writing code. And here's the powerful part: generate a 3-sentence executive summary that a non-technical stakeholder could understand. AI agents can communicate up the chain, not just down. [pause] Now look at what just happened. You planned, you delegated, you reviewed. The entire plan-do-review cycle, and you didn't write a single line of code. [let it land] Hold that thought.");
-    },
-  },
 
-  // SLIDE 43 — You Are No Longer a Coder
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
+      // Phase 2: Remediate
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 5.2, y: 1.45, w: 4.3, h: 3.55, fill: { color: C.midBg }, shadow: makeShadow()
+      });
+      s.addShape(pres.shapes.RECTANGLE, {
+        x: 5.2, y: 1.45, w: 4.3, h: 0.07, fill: { color: C.accent }
+      });
+      s.addText("Phase 2 — Remediate", {
+        x: 5.4, y: 1.55, w: 3.9, h: 0.5,
+        fontSize: 13, fontFace: FONT.head, color: C.white, bold: true, margin: 0
+      });
 
-      const s = darkSlide(pres, FT);
-      s.background = { color: C.darkBg };
-      s.addText("You Are No Longer a Coder", {
-        x: 0.8, y: 0.4, w: 8, h: 0.7,
-        fontSize: 32, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      s.addText("You are the Director of Engineering\nfor a team of digital workers.", {
-        x: 0.8, y: 1.2, w: 8, h: 0.9,
-        fontSize: 20, fontFace: FONT.body, color: C.accent, lineSpacingMultiple: 1.3, margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 2.3, w: 8.4, h: 0.65, fill: { color: C.cardBg }
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 2.3, w: 0.06, h: 0.65, fill: { color: C.accent }
-      });
-      s.addText("In the last hour, you planned a feature, delegated it to an autonomous agent, and reviewed its output. You didn't write a single line of code — but you delivered software.", {
-        x: 1.1, y: 2.3, w: 7.8, h: 0.65,
-        fontSize: 13, fontFace: FONT.body, color: C.white, italic: true, valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 3.2, w: 8.4, h: 0.04, fill: { color: C.lightBg }
-      });
-      s.addText("This is only the beginning.", {
-        x: 0.8, y: 3.5, w: 8, h: 0.4,
-        fontSize: 16, fontFace: FONT.body, color: C.muted, margin: 0
-      });
-      const questions = [
-        { text: "If we have all this extra capacity, how does this change the way I create impact?", options: { bullet: true, breakLine: true, fontSize: 15, fontFace: FONT.body, color: C.offWhite } },
-        { text: "If coding just became a commodity skill, where do we add value now?", options: { bullet: true, fontSize: 15, fontFace: FONT.body, color: C.warnAmber } },
+      const remediateSteps = [
+        { icon: "eye", label: "Review the task prompt", detail: "Is it specific? Does it have clear inputs, outputs, and constraints?" },
+        { icon: "check", label: "Verify tests exist first", detail: "No tests = no remediation. Write them before you run the agent." },
+        { icon: "robot", label: "Run the agent", detail: "Execute the task prompt. Watch — don't touch." },
+        { icon: "chart", label: "Validate the output", detail: "Do the tests pass? Does the fix match the acceptance criteria?" },
+        { icon: "book", label: "Capture the pattern", detail: "Document the prompt + fix as a reusable template for the next one." },
       ];
-      s.addText(questions, { x: 0.8, y: 4.0, w: 8.4, h: 1.0, margin: 0 });
-      s.addNotes("You are no longer a coder. [long pause] Think about what you just did. You planned. You delegated. You reviewed. Software was delivered, and you didn't write any of it. [pause] That might feel exciting to some of you. It might feel threatening to others. Both reactions are completely valid. [read the questions on screen] What does 'senior engineer' mean when AI writes most of the code? What's your value when the AI can build faster than you can type? [pause] Don't rush to answer. Sit with it for a moment. The next slide gives us a framework for navigating this.");
-    },
-  },
-
-  // SLIDE 44 — Step Back, Step Up, Step In
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("Step Back, Step Up, Step In", {
-        x: 0.8, y: 0.3, w: 8, h: 0.6,
-        fontSize: 28, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      const phases = [
-        {
-          title: "Step Back", color: C.warnAmber, icon: "stepback",
-          items: [
-            "You're no longer a Coder, Developer, or Software Engineer",
-            "You have expanded capacity — more time",
-            "But you have unused capability — skills that dropped in value"
-          ]
-        },
-        {
-          title: "Step Up", color: C.accent, icon: "arrowUp",
-          items: [
-            "Broaden ownership of the Software Development Lifecycle",
-            "Extend into Security, Reliability, Design, and Data",
-            "High impact comes from breadth, not just depth"
-          ]
-        },
-        {
-          title: "Step In", color: C.highlightYellow, icon: "stepfwd",
-          items: [
-            "Apply orchestration concepts — Engineer to Orchestrator",
-            "Extend your remit: Product, Analysis, Design, QA, Operations",
-            "Use AI to learn and operate wider specialisations"
-          ]
-        },
-      ];
-      phases.forEach((p, i) => {
-        const y = 1.05 + i * 1.45;
-        addCard(s, 0.8, y, 8.4, 1.25, p.color, pres);
-        iconCircle(s, p.icon, 1.1, y + 0.15, 0.5, C.darkBg, icons, pres);
-        s.addText(p.title, {
-          x: 1.8, y: y + 0.08, w: 3, h: 0.35,
-          fontSize: 18, fontFace: FONT.head, color: p.color, bold: true, margin: 0
-        });
-        const bullets = p.items.map((item, idx) => ({
-          text: item,
-          options: { bullet: true, breakLine: idx < p.items.length - 1, fontSize: 11, fontFace: FONT.body, color: C.offWhite }
-        }));
-        s.addText(bullets, { x: 1.8, y: y + 0.42, w: 7, h: 0.75, margin: 0 });
-      });
-      s.addNotes("Here's the framework. Three steps. [point to each] Step Back — acknowledge that the landscape has changed. Your coding skills aren't worthless, but they're less differentiated than they used to be. Step Up — the opportunity is to own more of the SDLC. Not just 'I write backend code' but 'I own the entire delivery pipeline from spec to production.' Step In — and this is my favourite — use AI itself to upskill into adjacent disciplines. Security, reliability engineering, data governance — areas where human judgment is still critical but expertise was previously hard to acquire. [pause] This is an expansion of your role, not a contraction. You're becoming more valuable, not less.");
-    },
-  },
-
-  // SLIDE 45 — Evolution Stages Revisited
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("Where Are We Now?", {
-        x: 0.8, y: 0.3, w: 8, h: 0.6,
-        fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      s.addText("Evolution Stages — Revisited", {
-        x: 0.8, y: 0.85, w: 6, h: 0.3,
-        fontSize: 14, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
-      });
-      const stages = [
-        { label: "Genesis", desc: "Orchestrators", color: C.warnAmber, w: 2.1 },
-        { label: "Custom", desc: "Loops, Specs", color: C.accent, w: 2.1 },
-        { label: "Product", desc: "Coding Agents, IDEs", color: C.accentDim, w: 2.1 },
-        { label: "Commodity", desc: "Laptops, Cloud, Git", color: C.muted, w: 2.1 },
-      ];
-      let xPos = 0.8;
-      stages.forEach((st, i) => {
+      remediateSteps.forEach((step, i) => {
+        const y = 2.1 + i * 0.57;
         s.addShape(pres.shapes.RECTANGLE, {
-          x: xPos, y: 1.35, w: st.w, h: 1.3, fill: { color: C.cardBg }, shadow: makeShadow()
+          x: 5.35, y, w: 3.95, h: 0.48, fill: { color: "F5F2EC" }, shadow: makeShadow()
         });
-        s.addShape(pres.shapes.RECTANGLE, {
-          x: xPos, y: 1.35, w: st.w, h: 0.06, fill: { color: st.color }
-        });
-        s.addText(st.label, {
-          x: xPos, y: 1.5, w: st.w, h: 0.35,
-          fontSize: 14, fontFace: FONT.head, color: st.color, bold: true, align: "center", margin: 0
-        });
-        s.addText(st.desc, {
-          x: xPos, y: 1.9, w: st.w, h: 0.55,
-          fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", margin: 0
-        });
-        xPos += st.w + 0.15;
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 2.8, w: 4.35, h: 0.06, fill: { color: C.accent }
-      });
-      s.addText("Today you experienced:", {
-        x: 0.8, y: 3.05, w: 8, h: 0.3,
-        fontSize: 14, fontFace: FONT.body, color: C.accent, bold: true, margin: 0
-      });
-      const journeyItems = [
-        { text: "Part 1 — Product stage: AI-native IDEs, codebase indexing, tool use", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: C.offWhite } },
-        { text: "Part 2 — Custom stage: Spec-driven development, meta-prompting, context management", options: { bullet: true, breakLine: true, fontSize: 12, fontFace: FONT.body, color: C.offWhite } },
-        { text: "Part 3 — Genesis stage: Autonomous agents, orchestration, plan→do→review pipelines", options: { bullet: true, fontSize: 12, fontFace: FONT.body, color: C.warnAmber } },
-      ];
-      s.addText(journeyItems, { x: 0.8, y: 3.4, w: 8.4, h: 1.2, margin: 0 });
-      s.addNotes("Let's bring it full circle. Remember the evolution stages from Part 2? They have concrete meaning now because you've lived them today. [walk through each] Part 1 was Product territory — stable tools, increasing adoption. You can use those tomorrow morning. Part 2 moved into Custom — spec-driven approaches work, but they require expertise and practice. Part 3 was Genesis — orchestrators, autonomous loops, multi-agent pipelines. Novel, uncertain, and exciting. [pause] All three are worth pursuing, but at different investment levels. Calibrate your expectations accordingly.");
-    },
-  },
-
-  // SLIDE 46 — The Multiplier Effect
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("The Multiplier Effect", {
-        x: 0.8, y: 0.3, w: 8, h: 0.6,
-        fontSize: 30, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 1.15, w: 2.5, h: 0.55, fill: { color: C.accent }
-      });
-      s.addText("You write Plan A", {
-        x: 0.8, y: 1.15, w: 2.5, h: 0.55,
-        fontSize: 11, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 3.5, y: 1.15, w: 3.5, h: 0.55, fill: { color: C.cardBg }
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 3.5, y: 1.15, w: 0.06, h: 0.55, fill: { color: C.accentDim }
-      });
-      s.addText("Agent builds Feature A", {
-        x: 3.5, y: 1.15, w: 3.5, h: 0.55,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 7.2, y: 1.15, w: 2.0, h: 0.55, fill: { color: C.warnAmber }
-      });
-      s.addText("You review A", {
-        x: 7.2, y: 1.15, w: 2.0, h: 0.55,
-        fontSize: 11, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 3.5, y: 1.9, w: 2.5, h: 0.55, fill: { color: C.accent }
-      });
-      s.addText("You write Plan B", {
-        x: 3.5, y: 1.9, w: 2.5, h: 0.55,
-        fontSize: 11, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 6.2, y: 1.9, w: 3.0, h: 0.55, fill: { color: C.cardBg }
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 6.2, y: 1.9, w: 0.06, h: 0.55, fill: { color: C.accentDim }
-      });
-      s.addText("Agent builds Feature B", {
-        x: 6.2, y: 1.9, w: 3.0, h: 0.55,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, align: "center", valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 6.2, y: 2.65, w: 2.5, h: 0.55, fill: { color: C.accent }
-      });
-      s.addText("You write Plan C", {
-        x: 6.2, y: 2.65, w: 2.5, h: 0.55,
-        fontSize: 11, fontFace: FONT.head, color: C.darkBg, bold: true, align: "center", valign: "middle", margin: 0
-      });
-      s.addText("YOU", {
-        x: 0.1, y: 1.15, w: 0.6, h: 0.55,
-        fontSize: 10, fontFace: FONT.head, color: C.accent, bold: true, valign: "middle", margin: 0
-      });
-      s.addText("AGENT", {
-        x: 0.1, y: 1.9, w: 0.6, h: 0.55,
-        fontSize: 10, fontFace: FONT.head, color: C.accentDim, bold: true, valign: "middle", margin: 0
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 3.45, w: 8.4, h: 0.04, fill: { color: C.lightBg }
-      });
-      s.addText("While the agent builds Feature A, you write the plan for Feature B.", {
-        x: 0.8, y: 3.65, w: 8.4, h: 0.4,
-        fontSize: 16, fontFace: FONT.body, color: C.white, margin: 0
-      });
-      s.addText("While the agent builds Feature B, you write the plan for Feature C.", {
-        x: 0.8, y: 4.05, w: 8.4, h: 0.4,
-        fontSize: 16, fontFace: FONT.body, color: C.white, margin: 0
-      });
-      s.addText("Features are delivered in parallel. You are the bottleneck on planning, not coding.", {
-        x: 0.8, y: 4.55, w: 8.4, h: 0.4,
-        fontSize: 14, fontFace: FONT.body, color: C.warnAmber, bold: true, margin: 0
-      });
-      s.addNotes("Look at this timeline. [walk through it] You spend 10 minutes writing Plan A. You hand it to an agent. While the agent spends 20 minutes building Feature A, you're writing Plan B. When Feature A comes back for review and Feature B goes to the agent, you're already on Plan C. You're never idle. The agents are never idle. Features are being delivered in parallel. [pause] Notice where the bottleneck shifted — it's no longer coding speed, it's planning quality. That's why Part 2 matters so much. Your specs, your standards, your meta-prompting skills — they determine the throughput of the entire system. An engineering manager doesn't write code; they write plans, review output, and unblock their team. That's exactly what you're doing here.");
-    },
-  },
-
-  // SLIDE 46b — From Actions to Loops (nested concentric)
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT } = ctx.branding;
-      const { darkSlide, nestingDiagram } = ctx.helpers;
-
-      const s = darkSlide(pres, FT);
-      s.addText("From Actions to Loops", {
-        x: 0.8, y: 0.2, w: 8, h: 0.5,
-        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("Building up the units of AI-assisted development", {
-        x: 0.8, y: 0.7, w: 6, h: 0.3,
-        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
-      });
-      nestingDiagram(s, pres, 4);
-      s.addNotes("[walk through from the inside out] Actions — the atomic unit, what we covered in Part 1. Completions, edits, tool calls. Tasks — combining multiple actions towards a goal, that's Part 2 territory. Flows — chaining planning, execution, and review into an autonomous pipeline, which is what we've been building in Part 3. And finally, loops — wrapping flows in self-correcting feedback. The output of a review feeds back into the next plan until the outcome is met. Each layer multiplies the previous one.");
-    },
-  },
-
-  // SLIDE 46c — Scaling the Loop (macro level)
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, addCard } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("Scaling the Loop", {
-        x: 0.8, y: 0.2, w: 8, h: 0.5,
-        fontSize: 28, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("From individual loops to organisational feedback cycles", {
-        x: 0.8, y: 0.7, w: 7, h: 0.3,
-        fontSize: 13, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
+        iconCircle(s, step.icon, 5.45, y + 0.05, 0.35, C.midBg, icons, pres);
+        s.addText([
+          { text: step.label + "  ", options: { bold: true, fontSize: 11, fontFace: FONT.head, color: C.darkText } },
+          { text: step.detail, options: { fontSize: 10, fontFace: FONT.body, color: "555555" } },
+        ], { x: 5.88, y, w: 3.35, h: 0.48, valign: "middle", margin: 0 });
       });
 
-      // Three tiers stacked vertically, each wider than the last
-      // Tier 1: Loop (narrow, top)
-      addCard(s, 3.0, 1.2, 4.0, 0.8, C.accent, pres);
-      s.addText("LOOP", {
-        x: 3.2, y: 1.25, w: 2.0, h: 0.3,
-        fontSize: 14, fontFace: FONT.head, color: C.accent, bold: true, margin: 0
-      });
-      s.addText("A single Plan \u2192 Do \u2192 Review cycle on one task", {
-        x: 3.2, y: 1.55, w: 3.6, h: 0.35,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
-      });
-
-      // Tier 2: Macro Flow (medium, middle) — taller to fit steps
-      addCard(s, 2.0, 2.3, 6.0, 1.5, C.warnAmber, pres);
-      s.addText("MACRO FLOW", {
-        x: 2.2, y: 2.35, w: 3.0, h: 0.3,
-        fontSize: 14, fontFace: FONT.head, color: C.warnAmber, bold: true, margin: 0
-      });
-      s.addText("Chaining loops into a sprint-level pipeline", {
-        x: 2.2, y: 2.65, w: 5.6, h: 0.3,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
-      });
-      // Plan → Do → Review step boxes
-      const steps = ["Plan", "Do", "Review"];
-      const stepW = 1.4;
-      const stepGap = 0.4;
-      const totalStepsW = 3 * stepW + 2 * stepGap;
-      const stepStartX = 2.0 + (6.0 - totalStepsW) / 2;
-      steps.forEach((step, i) => {
-        const sx = stepStartX + i * (stepW + stepGap);
-        s.addShape(pres.shapes.ROUNDED_RECTANGLE, {
-          x: sx, y: 3.05, w: stepW, h: 0.55,
-          fill: { color: C.lightBg }, rectRadius: 0.08
-        });
-        s.addText(step, {
-          x: sx, y: 3.05, w: stepW, h: 0.55,
-          fontSize: 13, fontFace: FONT.head, color: C.warnAmber, bold: true,
-          align: "center", valign: "middle", margin: 0
-        });
-        if (i < 2) {
-          s.addImage({ data: icons.arrow, x: sx + stepW + (stepGap - 0.35) / 2, y: 3.15, w: 0.35, h: 0.35 });
-        }
-      });
-
-      // Tier 3: Macro Loop (wide, bottom)
-      addCard(s, 1.0, 4.1, 8.0, 0.8, C.highlightYellow, pres);
-      s.addText("MACRO LOOP", {
-        x: 1.2, y: 4.15, w: 3.0, h: 0.3,
-        fontSize: 14, fontFace: FONT.head, color: C.highlightYellow, bold: true, margin: 0
-      });
-      s.addText("Continuous feedback: outcomes inform the next macro flow, adapting strategy over time", {
-        x: 1.2, y: 4.45, w: 7.6, h: 0.35,
-        fontSize: 11, fontFace: FONT.body, color: C.offWhite, margin: 0
-      });
-
-      // Feedback arrows (vertical dashed lines connecting tiers)
-      s.addShape(pres.shapes.LINE, {
-        x: 9.2, y: 1.6, w: 0, h: 3.3,
-        line: { color: C.muted, width: 1.5, dashType: "dash" }
-      });
-      s.addText("\u2191 feedback", {
-        x: 9.0, y: 2.9, w: 0.9, h: 0.4,
-        fontSize: 9, fontFace: FONT.body, color: C.muted, margin: 0
-      });
-      s.addShape(pres.shapes.LINE, {
-        x: 0.7, y: 1.6, w: 0, h: 3.3,
-        line: { color: C.muted, width: 1.5, dashType: "dash" }
-      });
-      s.addText("\u2193 scale", {
-        x: 0.15, y: 2.9, w: 0.6, h: 0.4,
-        fontSize: 9, fontFace: FONT.body, color: C.muted, margin: 0
-      });
-
-      s.addNotes("Now let's zoom out from the individual loop to the macro level. [point to each layer] A Loop is a single plan-do-review cycle on one task — that's what you experienced in the activities. A Macro Flow chains multiple loops together: plan the sprint, execute tasks in parallel loops, review outcomes as a batch. And a Macro Loop is the organisational feedback cycle: the outcomes of one macro flow inform the strategy for the next. [point to arrows] Feedback flows back up on the right. Strategy flows down on the left. This is how AI-assisted development scales from individual productivity to team and organisational transformation.");
-    },
-  },
-
-  // SLIDE 47 — Tools & Ecosystem
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("Tools & Ecosystem", {
-        x: 0.8, y: 0.3, w: 8, h: 0.6,
-        fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      s.addText("Projects building towards this future today", {
-        x: 0.8, y: 0.85, w: 6, h: 0.3,
-        fontSize: 14, fontFace: FONT.body, color: C.muted, italic: true, margin: 0
-      });
-      const tools = [
-        {
-          title: "Agor", url: "agor.live",
-          desc: "Agent orchestration platform. Manages multi-agent workflows with human-on-the-loop approval checkpoints. Production-ready.",
-          color: C.accent
-        },
-        {
-          title: "Loom", url: "github.com/ghuntley/loom",
-          desc: "Spec-driven autonomous agent framework. The \"Ralph loop\": study specs → pick task → implement → verify → repeat. The philosophical foundation for spec-first development.",
-          color: C.accentDim
-        },
-        {
-          title: "Swarm CLI", url: "github.com/mj1618/swarm-cli",
-          desc: "Docker-like CLI for running Ralph loops. Containerised agents with safety boundaries. Think \"docker-compose for AI agents.\"",
-          color: C.accent
-        },
-        {
-          title: "Token Bonfire", url: "github.com/aidanmorgan/token-bonfire",
-          desc: "Cost tracking and observability for agent workflows. Answers \"how much did that agent run cost?\" Essential for managing autonomous systems at scale.",
-          color: C.warnAmber
-        },
-      ];
-      tools.forEach((t, i) => {
-        const y = 1.3 + i * 0.85;
-        addCard(s, 0.8, y, 8.4, 0.7, t.color, pres);
-        s.addText(t.title, {
-          x: 1.1, y: y + 0.05, w: 2.0, h: 0.28,
-          fontSize: 15, fontFace: FONT.head, color: t.color, bold: true, margin: 0
-        });
-        s.addText(t.url, {
-          x: 3.2, y: y + 0.07, w: 5.5, h: 0.22,
-          fontSize: 10, fontFace: "Courier New", color: C.muted, margin: 0
-        });
-        s.addText(t.desc, {
-          x: 1.1, y: y + 0.32, w: 7.8, h: 0.32,
-          fontSize: 10, fontFace: FONT.body, color: C.offWhite, margin: 0
-        });
-      });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.75, w: 8.4, h: 0.4, fill: { color: C.darkBg }
-      });
-      s.addText("These are Genesis-stage tools. Expect rough edges, rapid change, and real learning.", {
-        x: 1.0, y: 4.75, w: 8, h: 0.4,
-        fontSize: 12, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
-      });
-      s.addNotes("Concrete next steps — tools you can try this week. [walk through each] Agor is the most production-ready: an orchestration platform with approval checkpoints built in. Loom is the philosophical foundation — Geoffrey Huntley's spec-first approach where the 'Ralph loop' runs continuously: study specs, pick task, implement, verify, repeat. Swarm CLI makes the Ralph loop practical — think docker-compose for AI agents, with containerisation for safety. And Token Bonfire is the observability layer. When you're running autonomous agents, you must track costs. Without it, the Loop of Death becomes a financial disaster. [pause] Fair warning: these are all Genesis-stage tools. Rough around the edges. They'll change rapidly. But they represent the direction the industry is heading, and getting familiar now is an investment in your future capability.");
-    },
-  },
-
-  // SLIDE 48 — The Year 2027
-  {
-    type: "custom",
-    render(pres, ctx) {
-      const { C, FONT, makeShadow } = ctx.branding;
-      const { darkSlide, lightSlide, addCard, addLightCard, iconCircle } = ctx.helpers;
-      const { icons } = ctx;
-
-      const s = darkSlide(pres, FT);
-      s.addText("The Year 2027", {
-        x: 0.8, y: 0.3, w: 5, h: 0.6,
-        fontSize: 30, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      s.addText("The Distant Future", {
-        x: 5.5, y: 0.35, w: 4, h: 0.5,
-        fontSize: 14, fontFace: FONT.body, color: C.muted, italic: true, align: "right", margin: 0
-      });
-      s.addText("What is old is new again", {
-        x: 0.8, y: 1.1, w: 8, h: 0.35,
-        fontSize: 16, fontFace: FONT.body, color: C.accent, italic: true, margin: 0
-      });
-      const themes = [
-        { icon: "eye", title: "Observability", desc: "What is it actually doing?", color: C.accent },
-        { icon: "shield", title: "Governance", desc: "Should it be doing that?", color: C.warnAmber },
-        { icon: "chart", title: "Data & Cost", desc: "What is working well?", color: C.accentDim },
-      ];
-      themes.forEach((t, i) => {
-        const y = 1.7 + i * 0.95;
-        addCard(s, 0.8, y, 5, 0.75, t.color, pres);
-        iconCircle(s, t.icon, 1.1, y + 0.1, 0.45, C.darkBg, icons, pres);
-        s.addText(t.title, {
-          x: 1.75, y: y + 0.05, w: 2.5, h: 0.3,
-          fontSize: 14, fontFace: FONT.head, color: t.color, bold: true, margin: 0
-        });
-        s.addText(t.desc, {
-          x: 1.75, y: y + 0.38, w: 3.5, h: 0.3,
-          fontSize: 12, fontFace: FONT.body, color: C.offWhite, margin: 0
-        });
-      });
-      s.addText("Change is here.\nWe will adapt.", {
-        x: 6.2, y: 1.7, w: 3.2, h: 0.7,
-        fontSize: 18, fontFace: FONT.head, color: C.white, bold: true, margin: 0
-      });
-      const changes = [
-        { text: "New Tools", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "New Processes", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "New Expectations", options: { bullet: true, breakLine: true, fontSize: 13, fontFace: FONT.body, color: C.offWhite } },
-        { text: "New Roles", options: { bullet: true, fontSize: 13, fontFace: FONT.body, color: C.accent, bold: true } },
-      ];
-      s.addText(changes, { x: 6.2, y: 2.6, w: 3.2, h: 1.6, margin: 0 });
-      s.addShape(pres.shapes.RECTANGLE, {
-        x: 0.8, y: 4.5, w: 8.4, h: 0.55, fill: { color: C.darkBg }
-      });
-      s.addText("Remember the Great Divide — these four dimensions determine your pace, not a universal timeline.", {
-        x: 1.0, y: 4.5, w: 8, h: 0.55,
-        fontSize: 12, fontFace: FONT.body, color: C.warnAmber, italic: true, valign: "middle", margin: 0
-      });
-      s.addNotes("2027 sounds like the distant future, but it's barely a year away. And here's the serious point behind the fun: the core disciplines of software engineering — observability, governance, cost management — are still essential. [pause] Remember the Great Divide? Those four dimensions — greenfield versus brownfield, small versus large, solo versus team, risk appetite — they don't disappear. They're the permanent constraints that determine how fast any team can move along the AI engineering levels. A solo developer on a greenfield project might reach Level 4 next month. A team maintaining a large brownfield system with low risk appetite might take two years to reach Level 3. And that's perfectly fine. The levels are a map, not a race. Meet yourself where you are.");
+      s.addNotes("Group 2, you have two phases. [pause] Phase 1 is about finding honest problems — not the ones you already know about and have been avoiding. Pull the evidence: Confluence pages that say 'TODO: fix this', incident retros that keep citing the same component, static analysis warnings that haven't moved in six months. Then for each problem: name it precisely, define what good looks like, estimate the gap, and write a task prompt an AI could execute. [pause] Phase 2 is where you prove it works. Critical rule: if there are no tests, you do not remediate. You write the tests first. Otherwise you can't tell if the AI fixed anything or just moved the mess around. Run the agent, validate against your criteria, then capture the pattern — because once you have one good prompt-and-fix template, the next one is ten times faster. [pause] Deliverable: one identified problem, one task prompt, one validated fix.");
     },
   },
 ];
