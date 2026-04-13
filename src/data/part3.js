@@ -408,7 +408,7 @@ module.exports = [
           color: C.accent,
         },
         {
-          icon: "bolt",
+          icon: "rocket",
           title: "Fast Feedback",
           desc: "CI/CD that closes the loop in seconds, not hours. AI loops on feedback — slow feedback = slow AI.",
           color: C.warnAmber,
